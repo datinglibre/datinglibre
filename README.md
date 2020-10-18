@@ -11,11 +11,11 @@ As an alpha release, it may include bugs and security issues.
 
 ## Development
 
-You must have the following installed. Ubuntu 20.04 is recommended.
+To run all tests, install the following. Ubuntu 20.04 is recommended.
 
   - Chromium `snap install chromium`
   - [Chromedriver](https://chromedriver.chromium.org/) (`sudo mv chromedriver /usr/local/bin`)
-  - [Java 11](https://docs.azul.com/zulu/zuludocs/ZuluUserGuide/PrepareZuluPlatform/AttachAPTRepositoryUbuntuOrDebianSys.htm)  
+  - [Java 11](https://docs.azul.com/zulu/zuludocs/ZuluUserGuide/PrepareZuluPlatform/AttachAPTRepositoryUbuntuOrDebianSys.htm) 
   - [Selenium Standalone](https://www.selenium.dev/downloads/)
   - `PHP` 7.4 (`sudo apt install php7.4 php7.4-json php7.4-curl php7.4-simplexml php7.4-pgsql php7.4-intl`)
   - Composer (`sudo apt install composer`)
