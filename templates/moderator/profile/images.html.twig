@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block title %}Moderator - Images{% endblock %}
+{% block menu %}
+    {% include 'moderator/menu.html.twig' %}
+{% endblock %}
+{% block content %}
+    {% if profileImage is null %}
+        <div class="alert alert-success" role="alert">
+            {{ 'moderate.no_images'|trans }}
+        </div>
+    {% endif %}
+    {% if profileImage is not null %}
+        <img src="{{ profileImage.secureUrl|raw }}" class="rounded mx-auto d-block" width="180" height="180" />
+        {{ form(moderateForm) }}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ 'menu.edit'|trans }} - {{ 'nav.profile'|trans }}{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.15/css/bootstrap-select.min.css" />
+{% endblock %}
+{% block menu %}
+    {% from "profile/profile.image.html.twig" import profile_image %}
+    <a href="{{ path('profile_image') }}">{{ profile_image(profile) }}</a>
+    {% include 'profile/menu.html.twig' %}
+{% endblock %}
+{% block content %}
+    {% from "profile/profile.image.moderation.status.html.twig" import profile_image_moderation_status %}
+    {{ profile_image_moderation_status(profile.imagePresent, profile.imageUnmoderated, profile.imageRejected) }}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div id="cityId" value="{{ profileForm.vars.value.city == null ? null : profileForm.vars.value.city.id }}"></div>
+            <div id="regionId" value="{{ profileForm.vars.value.region == null ? null : profileForm.vars.value.region.id }}"></div>
+            <div id="countryId" value="{{ profileForm.vars.value.country == null ? null : profileForm.vars.value.country.id }}"></div>
+            {{ form_start(profileForm) }}
+            {{ form_row(profileForm.username) }}
+            {{ form_row(profileForm.color) }}
+            {{ form_row(profileForm.shape) }}
+            {{ form_row(profileForm.dob) }}
+            {{ form_row(profileForm.country) }}
+            {{ form_row(profileForm.region) }}
+            {{ form_row(profileForm.city) }}
+            {{ form_row(profileForm.about) }}
+            {{ form_row(profileForm.save) }}
+            {{ form_end(profileForm) }}
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.15/js/bootstrap-select.min.js"
+             integrity="sha384-fSJacRNiqwuGQg4sAAs0X8bVHsAZBEG5VT+tQIhIqCxFzgR1YazUQR1/VV33DW/J" crossorigin="anonymous"></script>
+     <script src="{{ asset('js/location.js') }}"></script>
+     <script>
+         console.log("Location")
+          $(function () {
+              var $countrySelect = $('#profile_form_country');
+              var $regionSelect = $('#profile_form_region');
+              var $citySelect = $('#profile_form_city');
+              var $regionLabel = $("label[for='profile_form_region']");
+              var $countryLabel = $("label[for='profile_form_city']");
+
+              var $countryId = $countrySelect.val();
+              var $cityId = $('#cityId').attr('value');
+              var $regionId = $('#regionId').attr('value');
+
+
+              console.log("Country ID is " + $countryId);
+              console.log("City ID is " + $cityId);
+              console.log("Region ID is " + $regionId);
+
+              new LocationSelect(
+                  $countryId,
+                  $regionId,
+                  $cityId,
+                  $countrySelect,
+                  $regionSelect,
+                  $citySelect,
+                  $regionLabel,
+                  $countryLabel,
+                  "{{ 'profile.region.error'|trans }}",
+                  "{{ 'profile.city.error'|trans }}"
+              );
+          });
+     </script>
+{% endblock %}

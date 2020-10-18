@@ -1,0 +1,7 @@
+---
+  - hosts: databases
+    gather_facts: False
+    roles:
+    - common
+    - database
+    - datinglibredb

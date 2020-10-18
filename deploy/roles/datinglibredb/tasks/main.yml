@@ -1,0 +1,53 @@
+---
+- name: Add datinglibre database
+  become: true
+  become_user: postgres
+  postgresql_db:
+    name: datinglibre
+
+- name: Add postgis to datinglibre database
+  become: true
+  become_user: postgres
+  postgresql_ext:
+    name: postgis
+    db: datinglibre
+
+- name: Add uuid-ossp to datinglibre database
+  become: true
+  become_user: postgres
+  postgresql_ext:
+    name: uuid-ossp
+    db: datinglibre
+
+- name: Add user datinglibre
+  become: true
+  become_user: postgres
+  postgresql_user:
+    name: datinglibre
+    password: "{{ database_password }}"
+    encrypted: true
+
+- name: Give datinglibre privileges to datinglibre database
+  become: true
+  become_user: postgres
+  postgresql_privs:
+    db: datinglibre
+    privs: ALL
+    type: database
+    role: datinglibre
+
+- name: Add datinglibre schema
+  become: true
+  become_user: postgres
+  postgresql_schema:
+    database: datinglibre
+    name: datinglibre
+    owner: datinglibre
+
+- name: Create pgbouncer userlist
+  become: true
+  become_user: postgres
+  shell: psql -Atq -U postgres -d postgres -c "SELECT concat('\"', usename, '\" \"', passwd, '\"') FROM pg_shadow WHERE usename = 'datinglibre'" > /etc/pgbouncer/userlist.txt
+  args:
+    executable: /bin/bash
+  notify: restart pgbouncer

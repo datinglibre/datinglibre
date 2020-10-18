@@ -1,0 +1,88 @@
+---
+- name: Add key for Postgres repo
+  become: True
+  apt_key: url=https://www.postgresql.org/media/keys/ACCC4CF8.asc state=present
+
+- name: Add Postgres repo to sources list
+  become: True
+  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main' state=present update_cache=yes
+
+- name: Install postgresql-13, postgis-2.5, pgbouncer
+  become: True
+  apt:
+    name: ['postgresql-13', 'postgresql-13-postgis-2.5', 'pgbouncer']
+
+- name: Install ansible postgres dependencies
+  become: true
+  apt:
+    name: ['libpq-dev', 'python3-psycopg2']
+
+- name: Listen on private ip address
+  become: true
+  lineinfile:
+    dest: /etc/postgresql/13/main/postgresql.conf
+    regexp: "^#?listen_addresses"
+    line: "listen_addresses = '{{ database_host }},127.0.0.1'"
+    state: present
+  notify: restart postgresql
+
+- name: Copy postgresql certs
+  become: true
+  become_user: postgres
+  copy:
+    content: "{{ item.content }}"
+    dest: "{{ item.dest }}"
+    mode: 0600
+  with_items: 
+  - { content: "{{ database_cert }}", dest: "{{ database_cert_path }}"}
+  - { content: "{{ database_key }}", dest: "{{ database_key_path }}"}
+  - { content: "{{ database_root_cert }}", dest: "{{ database_root_cert_path }}" }
+
+- name: Add certs to postgres
+  become: true
+  become_user: postgres
+  lineinfile:
+    dest: /etc/postgresql/13/main/postgresql.conf
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  with_items:
+  - { regexp: "^ssl_cert_file", line: "ssl_cert_file = '{{ database_cert_path }}'"}
+  - { regexp: "^ssl_key_file", line: "ssl_key_file = '{{ database_key_path }}'"}
+  notify: restart postgresql
+
+- name: Copy pgbouncer configuration
+  become: true
+  template:
+    src: ../files/pgbouncer.ini.j2
+    dest: /etc/pgbouncer/pgbouncer.ini
+    owner: postgres
+    group: postgres
+
+- name: Allow connections from webserver to db
+  become: True
+  ufw:
+    rule: "allow"
+    port: "5432"
+    proto: "tcp"
+    from_ip: "{{ webserver_host }}"
+
+- name: Allow connections from webserver to pgbouncer
+  become: True
+  ufw:
+    rule: "allow"
+    port: "6543"
+    proto: "tcp"
+    from_ip: "{{ webserver_host }}"
+
+# pgbouncer configured as transaction pooling does not
+# support session features, so also allow connecting
+# to postgres directly.
+- name: Allow direct SSL connections to postgres
+  become: true
+  become_user: postgres
+  blockinfile:
+   dest: /etc/postgresql/13/main/pg_hba.conf
+   block: |
+     hostssl datinglibre         datinglibre          {{ webserver_host }}/32         md5
+  notify: restart postgresql

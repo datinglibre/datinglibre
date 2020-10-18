@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ 'account.delete'|trans }} - {{ 'account.account'|trans }}{% endblock %}
+{% block menu %}
+    {% include 'user/menu.html.twig' %}
+{% endblock %}
+{% block content %}
+    <p class="alert-danger alert">{{ 'account.delete_confirmation'|trans }}</p>
+    {{ form(deleteAccountForm) }}
+{% endblock %}

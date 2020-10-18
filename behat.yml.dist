@@ -1,0 +1,31 @@
+default:
+    suites:
+        default:
+            contexts:
+                - App\Tests\Behat\UserContext
+                - App\Tests\Behat\RegistrationContext
+                - App\Tests\Behat\ProfileEditContext
+                - App\Tests\Behat\ProfileImageContext
+                - App\Tests\Behat\SearchContext
+                - App\Tests\Behat\BlockContext
+                - App\Tests\Behat\MessageContext
+                - App\Tests\Behat\ModerateContext
+                - App\Tests\Behat\ImageContext
+                - Behat\MinkExtension\Context\MinkContext
+
+    extensions:
+        FriendsOfBehat\SymfonyExtension: ~
+        Behat\MinkExtension:
+            base_url: "http://localhost:8000/"
+            files_path: "%paths.base%/features/media"
+            default_session: symfony
+            javascript_session: selenium2
+            browser_name: chrome
+            sessions:
+                symfony:
+                    symfony: ~
+                selenium2:
+                    selenium2:
+                        wd_host: "http://127.0.0.1:4444/wd/hub"
+
+

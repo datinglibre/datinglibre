@@ -1,0 +1,25 @@
+---
+- name: Install docker, docker compose
+  become: true
+  apt:
+    name: ['docker', 'docker-compose']
+
+- name: Add user vagrant to docker group
+  become: true
+  user: name=vagrant
+    group=vagrant
+    groups=docker
+    append=yes
+
+- name: reset SSH connection to refresh groups
+  meta: reset_connection
+
+- name: Copy docker-compose file
+  copy:
+    src: ../files/docker-compose.yml
+    dest: /home/vagrant/docker-compose.yml
+    mode: 0755
+
+- name: Start docker-compose (downloading docker images may take a while)
+  docker_compose:
+    project_src: .

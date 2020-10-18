@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block title %}{% endblock %}
+{% block menu %}
+    {% include 'message/menu.html.twig' %}
+{% endblock %}
+{% block content %}
+    {% form_theme blockForm 'bootstrap_4_layout.html.twig' %}
+    {{ form(blockForm) }}
+{% endblock %}

@@ -1,0 +1,52 @@
+---
+- name: Install python
+  become: True
+  raw: test -e /usr/bin/python || (apt install -y python3-minimal)
+  changed_when: False
+
+- name: Update cache if needed
+  become: True
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Disable empty password login
+  become: true
+  lineinfile: dest=/etc/ssh/sshd_config regexp="^#?PermitEmptyPasswords" line="PermitEmptyPasswords no"
+
+- name: Disable password login
+  become: true
+  lineinfile: dest=/etc/ssh/ssh_config regexp="^(#\s*)?PasswordAuthentication " line="PasswordAuthentication no"
+  notify: restart sshd
+
+# Provides entropy, which can be lacking on virtual servers
+- name: Install haveged
+  become: True
+  apt:
+    name: haveged
+
+# ACL is a required dependency for Ansible, however for some reason it
+# was removed in Ubuntu 20.04
+- name: Install ACL
+  become: True
+  apt:
+    name: acl
+
+# Warning! These rules are bypassed if docker is installed
+- name: Configure firewall to only allow SSH
+  become: True
+  ufw:
+    rule: "{{ item.rule }}"
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+    state: enabled
+  with_items:
+  - { rule: 'allow', port: "{{ ssh_port }}", proto: 'tcp' }
+
+- name: Configure firewall to deny all incoming and allow all outgoing connections as default
+  become: True
+  ufw: 
+    direction: "{{ item.direction }}"
+    policy: "{{ item.policy }}"
+    state: enabled
+  with_items:
+  - { direction: outgoing, policy: allow }
+  - { direction: incoming, policy: deny }

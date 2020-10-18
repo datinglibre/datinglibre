@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ 'matches.title'|trans }}{% endblock %}
+{% block menu %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+{% from 'profile/profile.image.html.twig' import profile_image %}
+    <div class="panel panel-default">
+    <div class="panel-body">
+        {% if matches is empty %}
+            <p class="alert-warning alert">{{ 'matches.empty'|trans }}</p>
+        {% endif %}
+        {% if matches is not empty %}
+            <table class="table table-striped">
+                {% for match in matches %}
+                    <tr class="d-flex">
+                        <td class="col-1">
+                            <a href="{{ path('message_send', {'userId': match.currentRecipientId}) }}">
+                                {{ profile_image(match.currentRecipientProfileImageUrl) }}
+                            </a>
+                        </td>
+                        <td class="col-11">
+                            <h5 class="media-heading">
+                                <a href="{{ path('message_send', {'userId': match.currentRecipientId}) }}">{{ match.currentRecipientUsername }}</a>
+                            </h5>
+                            <div>{{ match.content }}</div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+    </div>
+{% endblock %}

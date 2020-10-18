@@ -1,0 +1,19 @@
+if [[ $1 == "r" ]]
+then
+    echo 'drop schema if exists datinglibre cascade; create schema datinglibre; ' | PGPASSWORD=secret psql -h localhost --user datinglibre datinglibre
+    php bin/console doctrine:migrations:migrate --no-interaction
+    php bin/console doctrine:fixtures:load --append --no-interaction # append is workaround to stop doctrine dropping non-existent projections
+fi;
+
+if [[ $1 == "c" ]]
+then
+    PGPASSWORD=secret psql -h localhost --user datinglibre datinglibre
+fi;
+if [[ $1 == "ds" ]]
+then 
+    ./bin/console server:dump
+fi;
+if [[ $1 == "sync_production" ]]
+then
+    ansible-playbook -i ./deploy/inventories/production ./deploy/webservers.yml --vault-password-file=~/vault_password --tags sync
+fi;

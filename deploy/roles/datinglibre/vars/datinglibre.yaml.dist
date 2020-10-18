@@ -1,0 +1,12 @@
+categories:
+  - Color
+  - Shape
+attributes:
+  Color:
+    - Blue
+    - Green
+    - Yellow
+  Shape:
+    - Square
+    - Circle
+    - Triangle

@@ -1,0 +1,12 @@
+datinglibre ansible_ssh_host=datinglibre.local ansible_ssh_port=22 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='/home/datinglibre/git/datinglibre/.vagrant/machines/datinglibre/virtualbox/private_key'
+datinglibredb ansible_ssh_host=datinglibredb.local ansible_ssh_port=22 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='/home/datinglibre/git/datinglibre/.vagrant/machines/datinglibredb/virtualbox/private_key'
+datinglibretesting ansible_ssh_host=datinglibretesting.local ansible_ssh_port=22 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='/home/datinglibre/git/datinglibre/.vagrant/machines/datinglibretesting/virtualbox/private_key'
+
+[webservers]
+datinglibre
+
+[databases]
+datinglibredb
+
+[testing]
+datinglibretesting

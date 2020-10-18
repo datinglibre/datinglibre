@@ -1,0 +1,8 @@
+{% macro profile_image_moderation_status(imagePresent, imageUnmoderated, imageRejected) %}
+    {% if imagePresent and imageUnmoderated %}
+        <div class="alert alert-warning" role="alert">{{ 'profile.image.awaiting_moderation'|trans }}</div>
+    {% endif %}
+    {% if imagePresent and imageRejected %}
+        <div class="alert alert-danger" role="alert">{{ 'profile.image.rejected'|trans }}</div>
+    {% endif %}
+{% endmacro  %}

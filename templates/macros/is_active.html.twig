@@ -1,0 +1,3 @@
+{% macro is_active(path) %}
+{% if app.request.attributes.get('_route') starts with path %}active{% endif %}
+{% endmacro  %}

@@ -1,0 +1,4 @@
+<div class="list-group">
+    {% from 'macros/is_active.html.twig' import is_active %}
+    <a href="{{ path('delete_my_user') }}" class="{{ is_active('delete_my_user') }} list-group-item list-group-item-action">{{ 'account.delete'|trans }}</a>
+</div>

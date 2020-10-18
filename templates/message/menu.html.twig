@@ -1,0 +1,6 @@
+<div class="list-group">
+    {% from 'macros/is_active.html.twig' import is_active %}
+    <a href="{{ path('search_profile_view', {'userId': profile.id}) }}" class="{{ is_active('search_profile_view') }} list-group-item list-group-item-action">{{ 'menu.view'|trans }}</a>
+    <a href="{{ path('message_send', {'userId': profile.id}) }}" class="{{ is_active('message_send') }} list-group-item list-group-item-action">{{ 'menu.message'|trans }}</a>
+    <a href="{{ path('block_user', {'userId': profile.id }) }}" class="{{ is_active('block_user') }} list-group-item list-group-item-action">{{ 'menu.block'|trans }}</a>
+</div>

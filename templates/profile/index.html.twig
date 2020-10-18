@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block title %}Profile{% endblock %}
+{% block menu %}
+    {% from "profile/profile.image.html.twig" import profile_image %}
+    <a href="{{ path('profile_image') }}">{{ profile_image(profile) }}</a>
+    {% include 'profile/menu.html.twig' %}
+{% endblock %}
+{% block content %}
+    <div class="panel panel-default">
+    {% from "profile/profile.image.moderation.status.html.twig" import profile_image_moderation_status %}
+    {{ profile_image_moderation_status(profile.imagePresent, profile.imageUnmoderated, profile.imageRejected) }}
+    <div class="panel-body">
+        <h2>
+            {{ profile.username }}
+            <small class="text-muted">{{ profile.age }}. {{ profile.regionName }}, {{ profile.cityName }}.</small>
+        </h2>
+
+        {% if attributes is not empty %}
+            <ul>
+                {% for attribute in attributes %}
+                    <li>{{ attribute.name }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {{ profile.about|nl2br }}
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+.idea
+.php-version
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+.vagrant
+/src/.preload.php
+deploy/inventories/staging/hosts
+deploy/inventories/production/
+deploy/roles/datinglibre/vars/datinglibre.yaml
+deploy/roles/datinglibre/files/countries.sql
+deploy/roles/datinglibre/files/region.sql
+deploy/roles/datinglibre/files/cities.sql
+
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+###> friends-of-behat/symfony-extension ###
+/behat.yml
+###< friends-of-behat/symfony-extension ###
+
+###> behat/symfony2-extension ###
+behat.yml
+###< behat/symfony2-extension ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php_cs
+/.php_cs.cache
+###< friendsofphp/php-cs-fixer ###

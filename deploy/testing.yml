@@ -1,0 +1,6 @@
+---
+  - hosts: testing
+    gather_facts: False
+    roles:
+    - common
+    - testingtools

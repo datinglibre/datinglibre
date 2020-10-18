@@ -1,0 +1,8 @@
+---
+  - hosts: webservers
+    gather_facts: False
+    roles:
+    - common
+    - webserver
+    - php
+    - datinglibre

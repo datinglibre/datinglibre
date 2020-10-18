@@ -1,0 +1,36 @@
+{% from 'macros/is_active.html.twig' import is_active %}
+{% if app.user %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="{{ path('login') }}">Dating Libre</a>
+    <div class="collapse navbar-collapse" id="navbar">
+        {% if is_granted('ROLE_USER') and not is_granted('ROLE_MODERATOR') or is_granted('ROLE_ADMIN') %}
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('search') }}">{{ 'nav.search'|trans  }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('profile_index') }}">{{ 'nav.profile'|trans }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('matches_index') }}">{{ 'nav.matches'|trans }}</a>
+            </li>
+        </ul>
+        {% endif %}
+        {% if is_granted('ROLE_MODERATOR') or is_granted('ROLE_ADMIN')  %}
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link {{ is_active('moderate') }}" href="{{ path('moderate_profile_images') }}">{{ 'nav.moderate'|trans  }}</a>
+            </li>
+        </ul>
+        {% endif %}
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('delete_my_user') }}">{{ 'nav.account'|trans }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('logout') }}">{{ 'nav.logout'|trans }}</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endif %}

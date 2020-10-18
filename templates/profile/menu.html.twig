@@ -1,0 +1,5 @@
+<div class="list-group">
+    {% from 'macros/is_active.html.twig' import is_active %}
+    <a href="{{ path('profile_index') }}" class="{{ is_active('profile_index') }} list-group-item list-group-item-action">{{ 'menu.view'|trans }}</a>
+    <a href="{{ path('profile_edit') }}" class="{{ is_active('profile_edit') }} list-group-item list-group-item-action">{{ 'menu.edit'|trans }}</a>
+</div>

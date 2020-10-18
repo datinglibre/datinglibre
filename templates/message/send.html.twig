@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ 'message.title'|trans }}{% endblock %}
+{% block menu %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {% include 'message/menu.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="panel panel-default">
+    <div class="panel-body">
+    {% if messages is not empty %}
+    {% from 'profile/profile.image.html.twig' import profile_image %}
+        <table class="table table-striped">
+            {% for message in messages %}
+                <tr class="d-flex">
+                    <td class="col-1">{{ profile_image(message.secureProfileImageUrl) }}</td>
+                    <td class="col-11">
+                        <h5 class="media-heading">{{ message.senderUsername }}</h5>
+                        <div>{{ message.content }}</div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+        {% form_theme messageForm 'bootstrap_4_layout.html.twig' %}
+        {{ form(messageForm) }}
+    </div>
+{% endblock %}

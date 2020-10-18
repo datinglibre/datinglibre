@@ -1,0 +1,19 @@
+[databases]
+datinglibre = host=127.0.0.1 port=5432 dbname=datinglibre
+
+[pgbouncer]
+listen_port = 6543
+listen_addr = {{ database_host }}
+auth_type = md5
+auth_file = /etc/pgbouncer/userlist.txt
+logfile=/var/log/postgresql/pgbouncer.log
+pidfile=/var/run/postgresql/pgbouncer.pid
+admin_users = postgres
+pool_mode = transaction
+default_pool_size=56
+max_client_conn=600
+client_tls_sslmode=require
+client_tls_key_file={{ database_key_path }}
+client_tls_cert_file={{ database_cert_path }}
+client_tls_ca_file ={{ database_root_cert_path }}
+client_tls_ciphers=normal

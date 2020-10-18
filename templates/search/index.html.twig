@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ 'search.search'|trans }}{% endblock %}
+
+{% block menu %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {% form_theme filterForm 'bootstrap_4_layout.html.twig' %}
+            {{ form(filterForm) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    {{ form_start(requirementsForm) }}
+    <div class="form-row">
+        <div class="col-5">{{ form_row(requirementsForm.shapes) }}</div>
+        <div class="col-5">{{ form_row(requirementsForm.colors) }}</div>
+        <div class="col-2">{{ form_widget(requirementsForm.save) }}</div>
+    </div>
+
+    {% if profiles is empty %}
+        <p class="alert-warning alert">{{ 'search.no_results'|trans }}</p>
+    {% endif %}
+
+    {{ form_end(requirementsForm) }}
+
+    {% if profiles is not empty %}
+        <ul class="list-unstyled">
+            {% for profile in profiles %}
+            <li class="media">
+                <img src="/profile.jpg" class="mr-3" alt="" height="64" width="64">
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1"><a href="{{ path('search_profile_view', {'userId': profile.id}) }}">{{ profile.username }}</a></h5>
+                    {{ profile.id }}
+            </li>
+            {% endfor %}
+        </ul>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item {% if previous is empty %}disabled{% endif %}">
+                    <a class="page-link" href="{{  path('search', previous) }}" {% if previous is empty %}aria-disabled="true"{% endif %}>{{ 'controls.previous'|trans }}</a>
+                </li>
+                <li class="page-item {% if next is empty %}disabled{% endif %}">
+                    <a class="page-link" href="{{ path('search', next) }}" {% if next is empty %}aria-disabled="true"{% endif %}>{{ 'controls.next'|trans }}</a>
+                </li>
+            </ul>
+        </nav>
+    {% endif %}
+{% endblock %}

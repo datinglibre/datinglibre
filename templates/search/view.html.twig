@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block title %}Profile{% endblock %}
+{% block menu %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {% include 'message/menu.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="panel panel-default">
+    <div class="panel-body">
+        <h2>
+            {{ profile.username }}
+            <small class="text-muted">{{ profile.age }}. {{ profile.regionName }}, {{ profile.cityName }}.</small>
+        </h2>
+        {{ profile.about|nl2br }}
+    </div>
+{% endblock %}

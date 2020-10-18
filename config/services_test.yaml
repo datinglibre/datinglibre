@@ -1,0 +1,135 @@
+services:
+    App\Tests\Behat\Page\LoginPage:
+        arguments:
+            - '@behat.mink.default_session'
+            - '@behat.mink.parameters'
+            - '@router'
+
+    App\Tests\Behat\Page\RegistrationPage:
+        arguments:
+            - '@behat.mink.default_session'
+            - '@behat.mink.parameters'
+            - '@router'
+
+    App\Tests\Behat\Page\ProfileIndexPage:
+        arguments:
+            - '@behat.mink.default_session'
+            - '@behat.mink.parameters'
+            - '@router'
+
+    App\Tests\Behat\Page\ProfileEditPage:
+        arguments:
+            - '@behat.mink.default_session'
+            - '@behat.mink.parameters'
+            - '@router'
+
+    App\Tests\Behat\Page\ProfileImagePage:
+        arguments:
+            - '@behat.mink.default_session'
+            - '@behat.mink.parameters'
+            - '@router'
+
+    App\Tests\Behat\Page\SearchPage:
+        arguments:
+            - '@behat.mink.default_session'
+            - '@behat.mink.parameters'
+            - '@router'
+            -
+    App\Tests\Behat\Page\MessageSendPage:
+        arguments:
+            - '@behat.mink.default_session'
+            - '@behat.mink.parameters'
+            - '@router'
+
+    App\Tests\Behat\Page\MatchesPage:
+        arguments:
+            - '@behat.mink.default_session'
+            - '@behat.mink.parameters'
+            - '@router'
+
+    App\Tests\Behat\Page\ModerateProfileImagesPage:
+        arguments:
+            - '@behat.mink.default_session'
+            - '@behat.mink.parameters'
+            - '@router'
+
+    App\Tests\Behat\RegistrationContext:
+        public: true
+        arguments:
+            - '@App\Tests\Behat\Page\LoginPage'
+            - '@App\Tests\Behat\Page\RegistrationPage'
+            - '@App\Repository\UserRepository'
+
+    App\Tests\Behat\SearchContext:
+        public: true
+        arguments:
+            - '@App\Service\UserService'
+            - '@App\Repository\UserRepository'
+            - '@App\Repository\ProfileRepository'
+            - '@App\Service\MatchingService'
+            - '@App\Repository\CityRepository'
+            - '@App\Tests\Behat\Page\SearchPage'
+            - '@App\Repository\FilterRepository'
+
+    App\Tests\Behat\ProfileEditContext:
+        public: true
+        arguments:
+            - '@App\Service\UserService'
+            - '@App\Repository\UserRepository'
+            - '@App\Repository\ProfileRepository'
+            - '@App\Service\ProfileService'
+            - '@App\Service\MatchingService'
+            - '@App\Repository\CityRepository'
+            - '@App\Repository\RegionRepository'
+            - '@App\Repository\CountryRepository'
+            - '@App\Tests\Behat\Page\LoginPage'
+            - '@App\Tests\Behat\Page\ProfileIndexPage'
+            - '@App\Tests\Behat\Page\ProfileEditPage'
+            - '@App\Tests\Behat\Page\SearchPage'
+
+    App\Tests\Behat\ProfileImageContext:
+        public: true
+        arguments:
+            - '@App\Tests\Behat\Page\ProfileImagePage'
+            - '@App\Service\ProfileService'
+            - '@App\Repository\ProfileRepository'
+            - '@App\Repository\UserRepository'
+            - '@App\Service\ImageService'
+
+    App\Tests\Behat\BlockContext:
+        public: true
+        arguments:
+            - '@App\Service\UserService'
+            - '@App\Repository\BlockRepository'
+            - '@App\Repository\BlockReasonRepository'
+    App\Tests\Behat\UserContext:
+        public: true
+        arguments:
+            - '@App\Repository\UserRepository'
+            - '@App\Service\UserService'
+            - '@App\Tests\Behat\Page\LoginPage'
+
+    App\Tests\Behat\MessageContext:
+         public: true
+         arguments:
+            - '@App\Service\UserService'
+            - '@App\Repository\MessageRepository'
+            - '@App\Tests\Behat\Page\MessageSendPage'
+            - '@App\Tests\Behat\Page\MatchesPage'
+            -
+    App\Tests\Behat\ImageContext:
+        public: true
+        arguments:
+            - '@App\Service\UserService'
+            - '@App\Repository\ImageRepository'
+            - '@App\Service\ImageService'
+
+    App\Tests\Behat\ModerateContext:
+        public: true
+        arguments:
+            - '@App\Service\ImageService'
+            - '@App\Repository\UserRepository'
+            - '@App\Tests\Behat\Page\ModerateProfileImagesPage'
+
+
+

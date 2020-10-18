@@ -1,0 +1,47 @@
+---
+- name: Configure firewall to allow ports 443 and 80.
+  become: true
+  ufw:
+   rule: "{{ item.rule }}"
+   port: "{{ item.port }}"
+   proto: "{{ item.proto }}"
+  with_items:
+  - { rule: 'allow', port: 80, proto: 'tcp' }
+  - { rule: 'allow', port: 443, proto: 'tcp' }
+
+- name: Install nginx
+  become: true
+  apt:
+    name: nginx
+
+- name: Increase number of file descriptors
+  become: true
+  pam_limits:
+    domain: "*"
+    limit_type: "{{ item }}"
+    limit_item: nofile
+    value: '65536'
+  with_items:
+  - 'soft'
+  - 'hard'
+
+- name: update sysctl
+  become: true
+  sysctl:
+   name: fs.file-max
+   value: '65536'
+   state: present
+
+- name: Add dhparams for more secure SSL
+  become: true
+  copy: 
+    src: ../files/nginx/etc/nginx/dhparam.pem
+    dest: /etc/nginx/dhparam.pem
+  notify: restart nginx
+
+- name: Replace nginx configuration
+  become: true
+  copy: 
+    src: ../files/nginx/etc/nginx/nginx.conf
+    dest: /etc/nginx/nginx.conf
+  notify: restart nginx

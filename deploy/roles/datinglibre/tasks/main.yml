@@ -1,0 +1,274 @@
+---
+- name: Include datinglibre vars
+  include_vars: datinglibre.yaml
+
+- name: Add key for Postgres repo
+  become: True
+  apt_key: url=https://www.postgresql.org/media/keys/ACCC4CF8.asc state=present
+
+- name: Add Postgres repo to sources list
+  become: True
+  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main' state=present update_cache=yes
+
+- name: Install postgresql 13 client
+  become: True
+  apt:
+    name: ['postgresql-client-13']
+
+- name: Add datinglibre group
+  become: true
+  group:
+    name: datinglibre
+    state: present
+
+- name: Add datinglibre user
+  become: true
+  user:
+    name: datinglibre
+    group: datinglibre
+    append: true
+    skeleton: "/etc/skel"
+    createhome: yes
+    shell: /bin/bash
+
+- name: Update PHP FPM to use datinglibre user
+  become: true
+  lineinfile:
+    dest: /etc/php/7.4/fpm/pool.d/www.conf
+    regexp: "^user = www-data"
+    line: "user = datinglibre"
+    state: present
+  notify: restart php-fpm
+
+- meta: flush_handlers
+
+- name: Create datinglibre directory
+  become: true
+  file:
+    path: /var/www/datinglibre
+    state: directory
+    owner: datinglibre
+    group: www-data
+
+- name: Create datinglibre config direction
+  become: true
+  file:
+    path: /etc/datinglibre
+    state: directory
+    owner: datinglibre
+    group: www-data
+    mode: 0750
+
+- name: Copy datinglibre database certificate
+  become: true
+  copy:
+    content: "{{ database_cert }}"
+    dest: "{{ database_cert_path }}"
+    owner: datinglibre
+    group: www-data
+    mode: 0750
+
+- name: Copy datinglibre database key
+  become: true
+  copy:
+    content: "{{ database_key }}"
+    dest: "{{ database_key_path }}"
+    owner: datinglibre
+    group: www-data
+    mode: 0600
+
+- name: Copy datinglibre SSL certificates
+  become: true
+  copy:
+    content: "{{ item.content }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode }}"
+  with_items:
+    - { content: "{{ datinglibre_certificate }}", dest: "/etc/ssl/certs/datinglibre.crt", mode: 644 }
+    - { content: "{{ datinglibre_key }}", dest: "/etc/ssl/private/datinglibre.key", mode: 700 }
+  tags: ssl
+
+- name: Deploy datinglibre src
+  become: true
+  synchronize:
+    src: ../../../../src
+    delete: yes
+    dest: /var/www/datinglibre
+  tags: sync
+
+- name: Deploy datinglibre templates
+  become: true
+  synchronize:
+    src: ../../../../templates
+    delete: yes
+    dest: /var/www/datinglibre
+  tags: sync
+
+- name: Deploy datinglibre config
+  become: true
+  synchronize:
+    src: ../../../../config
+    delete: yes
+    dest: /var/www/datinglibre
+  tags: sync
+
+- name: Deploy datinglibre public
+  become: true
+  synchronize:
+    src: ../../../../public
+    delete: yes
+    dest: /var/www/datinglibre
+  tags: sync
+
+- name: Deploy datinglibre bin
+  become: true
+  synchronize:
+    src: ../../../../bin
+    delete: yes
+    dest: /var/www/datinglibre
+  tags: sync
+
+- name: Deploy composer.json
+  become: true
+  synchronize:
+    src: ../../../../composer.json
+    delete: yes
+    dest: /var/www/datinglibre
+  tags: sync
+
+- name: Deploy composer.lock
+  become: true
+  synchronize:
+    src: ../../../../composer.lock
+    delete: yes
+    dest: /var/www/datinglibre
+  tags: sync
+
+- name: Deploy symfony.lock
+  become: true
+  synchronize:
+    src: ../../../../symfony.lock
+    delete: yes
+    dest: /var/www/datinglibre
+  tags: sync
+
+- name: Deploy env.local
+  become: true
+  template:
+    src: ../templates/env.local.j2
+    dest: /var/www/datinglibre/.env.local
+    owner: datinglibre
+    group: datinglibre
+    mode: 0750
+  tags: sync
+
+- name: Deploy env
+  become: true
+  synchronize:
+    src: ../../../../.env
+    delete: yes
+    dest: /var/www/datinglibre
+  tags: sync
+
+- name: Deploy translations
+  become: true
+  synchronize:
+    src: ../../../../translations
+    delete: yes
+    dest: /var/www/datinglibre
+  tags: sync
+
+- name: Composer install
+  become: true
+  become_user: datinglibre
+  composer:
+    command: install
+    arguments: --no-dev
+    working_dir: /var/www/datinglibre
+  tags: sync
+
+- name: Set ownership and permissions
+  become: true
+  file:
+    dest: /var/www/datinglibre
+    owner: datinglibre
+    group: www-data
+    recurse: yes
+  tags: sync
+
+- name: Run migrations
+  become: true
+  become_user: datinglibre
+  command: '/var/www/datinglibre/bin/console doctrine:migrations:migrate --no-interaction'
+  tags: sync
+
+- name: clear php opcache
+  become: True
+  service: name=php7.4-fpm state=reloaded
+  tags: sync
+
+- name: Copy categories and attributes configuration
+  become: true
+  template:
+    src: ../templates/categories_and_attributes.sql.j2
+    dest: /tmp/categories_and_attributes.sql
+    owner: datinglibre
+    group: datinglibre
+    mode: 0770
+
+- name: Insert categories and attributes into database
+  become: true
+  become_user: datinglibre
+  shell: /var/www/datinglibre/bin/console doctrine:query:sql "$(< /tmp/categories_and_attributes.sql)"
+  args:
+    executable: /bin/bash
+
+- name: Delete categories and attributes configuration
+  become: true
+  file:
+    path: /tmp/categories_and_attributes.sql
+    state: absent
+
+- name: Copy locations
+  become: true
+  copy:
+    src: "{{ item }}"
+    dest: /tmp/
+    owner: datinglibre
+    group: www-data
+    mode: 0750
+  with_items:
+    - ../locations/countries.sql
+    - ../locations/regions.sql
+    - ../locations/cities.sql
+
+- name: Insert countries into the database
+  become: true
+  become_user: datinglibre
+  shell: "{{ psql_direct_connection }} < /tmp/countries.sql"
+  args:
+    executable: /bin/bash
+
+- name: Insert regions into the database
+  become: true
+  become_user: datinglibre
+  shell: "{{ psql_direct_connection }} < /tmp/regions.sql"
+  args:
+    executable: /bin/bash
+
+- name: Insert cities into the database
+  become: true
+  become_user: datinglibre
+  shell: "{{ psql_direct_connection }} < /tmp/cities.sql"
+  args:
+    executable: /bin/bash
+
+- name: Copy datinglibre nginx conf
+  become: true
+  template:
+    src: ../templates/nginx/datinglibre.conf.j2
+    dest: /etc/nginx/conf.d/datinglibre.conf
+
+- name: restart nginx
+  become: true
+  service: name=nginx state=restarted

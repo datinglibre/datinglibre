@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    environment:
+      MH_STORAGE: memory
+
+  s3ninja:
+    image: scireum/s3-ninja:6.4
+    ports:
+      - "9444:9000"
