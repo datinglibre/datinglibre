@@ -6,6 +6,9 @@ not only for relationships, but also for hobbies, such as finding a tandem langu
 
 As an alpha release, it may include bugs and security issues.
 
+![Image showing profile edit page](https://raw.githubusercontent.com/datinglibre/datinglibre.github.io/main/profile.png "Profile edit page")
+
+
 ## Development
 
 You must have the following installed. Ubuntu 20.04 is recommended.
