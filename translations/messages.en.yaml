@@ -9,7 +9,7 @@ user:
   signin: "Sign in"
   login: "Log in"
   signup_subject: "Confirm your account"
-  confirm: "Your email address has been used to create an account"
+  confirm: "Your email address has been used to create an account. Please ignore this mail if you did not request an account and your email address will be automatically removed from the system."
   confirm_link: "Click here to confirm your account"
   confirmed: "Your account is now enabled. You can now login"
   confirmation_failed: "Could not enable your account"

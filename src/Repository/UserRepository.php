@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\User;
+use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Persistence\ManagerRegistry;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -61,6 +63,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         $this->_em->remove($user);
         $this->_em->flush();
+    }
+
+    public function updateCreatedAt(UuidInterface $userId, DateTimeImmutable $dateTime): void
+    {
+        $query = $this->getEntityManager()->createNativeQuery(<<<EOD
+UPDATE datinglibre.users SET created_at = :createdAt WHERE id = :userId
+EOD, new ResultSetMapping());
+
+        $query->setParameter('userId', $userId);
+        $query->setParameter('createdAt', $dateTime);
+
+        $query->execute();
     }
 
     public function save(User $user): User

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Command;
 
 use App\Entity\User;
@@ -24,7 +26,7 @@ class CreateUserCommandTest extends KernelTestCase
     {
         $application = new Application(self::$kernel);
 
-        $command = $application->find('app:user');
+        $command = $application->find('app:users:create');
         $commandTester = new CommandTester($command);
         $commandTester->execute([
             'email' => 'test@example.com',

@@ -6,6 +6,7 @@ database_cert_path: /etc/datinglibre/database.crt
 database_key_path: /etc/datinglibre/database.key
 images_bucket: dlibreim
 disable_image_upload: false
+purge_users_params: NOT_ENABLED 24
 # used when we cannot go via pgbouncer as we require a session
 psql_direct_connection: PGSSLCERT={{ database_cert_path }} PGSSLKEY={{ database_key_path }} PGPASSWORD={{ database_password }} psql -U datinglibre -p5432 -h {{ database_host }} datinglibre
 datinglibre_certificate: |

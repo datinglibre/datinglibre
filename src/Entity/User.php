@@ -162,7 +162,7 @@ class User implements UserInterface
      */
     public function addCreatedAt()
     {
-        $this->createdAt =  new DateTime('UTC');
+        $this->createdAt = new DateTime('UTC');
     }
 
     public function getCreatedAt()

@@ -8,6 +8,10 @@ use App\Entity\Email;
 use App\Entity\Token;
 use App\Entity\User;
 use App\Repository\UserRepository;
+use DateInterval;
+use DateTimeImmutable;
+use DateTimeZone;
+use Doctrine\Common\Collections\Criteria;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -156,5 +160,32 @@ class UserService
         }
 
         return false;
+    }
+
+    public function purge(string $type, int $hours): void
+    {
+        $users = [];
+        $now = new DateTimeImmutable('now', new DateTimeZone('UTC'));
+
+        $interval = new DateInterval(sprintf('PT%dH', $hours));
+
+        $criteria = Criteria::create()
+            ->andWhere(Criteria::expr()
+                ->lt('createdAt', $now->sub($interval)));
+
+        switch ($type) {
+            case 'ALL':
+                $users = $this->userRepository->matching($criteria);
+                break;
+            case 'NOT_ENABLED':
+                $criteria->andWhere(Criteria::expr()->eq(User::ENABLED, false));
+                $users = $this->userRepository->matching($criteria);
+                break;
+        }
+
+        /** @var User $user */
+        foreach ($users as $user) {
+            $this->delete(null, $user->getId());
+        }
     }
 }

@@ -272,3 +272,11 @@
 - name: restart nginx
   become: true
   service: name=nginx state=restarted
+
+- name: Install purge users cron
+  become: true
+  cron:
+    name: "Purge users"
+    minute: "*/5"
+    job: "/var/www/datinglibre/bin/console app:users:purge {{ purge_users_params }}"
+    user: datinglibre

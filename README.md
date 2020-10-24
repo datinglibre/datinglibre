@@ -219,7 +219,10 @@ Encrypt the `DSN` and enter is into `mailer_dsn`:
 
     ansible-vault encrypt_string --vault-password-file=~/vault_password ses+smtp://AKIABCDEFGH:s3cr3tp%2F4assw0r%3Fd@default?region=us-east-1
  
-Enter the email address that will send users notifications and confirmation emails in `admin_email`.
+Enter the email address that will send users notifications and confirmation emails in `admin_email`. If you 
+use the full format address, you'll need to escape the quotes for Ansible e.g.:
+
+    admin_email: "\"Dating Libre\" <admin@datinglibre.com>"
 
 #### 7. Run Ansible
 
@@ -238,10 +241,10 @@ Synchronise Symfony `PHP` files and run migrations with:
     
 #### 8. Add a user
 
-Connect to your webserver and run the `app:user` console command:
+Connect to your webserver and run the `app:users:create` console command:
 
-    /var/www/datinglibre/bin/console app:user email@example.com pa$$w0rd USER
-    /var/www/datinglibre/bin/console app:user admin@example.com p@ssw0rd MODERATOR
+    /var/www/datinglibre/bin/console app:users:create email@example.com pa$$w0rd USER
+    /var/www/datinglibre/bin/console app:users:create admin@example.com p@ssw0rd MODERATOR
 
 ### Debugging
 
