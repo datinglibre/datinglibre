@@ -14,11 +14,16 @@ class ProfileImageController extends AbstractController
 {
     private ImageService $imageService;
     private ProfileService $profileService;
+    private bool $disableImageUpload;
 
-    public function __construct(ImageService $imageService, ProfileService $profileService)
-    {
+    public function __construct(
+        ImageService $imageService,
+        ProfileService $profileService,
+        bool $disableImageUpload
+    ) {
         $this->imageService = $imageService;
         $this->profileService = $profileService;
+        $this->disableImageUpload = $disableImageUpload;
     }
 
     /**
@@ -26,15 +31,23 @@ class ProfileImageController extends AbstractController
      */
     public function index(Request $request)
     {
-        $image = $request->files->get('image', null);
         $userId = $this->getUser()->getId();
 
-        if ($image != null) {
-            $this->imageService->save($userId, file_get_contents($image->getRealPath()), 'jpg', true);
+        if ($request->isMethod('POST')) {
+            if ($this->disableImageUpload) {
+                throw $this->createAccessDeniedException();
+            }
+
+            $image = $request->files->get('image', null);
+
+            if ($image != null) {
+                $this->imageService->save($userId, file_get_contents($image->getRealPath()), 'jpg', true);
+            }
         }
 
         return $this->render('profile/image.html.twig', [
             'profile' => $this->profileService->findProjection($userId),
+            'disableImageUpload' => $this->disableImageUpload,
             'controller_name' => 'ProfileImageController'
         ]);
     }

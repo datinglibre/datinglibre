@@ -11,6 +11,10 @@
             <div class="alert alert-success collapse" id="profileImageSuccessMessage" role="alert">{{ 'profile.image.success'|trans }}</div>
             <div class="alert alert-danger collapse" id="profileImageFailureMessage" role="alert">{{ 'profile.image.failure'|trans }}</div>
 
+            {% if disableImageUpload %}
+            <div class="alert alert-danger" id="disableImageUpload" role="alert">{{ 'profile.image.disabled'|trans }}</div>
+            {% endif %}
+
             <label class="btn btn-primary" for="inputImageButton" title="Import">
                 <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="Import image">Open image</span>
                 <input type="file" id="inputImageButton" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff" hidden />

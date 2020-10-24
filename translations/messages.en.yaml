@@ -37,9 +37,10 @@ profile:
     success: "Uploaded profile image"
     failure: "Failed to upload profile image"
     awaiting_moderation: "Your profile image is awaiting moderation"
-    rejected: "Your profile image has failed moderation. Please upload a different image."
+    rejected: "Your profile image has failed moderation. Please upload a different image"
+    disabled: "Saving a profile image is currently disabled"
 account:
-  delete_confirmation: "Confirm your password below to permanently delete your account."
+  delete_confirmation: "Confirm your password below to permanently delete your account"
   account: "Account"
   delete: "Delete"
   delete_confirm: "Permanently delete my account"
