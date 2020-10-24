@@ -1,8 +1,8 @@
 {% from 'macros/is_active.html.twig' import is_active %}
 {% if app.user %}
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="{{ path('login') }}">Dating Libre</a>
-    <div class="collapse navbar-collapse" id="navbar">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="{{ path('login') }}">{{ 'site'|trans }}</a>
+    <div class="collapse navbar-collapse" id="site_navbar">
         {% if is_granted('ROLE_USER') and not is_granted('ROLE_MODERATOR') or is_granted('ROLE_ADMIN') %}
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
@@ -32,5 +32,8 @@
             </li>
         </ul>
     </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#site_navbar" aria-controls="site_navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 </nav>
 {% endif %}

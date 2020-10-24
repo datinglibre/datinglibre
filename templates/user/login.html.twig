@@ -1,56 +1,30 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Log in{% endblock %}
-
-{% block content %}
-    <div class="col-md-8 col-md-offset-2">
-        {% for flash in app.flashes('flash') %}
-            {{ flash|trans }}
-        {% endfor %}
-        <form class="form-signin" method="post">
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
-
-            {% if app.user %}
-                <div class="mb-3">
-                    You are logged in as {{ app.user.username }}, <a href="{{ path('logout') }}">Logout</a>
-                </div>
-            {% endif %}
-
-            <h1 class="font-weight-normal">{{ 'user.login'|trans }}</h1>
-
-            <div class="form-group">
-
-                <label for="inputEmail">Email</label>
-                <input type="email" value="{{ last_username }}" name="email" id="email" class="form-control"
-                       required
-                       autofocus>
-            </div>
-
-            <div class="form-group">
-                <label for="inputPassword">Password</label>
-                <input type="password" name="password" id="password" class="form-control" required>
-            </div>
-
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-            <div class="form-checkbox">
-                <div class="checkbox mb-3"><label><input type="checkbox" name="_remember_me"> Remember me</label></div>
-            </div>
-
-            <button class="btn btn-lg btn-primary" type="submit" id="login">
-                {{ 'user.login'|trans }}
-            </button>
-
-            <a class="btn btn-lg btn-primary" href="{{ path('register') }}" id="register">
-                {{ 'user.register'|trans }}
-            </a>
-
-            <a class="btn btn-lg btn-primary" href="{{ path('reset_password') }}" id="forgotten_password">
-                {{ 'user.forgotten_password'|trans }}
-            </a>
-        </form>
+{% extends 'base_unauthenticated.html.twig' %}
+{% block title %}{{ 'user.login'|trans }}{% endblock %}
+{% block body %}
+<form class="form" method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    {% include 'flash_messages.html.twig' %}
+    <h1 class="font-weight-normal">{{ 'user.login'|trans }}</h1>
+    <div class="form-group">
+        <label for="email">{{ 'user.email'|trans }}</label>
+        <input type="email" value="{{ last_username }}" name="email" id="email" class="form-control">
     </div>
-{% endblock %}
 
+    <div class="form-group">
+        <label for="password">{{ 'user.password'|trans }}</label>
+        <input type="password" name="password" id="password" class="form-control">
+    </div>
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+    <div class="checkbox mb-3">
+        <label><input type="checkbox" name="_remember_me"/>&nbsp;{{ 'user.remember_me'|trans }}</label>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit" id="login">{{ 'user.login'|trans }}</button>
+    <a class="btn btn-lg btn-primary btn-block" href="{{ path('register') }}" id="register">{{ 'user.register'|trans }}</a>
+    <a class="btn btn-lg btn-primary btn-block" href="{{ path('reset_password') }}" id="forgotten_password">{{ 'user.forgotten_password'|trans }}</a>
+</form>
+{% endblock %}

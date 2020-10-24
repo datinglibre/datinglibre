@@ -6,14 +6,12 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
-use App\Security\LoginFormAuthenticator;
 use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 class RegisterController extends AbstractController
 {
@@ -22,8 +20,6 @@ class RegisterController extends AbstractController
      */
     public function register(
         Request $request,
-        GuardAuthenticatorHandler $guardHandler,
-        LoginFormAuthenticator $authenticator,
         SessionInterface $session,
         UserService $userService
     ): Response {

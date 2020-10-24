@@ -1,33 +1,13 @@
-{% extends 'base.html.twig' %}
-{% block title %}Register{% endblock %}
-{% block stylesheets %}
-    <style>
-        .starter-template {
-            padding: 3rem 1.5rem;
-            text-align: center;
-        }
-    </style>
-{% endblock %}
-{% block content %}
-    <h1 class="font-weight-normal">Register</h1>
-    {{ form_start(registrationForm) }}
-
-    {{ form_label(registrationForm.email) }}
-    {{ form_errors(registrationForm.email) }}
-    {{ form_widget(registrationForm.email) }}
-
-    {{ form_label(registrationForm.password) }}
-    {{ form_errors(registrationForm.password) }}
-    {{ form_widget(registrationForm.password) }}
-
-    {{ form_label(registrationForm.agreeTerms) }}
-    {{ form_errors(registrationForm.agreeTerms) }}
-    {{ form_widget(registrationForm.agreeTerms) }}
-    <button class="btn btn-lg btn-primary" type="submit" id="register">
-        {{ 'user.register'|trans }}
-    </button>
-    <a class="btn btn-lg btn-primary" href="{{ path('login') }}" id="login">
-        {{ 'user.login'|trans }}
-    </a>
+{% extends 'base_unauthenticated.html.twig' %}
+{% block title %}{{ 'user.register'|trans }}{% endblock %}
+{% block body %}
+    {% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
+    {{ form_start(registrationForm, {'attr': {'class': 'form'}}) }}
+    <h1 class="font-weight-normal">{{ 'user.register'|trans }}</h1>
+    {{ form_row(registrationForm.email) }}
+    {{ form_row(registrationForm.password) }}
+    {{ form_row(registrationForm.agreeTerms) }}
+    <button class="btn btn-lg btn-primary btn-block" type="submit" id="register">{{ 'user.register'|trans }}</button>
+    <a class="btn btn-lg btn-primary btn-block" href="{{ path('login') }}" id="login">{{ 'user.login'|trans }}</a>
     {{ form_end(registrationForm) }}
 {% endblock %}

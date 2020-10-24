@@ -1,5 +1,9 @@
 site: "Dating Libre"
+submit: "Submit"
 user:
+  agree_terms: "Agree terms"
+  email: "Email"
+  remember_me: "Remember me"
   registered: "Registration successful. Please check your email to confirm your account"
   register: "Register"
   signin: "Sign in"

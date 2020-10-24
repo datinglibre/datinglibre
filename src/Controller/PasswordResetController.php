@@ -22,7 +22,6 @@ class PasswordResetController extends AbstractController
     {
         $form = $this->createFormBuilder()
             ->add('email', TextType::class, ['required' => true])
-            ->add('submit', SubmitType::class)
             ->getForm();
 
         $form->handleRequest($request);

@@ -6,6 +6,7 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,8 +22,10 @@ class PasswordUpdateFormType extends AbstractType
     public function buildForm(FormBuilderInterface $passwordUpdateFormBuilder, array $options)
     {
         $passwordUpdateFormBuilder->add('password', RepeatedType::class, [
-                'first_options' => ['label' => 'user.password'],
-                'second_options' => ['label' => 'user.confirm_password']
+            'type' => PasswordType::class,
+            'required' => true,
+            'first_options' => ['label' => 'user.password'],
+            'second_options' => ['label' => 'user.confirm_password']
         ]);
 
         $passwordUpdateFormBuilder->add('secret', HiddenType::class, ['required' => true]);
