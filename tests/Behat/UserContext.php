@@ -109,6 +109,7 @@ class UserContext extends RawMinkContext
         $emailResponse = $this->httpClient->request('GET', sprintf(MailHogConstants::EMAIL_REST_URL, 'localhost', $email));
         Assert::eq($emailResponse->getStatusCode(), 200);
         $emails = json_decode($emailResponse->getContent(), true);
+        Assert::eq($emails['items'][0]['Content']['Headers']['Subject'][0], "Reset password");
         $this->passwordResetEmail = quoted_printable_decode($emails['items'][0]['Content']['Body']);
         Assert::contains($this->passwordResetEmail, 'Click the link below to reset your password. Please ignore this email if you did not request to reset your password');
     }

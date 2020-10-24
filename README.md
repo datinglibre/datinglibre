@@ -15,7 +15,7 @@ To run all tests, install the following. Ubuntu 20.04 is recommended.
 
   - Chromium `snap install chromium`
   - [Chromedriver](https://chromedriver.chromium.org/) (`sudo mv chromedriver /usr/local/bin`)
-  - [Java 11](https://docs.azul.com/zulu/zuludocs/ZuluUserGuide/PrepareZuluPlatform/AttachAPTRepositoryUbuntuOrDebianSys.htm) 
+  - [Java 11](https://docs.azul.com/zulu/zuludocs/ZuluUserGuide/PrepareZuluPlatform/AttachAPTRepositoryUbuntuOrDebianSys.htm) (for Selenium) 
   - [Selenium Standalone](https://www.selenium.dev/downloads/)
   - `PHP` 7.4 (`sudo apt install php7.4 php7.4-json php7.4-curl php7.4-simplexml php7.4-pgsql php7.4-intl`)
   - Composer (`sudo apt install composer`)
@@ -123,11 +123,11 @@ Run in the following order to ensure the testing and database environments are c
 
 The virtual machines are setup as follows:
 
-| Hostname                 | IP            | Ports                         |
-| -------------------------|---------------|-------------------------------|
-| datinglibre.local        | 192.168.0.99  | 80/HTTP 443/HTTPS             |
-| datinglibredb.local      | 192.168.0.100 | 5432/TCP                      |
-| datinglibretesting.local | 192.168.0.101 | 8025/HTTP 1025/SMTP 9444/HTTP | 
+| Hostname                 | IP            | Ports                                 |
+| -------------------------|---------------|---------------------------------------|
+| datinglibre.local        | 192.168.0.99  | 80/HTTP 443/HTTPS                     |
+| datinglibredb.local      | 192.168.0.100 | 5432/POSTGRES SSL 6543/PGBOUNCER SSL  |
+| datinglibretesting.local | 192.168.0.101 | 8025/HTTP 1025/SMTP 9444/HTTP         | 
 
 If you need to provision any host again, use `vagrant provision`, e.g.:
 
@@ -186,12 +186,15 @@ In `all.yml` you will need to generate a password for `database_password`:
 #### 4. Enter your `AWS` details and `S3` bucket name and endpoint
 
 The site saves images in a single private `S3` bucket. You will need to create a private bucket in the `AWS` 
-administration panel and a user that can access `S3` in the `IAM` panel. Copy and paste the bucket name into 
-`images_bucket` in `webservers.yml`. You need to enter the access and secret keys of the `S3` user you created 
-as encrypted values `aws_access_key`and `aws_secret_key` in `all.yml`, again using `ansible-vault` as before.
+administration panel and a user that can access `S3` in the `IAM` panel. 
 
-The `aws_endpoint` and `aws_region` variables in `all.yml` also need updating with the region of your `S3` bucket,
-e.g. `aws_region` as `eu-west-2` and `aws_endpoint` as `https://s3-eu-west-2.amazonaws.com`.
+Copy and paste the bucket name into `images_bucket` in `webservers.yml`. You need to enter the access and secret keys of the `S3` user you created 
+as encrypted values `aws_access_key`and `aws_secret_key` in `all.yml`, again using `ansible-vault` as above:
+
+     ansible-vault encrypt_string --vault-password-file=~/vault_password AKIAZXYWVUTSRQP
+     ansible-vault encrypt_string --vault-password-file=~/vault_password tH3s3cr3tp4ssw0rd
+
+Next update the `aws_endpoint` and `aws_region` variables in `all.yml` e.g. `aws_region` as `eu-west-2` and `aws_endpoint` as `https://s3-eu-west-2.amazonaws.com`.
     
 #### 5. Update hosts to allow ansible to connect to your production servers
 
@@ -201,8 +204,24 @@ and the host.
 
 #### 6. Configure email
 
-The default mailer is Amazon `SES`. In `webservers.yml` enter an Amazon `SES` `DSN` in `mailer_dsn`. Enter the email
-address that will send users notifications and confirmation emails in `admin_email`. 
+The default mailer is Amazon `SES`, so sign up the Amazon `SES` to get an `SMTP` username and password.
+
+Your `SMTP` password may have special characters, which you will need to `URL` encode:
+
+    php -a 
+    php > echo urlencode('s3cr3tp/4assw0r?d');
+    s3cr3tp%2F4assw0r%3Fd
+    php > 
+
+Copy and paste the password to [create the connection string](https://symfony.com/doc/current/mailer.html#using-a-3rd-party-transport), which will look something like this:
+
+    ses+smtp://AKIABCDEFGH:s3cr3tp%2F4assw0r%3Fd@default?region=us-east-1
+    
+Encrypt the `DSN` and enter is into `mailer_dsn`:
+
+    ansible-vault encrypt_string --vault-password-file=~/vault_password ses+smtp://AKIABCDEFGH:s3cr3tp%2F4assw0r%3Fd@default?region=us-east-1
+ 
+Enter the email address that will send users notifications and confirmation emails in `admin_email`.
 
 #### 7. Run Ansible
 

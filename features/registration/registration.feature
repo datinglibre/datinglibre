@@ -12,7 +12,6 @@ Feature:
         And I should receive a confirmation email to "user@example.com"
         And I click the confirmation link and see "Your account is now enabled. You can now login"
 
-
     @ui
     Scenario: I am notified when my account confirmation is unsuccessful
         When I am on the homepage

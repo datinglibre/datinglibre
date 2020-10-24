@@ -11,6 +11,7 @@ use App\Repository\UserRepository;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserService
 {
@@ -19,6 +20,7 @@ class UserService
     private TokenService $tokenService;
     private UserPasswordEncoderInterface $passwordEncoder;
     private ProfileService $profileService;
+    private TranslatorInterface $translator;
     private string $adminEmail;
 
     public function __construct(
@@ -27,6 +29,7 @@ class UserService
         TokenService $tokenService,
         ProfileService $profileService,
         UserPasswordEncoderInterface $passwordEncoder,
+        TranslatorInterface $translator,
         string $adminEmail
     ) {
         $this->userRepository = $userRepository;
@@ -35,6 +38,7 @@ class UserService
         $this->emailService = $emailService;
         $this->tokenService = $tokenService;
         $this->adminEmail = $adminEmail;
+        $this->translator = $translator;
     }
 
     public function create(
@@ -83,6 +87,7 @@ class UserService
 
         $email = (new TemplatedEmail())
             ->from($this->adminEmail)
+            ->subject($this->translator->trans('user.signup_subject'))
             ->to($user->getEmail())
             ->htmlTemplate('user/email/confirm.html.twig')
             ->context(['secret' => $token->getSecret(), 'userId' => $user->getId()->toString()]);
@@ -119,6 +124,7 @@ class UserService
 
         $email = (new TemplatedEmail())
             ->from($this->adminEmail)
+            ->subject($this->translator->trans('user.reset_password_subject'))
             ->to($user->getEmail())
             ->htmlTemplate('user/email/password_reset.html.twig')
             ->context(['secret' => $token->getSecret(), 'userId' => $user->getId()->toString()]);

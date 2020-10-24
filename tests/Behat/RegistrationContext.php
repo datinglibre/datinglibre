@@ -64,6 +64,7 @@ final class RegistrationContext implements Context
         Assert::eq($emailResponse->getStatusCode(), 200);
         $emails = json_decode($emailResponse->getContent(), true);
         $this->signupEmail = quoted_printable_decode($emails['items'][0]['Content']['Body']);
+        Assert::eq($emails['items'][0]['Content']['Headers']['Subject'][0], "Confirm your account");
         Assert::contains($this->signupEmail, 'Your email address has been used to create an account');
     }
 
