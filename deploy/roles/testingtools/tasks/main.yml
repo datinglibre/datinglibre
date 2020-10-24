@@ -14,6 +14,12 @@
 - name: reset SSH connection to refresh groups
   meta: reset_connection
 
+- name: Enable docker on startup
+  become: true
+  service:
+    name: docker
+    enabled: yes
+
 - name: Copy docker-compose file
   copy:
     src: ../files/docker-compose.yml

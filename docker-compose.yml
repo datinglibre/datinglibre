@@ -1,9 +1,9 @@
-version: '2'
+version: '3'
 
 services:
   postgres:
-    restart: unless-stopped
     image: mdillon/postgis:11-alpine
+    restart: always
     ports:
     - "5432:5432"
     environment:
@@ -14,19 +14,19 @@ services:
     - ./docker/docker-entrypoint-initdb.d/create_dating_libre_schema.sql:/docker-entrypoint-initdb.d/create_dating_libre_schema.sql
   mailhog:
     image: mailhog/mailhog
+    restart: always
     ports:
     - "1025:1025"
     - "8025:8025"
-
     environment:
       MH_STORAGE: memory
-
   s3ninja:
+    restart: always
     image: scireum/s3-ninja:6.4
     ports:
     - "9444:9000"
-
   redis:
+    restart: always
     image: redis:4-alpine
     ports:
     - "6379:6379"

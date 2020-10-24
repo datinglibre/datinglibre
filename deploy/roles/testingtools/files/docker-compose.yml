@@ -1,8 +1,9 @@
-version: '2'
+version: '3'
 
 services:
   mailhog:
     image: mailhog/mailhog
+    restart: always
     ports:
       - "1025:1025"
       - "8025:8025"
@@ -10,6 +11,7 @@ services:
       MH_STORAGE: memory
 
   s3ninja:
+    restart: always
     image: scireum/s3-ninja:6.4
     ports:
       - "9444:9000"

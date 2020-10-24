@@ -133,8 +133,6 @@ If you need to provision any host again, use `vagrant provision`, e.g.:
 
     vagrant provision datinglibre
     
-This is required to restart the docker services in `datinglibretesting` if this server is shut down.
-
 ### Production
 
 You will first need `SSH` access to two servers, or virtual servers, running Ubuntu 20.04 with at least 1GB RAM, which 
