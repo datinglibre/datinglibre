@@ -21,3 +21,9 @@ Feature:
         And I should see "Registration successful. Please check your email to confirm your account"
         And I should receive a confirmation email to "user@example.com"
         And I click the confirmation link with the incorrect secret and see "Could not enable your account"
+
+    @ui
+    Scenario: I can view terms and conditions
+        When I am on "/register"
+        And I follow "Read terms and conditions"
+        Then I should see "demonstration"

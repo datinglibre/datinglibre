@@ -19,6 +19,13 @@ body {
     background-color: #f5f5f5;
 }
 
+#terms_and_conditions {
+    width: 100%;
+    max-width: 550px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
 .form {
     width: 100%;
     max-width: 330px;

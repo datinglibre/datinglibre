@@ -34,8 +34,16 @@ class RegisterController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
-        return $this->render('user/register.html.twig', [
+        return $this->render('register/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/register/terms", name="register_terms")
+     */
+    public function terms(): Response
+    {
+        return $this->render('register/terms.html.twig');
     }
 }

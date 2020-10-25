@@ -1,7 +1,6 @@
 site: "Dating Libre"
 submit: "Submit"
 user:
-  agree_terms: "Agree terms"
   email: "Email"
   remember_me: "Remember me"
   registered: "Registration successful. Please check your email to confirm your account (including your spam folder)"
@@ -91,3 +90,7 @@ moderate:
   accepted: "Accepted"
   rejected: "Rejected"
   no_images: "No images to moderate"
+registration:
+  read_terms_and_conditions: "Read terms and conditions"
+  agree_terms: "I agree to the terms and conditions"
+  terms_and_conditions: "Terms and conditions"
