@@ -2,7 +2,7 @@ version: '3'
 
 services:
   postgres:
-    image: mdillon/postgis:11-alpine
+    image: postgis/postgis:13-3.0-alpine
     restart: always
     ports:
     - "5432:5432"
