@@ -1,4 +1,4 @@
 ---
-- import_playbook: databases.yml
 - import_playbook: testing.yml
+- import_playbook: databases.yml
 - import_playbook: webservers.yml

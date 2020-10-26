@@ -113,13 +113,9 @@ The following files are distributed as part of the [separate DatingLibre locatio
 
 Copy them to`deploy/roles/datinglibre/locations`. 
 
-#### 4. Start the servers
+#### 4. Start the servers 
    
-Run in the following order to ensure the testing and database environments are created first:
-
-    vagrant up datinglibretesting
-    vagrant up datinglibredb
-    vagrant up datinglibre
+    vagrant up 
 
 The virtual machines are setup as follows:
 
