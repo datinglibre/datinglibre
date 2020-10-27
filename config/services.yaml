@@ -39,7 +39,7 @@ services:
 
     App\Service\S3Service:
         arguments:
-            $endpoint: '%env(resolve:AWS_ENDPOINT)%'
-            $accessKey: '%env(resolve:AWS_ACCESS_KEY)%'
-            $secretKey: '%env(resolve:AWS_SECRET_KEY)%'
-            $region: '%env(resolve:AWS_REGION)%'
+            $endpoint: '%env(resolve:STORAGE_ENDPOINT)%'
+            $accessKey: '%env(resolve:STORAGE_ACCESS_KEY)%'
+            $secretKey: '%env(resolve:STORAGE_SECRET_KEY)%'
+            $region: '%env(resolve:STORAGE_REGION)%'

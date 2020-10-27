@@ -183,12 +183,12 @@ The site saves images in a single private `S3` bucket. You will need to create a
 administration panel and a user that can access `S3` in the `IAM` panel. 
 
 Copy and paste the bucket name into `images_bucket` in `webservers.yml`. You need to enter the access and secret keys of the `S3` user you created 
-as encrypted values `aws_access_key`and `aws_secret_key` in `all.yml`, again using `ansible-vault` as above:
+as encrypted values `storage_access_key`and `storage_secret_key` in `all.yml`, again using `ansible-vault` as above:
 
      ansible-vault encrypt_string --vault-password-file=~/vault_password AKIAZXYWVUTSRQP
      ansible-vault encrypt_string --vault-password-file=~/vault_password tH3s3cr3tp4ssw0rd
 
-Next update the `aws_endpoint` and `aws_region` variables in `all.yml` e.g. `aws_region` as `eu-west-2` and `aws_endpoint` as `https://s3-eu-west-2.amazonaws.com`.
+Next update the `storage_endpoint` and `storage_region` variables in `all.yml` e.g. `storage_region` as `eu-west-2` and `storage_endpoint` as `https://s3-eu-west-2.amazonaws.com`.
     
 #### 5. Update hosts to allow ansible to connect to your production servers
 
