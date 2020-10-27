@@ -90,7 +90,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         }
 
         $user = $this->entityManager->getRepository(User::class)
-            ->findOneBy([User::EMAIL => $credentials['email'], User::ENABLED => true]);
+            ->findOneBy([User::EMAIL => trim(strtolower($credentials['email'])), User::ENABLED => true]);
 
         if (!$user) {
             // This is the same message as credential failure,

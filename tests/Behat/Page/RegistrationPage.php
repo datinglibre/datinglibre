@@ -16,7 +16,7 @@ class RegistrationPage extends SymfonyPage
     public function fillInDetails(string $email): void
     {
         $this->getElement('email')->setValue($email);
-        $this->getElement('password')->setValue("abcdefg");
+        $this->getElement('password')->setValue("password");
         $this->getElement('agreeTerms')->setValue(true);
         $this->getElement('register')->click();
     }

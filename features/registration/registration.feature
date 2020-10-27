@@ -3,6 +3,7 @@ Feature:
     I want to be able to register an account
 
     @ui
+    @registration
     Scenario: I can register for an account
         When I am on the homepage
         And I follow "Register"
@@ -13,6 +14,7 @@ Feature:
         And I click the confirmation link and see "Your account is now enabled. You can now login"
 
     @ui
+    @registration
     Scenario: I am notified when my account confirmation is unsuccessful
         When I am on the homepage
         And I follow "Register"
@@ -23,6 +25,7 @@ Feature:
         And I click the confirmation link with the incorrect secret and see "Could not enable your account"
 
     @ui
+    @registration
     Scenario: I can view terms and conditions
         When I am on "/register"
         And I follow "Read terms and conditions"
