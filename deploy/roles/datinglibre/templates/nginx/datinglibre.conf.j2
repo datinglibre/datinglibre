@@ -1,10 +1,10 @@
- server {
+server {
     listen [::]:80;
     listen 80;
 
     server_name {{ server_hostname }} www.{{ server_hostname }};
 
-    return 301 https://www.{{ server_hostname }}$request_uri;
+    return 301 https://{{ server_hostname }}$request_uri;
 }
 
  server {
@@ -14,11 +14,6 @@
 
      ssl_certificate /etc/ssl/certs/datinglibre.crt;
      ssl_certificate_key /etc/ssl/private/datinglibre.key;
-
-     error_log  /var/log/nginx/error.log;
-
-     root  /var/www/datinglibre/public/;
-     index index.html index.php;
 
      return 301 https://{{ server_hostname }}$request_uri;
 }
@@ -31,13 +26,10 @@ server {
      ssl_certificate /etc/ssl/certs/datinglibre.crt;
      ssl_certificate_key /etc/ssl/private/datinglibre.key;
 
-     error_log  /var/log/nginx/error.log;
-
-     root  /var/www/datinglibre/public/;
-     index index.html index.php;
+     root  /var/www/datinglibre/public;
 
      location / {
-         try_files $uri $uri/ /index.php?$args;
+         try_files $uri /index.php$is_args$args;
      }
 
      location = /favicon.ico {
@@ -45,17 +37,17 @@ server {
          access_log off;
      }
 
-     location ~ \.php$ {
-         try_files $uri =404;
-         fastcgi_split_path_info ^(.+.php)(/.+)$;
+    location ~ ^/index\.php(/|$) {
+         fastcgi_split_path_info ^(.+\.php)(/.*)$;
          fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+         include fastcgi_params;
          fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
          fastcgi_param DOCUMENT_ROOT $realpath_root;
-         fastcgi_read_timeout 3600;
          fastcgi_index index.php;
-         fastcgi_buffers 16 16k;
-         fastcgi_buffer_size 32k;
-         include fastcgi_params;
          internal;
+     }
+
+     location ~ \.php$ {
+         return 404;
      }
 }
