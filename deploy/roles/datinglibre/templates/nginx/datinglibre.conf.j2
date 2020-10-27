@@ -1,3 +1,6 @@
+limit_req_zone $binary_remote_addr zone=throttle_requests:10m rate=2r/s;
+limit_conn_zone $binary_remote_addr zone=throttle_connections:10m;
+
 server {
     listen [::]:80;
     listen 80;
@@ -38,6 +41,8 @@ server {
      }
 
     location ~ ^/index\.php(/|$) {
+         limit_req zone=throttle_requests burst=5 nodelay;
+         limit_conn throttle_connections 10;
          fastcgi_split_path_info ^(.+\.php)(/.*)$;
          fastcgi_pass unix:/run/php/php7.4-fpm.sock;
          include fastcgi_params;
