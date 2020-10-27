@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * This file is based on https://symfony.com/doc/current/security/form_login_setup.html
+ *
+ * It licenced under a Creative Commons BY-SA 3.0 licence
+ *
+ * https://creativecommons.org/licenses/by-sa/3.0/
+ *
+ * The following changes have been made:
+ * - Use CustomUserMessageAuthenticationException to supply custom translation.
+ * - Throw CustomUserMessageAuthenticationException if user is null,
+ *   to not leak who is registered on the site.
+ */
+
 declare(strict_types=1);
 
 namespace App\Security;
@@ -12,7 +25,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -27,6 +40,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 {
     use TargetPathTrait;
 
+    const USER_INCORRECT_CREDENTIALS_KEY = 'user.incorrect_credentials';
     private EntityManagerInterface $entityManager;
     private UrlGeneratorInterface $urlGenerator;
     private CsrfTokenManagerInterface $csrfTokenManager;
@@ -75,14 +89,13 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             throw new InvalidCsrfTokenException();
         }
 
-        // TODO behat scenario
         $user = $this->entityManager->getRepository(User::class)
             ->findOneBy([User::EMAIL => $credentials['email'], User::ENABLED => true]);
 
         if (!$user) {
             // This is the same message as credential failure,
             // to not leak who is registered on the site
-            throw new BadCredentialsException();
+            throw new CustomUserMessageAuthenticationException(self::USER_INCORRECT_CREDENTIALS_KEY);
         }
 
         return $user;
@@ -90,7 +103,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        if (!$this->passwordEncoder->isPasswordValid($user, $credentials['password'])) {
+            throw new CustomUserMessageAuthenticationException(self::USER_INCORRECT_CREDENTIALS_KEY);
+        } else {
+            return true;
+        }
     }
 
     /**
