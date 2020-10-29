@@ -4,11 +4,11 @@
     {% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
     {{ form_start(registrationForm, {'attr': {'class': 'form'}}) }}
     <h1 class="font-weight-normal">{{ 'user.register'|trans }}</h1>
+    <div class="checkbox mt-4">{{ form_errors(registrationForm.agreeTerms) }}{{ form_label(registrationForm.agreeTerms) }}{{ form_widget(registrationForm.agreeTerms) }}
+        <p class="text-center"><a href="{{ path('register_terms') }}">{{ 'registration.read_terms_and_conditions'|trans }}</a></p>
+    </div>
     {{ form_row(registrationForm.email) }}
     {{ form_row(registrationForm.password) }}
-    <div class="checkbox mb-3">{{ form_errors(registrationForm.agreeTerms) }}{{ form_label(registrationForm.agreeTerms) }}{{ form_widget(registrationForm.agreeTerms) }}
-        <p class="text-center"><a href="{{ path('register_terms') }}" target="_blank">{{ 'registration.read_terms_and_conditions'|trans }}</a></p>
-    </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit" id="register">{{ 'user.register'|trans }}</button>
     <a class="btn btn-lg btn-primary btn-block" href="{{ path('login') }}" id="login">{{ 'user.login'|trans }}</a>
     {{ form_end(registrationForm) }}

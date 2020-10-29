@@ -13,7 +13,7 @@ if [[ $1 == "ds" ]]
 then 
     ./bin/console server:dump
 fi;
-if [[ $1 == "sync_production" ]]
+if [[ $1 == "sync:prod" ]]
 then
     ansible-playbook -i ./deploy/inventories/production ./deploy/webservers.yml --vault-password-file=~/vault_password --tags sync
 fi;

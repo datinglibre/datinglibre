@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1a163b1727f105ff2b79aec39e0be53",
+    "content-hash": "9c1cb81603ad18c824ae29cf7365cda5",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2066,6 +2066,74 @@
                 "tsvector"
             ],
             "time": "2020-06-07T16:22:45+00:00"
+        },
+        {
+            "name": "mlocati/ip-lib",
+            "version": "1.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mlocati/ip-lib.git",
+                "reference": "334de586c7894afd838be44d73e72d8e97e5b0ff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mlocati/ip-lib/zipball/334de586c7894afd838be44d73e72d8e97e5b0ff",
+                "reference": "334de586c7894afd838be44d73e72d8e97e5b0ff",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "ext-pdo_sqlite": "*",
+                "phpunit/dbunit": "^1.4 || ^2 || ^3 || ^4",
+                "phpunit/phpunit": "^4.8 || ^5.7 || ^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "IPLib\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michele Locati",
+                    "email": "mlocati@gmail.com",
+                    "homepage": "https://github.com/mlocati",
+                    "role": "Author"
+                }
+            ],
+            "description": "Handle IPv4, IPv6 addresses and ranges",
+            "homepage": "https://github.com/mlocati/ip-lib",
+            "keywords": [
+                "IP",
+                "address",
+                "addresses",
+                "ipv4",
+                "ipv6",
+                "manage",
+                "managing",
+                "matching",
+                "network",
+                "networking",
+                "range",
+                "subnet"
+            ],
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/mlocati",
+                    "type": "github"
+                },
+                {
+                    "url": "https://paypal.me/mlocati",
+                    "type": "other"
+                }
+            ],
+            "time": "2020-10-04T12:22:58+00:00"
         },
         {
             "name": "monolog/monolog",

@@ -196,6 +196,15 @@
     recurse: yes
   tags: sync
 
+# For security, only support running the site through a
+# database on the private network, seek support if this fails
+- name: Check database is in private range
+  become: true
+  become_user: datinglibre
+  shell: /var/www/datinglibre/bin/console app:ip:is_private {{ database_host }}
+  args:
+    executable: /bin/bash
+
 - name: Run migrations
   become: true
   become_user: datinglibre

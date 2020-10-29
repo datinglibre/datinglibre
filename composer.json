@@ -12,6 +12,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
         "martin-georgiev/postgresql-for-doctrine": "^1.5",
+        "mlocati/ip-lib": "^1.13",
         "ocramius/proxy-manager": "^2.2",
         "ramsey/uuid": "^4.1",
         "ramsey/uuid-doctrine": "^1.6",
