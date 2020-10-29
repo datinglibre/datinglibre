@@ -1,5 +1,7 @@
 # DatingLibre
 
+![Image showing whether or not the build has passed](https://travis-ci.com/datinglibre/datinglibre.svg?branch=master "Travis CI status")
+
 [DatingLibre](https://datinglibre.com) is an alpha open source Symfony 4.4 `PHP` 7.4 project backed by PostgreSQL, which can introduce
 people based on geographical location, requirements and attributes. The requirements and attributes can be setup
 not only for relationships, but also for hobbies, such as finding a tandem language partner.
