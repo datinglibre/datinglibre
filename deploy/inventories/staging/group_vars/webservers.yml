@@ -4,6 +4,7 @@ mailer_dsn: smtp://192.168.0.101:1025
 admin_email: staging@datinglibre.com
 database_cert_path: /etc/datinglibre/database.crt
 database_key_path: /etc/datinglibre/database.key
+is_demo: false
 images_bucket: dlibreim
 disable_image_upload: false
 purge_users_params: NOT_ENABLED 24

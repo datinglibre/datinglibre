@@ -1,4 +1,6 @@
-site: "Dating Libre"
+site:
+  name: "Dating Libre"
+  description: "A demonstration of an open source dating platform"
 submit: "Submit"
 user:
   email: "Email"

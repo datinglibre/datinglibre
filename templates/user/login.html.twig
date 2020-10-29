@@ -26,5 +26,8 @@
     <button class="btn btn-lg btn-primary btn-block" type="submit" id="login">{{ 'user.login'|trans }}</button>
     <a class="btn btn-lg btn-primary btn-block" href="{{ path('register') }}" id="register">{{ 'user.register'|trans }}</a>
     <a class="btn btn-lg btn-primary btn-block" href="{{ path('reset_password') }}" id="forgotten_password">{{ 'user.forgotten_password'|trans }}</a>
+    {% if isDemo %}
+    <p class="mt-4 text-center"><a href="https://github.com/datinglibre/datinglibre">Powered by DatingLibre</a></p>
+    {% endif %}
 </form>
 {% endblock %}

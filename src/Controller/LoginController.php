@@ -16,7 +16,11 @@ class LoginController extends AbstractController
     /**
      * @Route("/", name="login")
      */
-    public function login(AuthenticationUtils $authenticationUtils, AuthorizationCheckerInterface $authChecker): Response
+    public function login(
+        bool $isDemo,
+        AuthenticationUtils $authenticationUtils,
+        AuthorizationCheckerInterface $authChecker
+    ): Response
     {
         if ($authChecker->isGranted(User::MODERATOR)) {
             return $this->redirectToRoute('moderate_profile_images');
@@ -29,6 +33,10 @@ class LoginController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('user/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('user/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error,
+            'isDemo' => $isDemo
+        ]);
     }
 }
