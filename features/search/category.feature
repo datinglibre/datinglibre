@@ -1,6 +1,5 @@
 Feature:
-  As a user
-  I want to be able to find another user based on at least one match in
+  As a user I want to be able to find another user based on at least one match in
   several distinct categories
 
     @search
@@ -9,6 +8,9 @@ Feature:
             | email                          | characteristics  | requirements   | city    | age |
             | chelsea_blue@example.com       | Square, Blue     | Yellow, Circle | London  | 30  |
             | westminster_yellow@example.com | Yellow, Circle   | Blue, Square   | London  | 30  |
+        And the following filters exist:
+            | email                    | distance | min_age | max_age |
+            | chelsea_blue@example.com | 100000   | 18      | 100     |
         When the user "chelsea_blue@example.com" searches for matches
         Then the user "westminster_yellow@example.com" matches
 
@@ -18,6 +20,9 @@ Feature:
              | email                          | characteristics  | requirements   | city    | age |
              | chelsea_blue@example.com       | Blue, Square     | Yellow, Circle | London  | 30  |
              | clapham_green@example.com      | Green, Circle    | Blue, Square   | London  | 30  |
+        And the following filters exist:
+             | email                    | distance | min_age | max_age |
+             | chelsea_blue@example.com | 100000   | 18      | 100     |
         When the user "chelsea_blue@example.com" searches for matches
         Then the user "clapham_green@example.com" does not match
 
@@ -28,6 +33,9 @@ Feature:
             | email                          | characteristics  | requirements   | city   | age |
             | chelsea_blue@example.com       | Blue, Square     | Yellow, Circle | London | 30  |
             | hackney_yellow@example.com     | Yellow, Circle   | Blue, Circle   | London | 30  |
+        And the following filters exist:
+            | email                    | distance | min_age | max_age |
+            | chelsea_blue@example.com | 100000   | 18      | 100     |
         When the user "chelsea_blue@example.com" searches for matches
         Then the user "hackney_yellow@example.com" does not match
 
@@ -38,6 +46,9 @@ Feature:
             | email                          | characteristics          | requirements             | city   | age |
             | chelsea_blue@example.com       | Blue, Square             | Yellow, Circle, Triangle | London | 30  |
             | hackney_yellow@example.com     | Yellow, Circle, Triangle | Blue, Circle, Square     | London | 30  |
+        And the following filters exist:
+            | email                    | distance | min_age | max_age |
+            | chelsea_blue@example.com | 100000   | 18      | 100     |
         When the user "chelsea_blue@example.com" searches for matches
         Then the user "hackney_yellow@example.com" matches
 
@@ -48,6 +59,9 @@ Feature:
             | email                          | characteristics          | requirements            | city   | age |
             | chelsea_blue@example.com       | Blue, Square             | Green, Circle, Triangle | London | 30  |
             | hackney_yellow@example.com     | Yellow, Circle, Triangle | Blue, Square            | London | 30  |
+        And the following filters exist:
+            | email                    | distance | min_age | max_age |
+            | chelsea_blue@example.com | 100000   | 18      | 100     |
         When the user "chelsea_blue@example.com" searches for matches
         Then the user "hackney_yellow@example.com" does not match
 
@@ -58,6 +72,9 @@ Feature:
             | chelsea_blue@example.com       | Blue, Square             | Yellow, Circle, Green    | London | 30  |
             | hackney_yellow@example.com     | Yellow, Circle, Triangle | Blue, Circle, Square     | London | 30  |
             | clapham_green@example.com      | Green, Circle            | Blue, Square             | London | 30  |
+        And the following filters exist:
+            | email                    | distance | min_age | max_age |
+            | chelsea_blue@example.com | 100000   | 18      | 100     |
         When the user "chelsea_blue@example.com" searches for matches
         Then the following users match:
             | email                      |

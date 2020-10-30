@@ -19,16 +19,20 @@ use Ramsey\Uuid\UuidInterface;
  */
 class ProfileRepository extends ServiceEntityRepository
 {
+    const DEFAULT_MAX_AGE = 100;
+    const DEFAULT_MIN_AGE = 18;
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Profile::class);
     }
 
-    public function findProfilesByDistance(
+    public function findByRadius(
         UuidInterface $userId,
         float $latitude,
         float $longitude,
         int $radius,
+        int $minAge,
+        int $maxAge,
         bool $previous,
         int $sortId,
         int $limit
@@ -63,31 +67,34 @@ INNER JOIN datinglibre.cities AS city ON p.city_id = city.id
 INNER JOIN datinglibre.regions AS region ON city.region_id = region.id
 INNER JOIN datinglibre.users AS u ON u.id = p.user_id
 LEFT JOIN datinglibre.images profileImage ON profileImage.user_id = p.user_id AND profileImage.is_profile = TRUE AND profileImage.state = 'ACCEPTED'
-WHERE ST_DWithin(Geography(ST_MakePoint(city.longitude, city.latitude)), 
-    Geography(ST_MakePoint(:longitude, :latitude)), :radius, false)
-AND EXISTS (SELECT match_id FROM (
-        SELECT c.user_id as match_id from datinglibre.requirements r 
-        LEFT JOIN datinglibre.user_attributes c on c.attribute_id = r.attribute_id 
-        LEFT JOIN datinglibre.attributes a on r.attribute_id = a.id
+LEFT JOIN datinglibre.filters filter ON filter.user_id = p.user_id
+WHERE ST_DWithin(Geography(ST_MakePoint(city.longitude, city.latitude)), Geography(ST_MakePoint(:longitude, :latitude)), :radius, false)
+AND p.user_id <> :userId
+AND EXISTS (SELECT matching_user_id FROM (
+        SELECT ua.user_id AS matching_user_id FROM datinglibre.requirements r 
+        LEFT JOIN datinglibre.user_attributes ua ON ua.attribute_id = r.attribute_id 
+        LEFT JOIN datinglibre.attributes a ON r.attribute_id = a.id
         WHERE r.user_id = :userId 
-        AND c.user_id = p.user_id
-        GROUP BY c.user_id
+        AND ua.user_id = p.user_id
+        GROUP BY ua.user_id
         HAVING COUNT(DISTINCT a.category_id) = (SELECT COUNT(id) from datinglibre.categories)
     ) AS matches
-    LEFT JOIN datinglibre.requirements match_r on match_r.user_id = match_id 
-    LEFT JOIN datinglibre.user_attributes match_c on match_c.attribute_id = match_r.attribute_id 
+    LEFT JOIN datinglibre.requirements match_r ON match_r.user_id = matching_user_id 
+    LEFT JOIN datinglibre.user_attributes match_c ON match_c.attribute_id = match_r.attribute_id 
     AND match_c.user_id = :userId 
-    LEFT JOIN datinglibre.attributes match_a on match_a.id = match_c.attribute_id 
-    GROUP BY match_id
+    LEFT JOIN datinglibre.attributes match_a ON match_a.id = match_c.attribute_id 
+    GROUP BY matching_user_id
     HAVING COUNT(DISTINCT match_a.category_id) = (SELECT COUNT(id) FROM datinglibre.categories)
 )
 AND NOT EXISTS (
     SELECT 1 FROM datinglibre.blocks b 
         WHERE (b.user_id = :userId AND b.blocked_user_id = p.user_id) 
         OR (b.user_id = p.user_id AND b.blocked_user_id = :userId)
-) 
+)
+AND (SELECT EXTRACT(YEAR FROM AGE(dob)) FROM datinglibre.profiles p WHERE p.user_id = :userId) 
+     BETWEEN COALESCE(filter.min_age, :defaultMinAge) AND COALESCE(filter.max_age, :defaultMaxAge)
+AND EXTRACT(YEAR FROM AGE(p.dob)) BETWEEN :minAge AND :maxAge 
 EOD;
-
         if ($previous === false && $sortId === 0) {
             $sql .= 'ORDER BY p.sort_id ASC';
         }
@@ -107,6 +114,11 @@ EOD;
         $query->setParameter('latitude', $latitude);
         $query->setParameter('longitude', $longitude);
         $query->setParameter('radius', $radius);
+        $query->setParameter('minAge', $minAge);
+        $query->setParameter('maxAge', $maxAge);
+        $query->setParameter('defaultMaxAge', self::DEFAULT_MAX_AGE);
+        $query->setParameter('defaultMinAge', self::DEFAULT_MIN_AGE);
+
 
         if ($sortId !== 0) {
             $query->setParameter('sortId', $sortId);
@@ -116,8 +128,7 @@ EOD;
 
         $profiles = $query->getResult();
 
-        // keep the query simple and sort here, so the correct profile is
-        // used for pagination
+        // sort here, as query is already complicated
         usort($profiles, fn ($a, $b) => ($a->getSortId()) > $b->getSortId());
         return $profiles;
     }

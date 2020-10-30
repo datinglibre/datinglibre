@@ -8,6 +8,9 @@ Feature:
         | email                          | characteristics  | requirements   | city    | age |
         | chelsea_blue@example.com       | Square, Blue     | Yellow, Circle | London  | 30  |
         | westminster_yellow@example.com | Yellow, Circle   | Blue, Square   | London  | 30  |
+    And the following filters exist:
+        | email                    | distance | min_age | max_age |
+        | chelsea_blue@example.com | 100000   | 18      | 100     |
     And the following blocks exist
         | email                    | block                          |
         | chelsea_blue@example.com | westminster_yellow@example.com |
@@ -17,22 +20,24 @@ Feature:
   @block
   Scenario: I have been blocked by another user
     Given the following profiles exist:
-      | email                          | characteristics  | requirements   | city    | age |
-      | chelsea_blue@example.com       | Square, Blue     | Yellow, Circle | London  | 30  |
-      | westminster_yellow@example.com | Yellow, Circle   | Blue, Square   | London  | 30  |
+        | email                          | characteristics  | requirements   | city    | age |
+        | chelsea_blue@example.com       | Square, Blue     | Yellow, Circle | London  | 30  |
+        | westminster_yellow@example.com | Yellow, Circle   | Blue, Square   | London  | 30  |
+    And the following filters exist:
+        | email                          | distance | min_age | max_age |
+        | westminster_yellow@example.com | 100000   | 18      | 100     |
     And the following blocks exist
-      | email                    | block                          |
-      | chelsea_blue@example.com | westminster_yellow@example.com |
+        | email                    | block                          |
+        | chelsea_blue@example.com | westminster_yellow@example.com |
     When the user "westminster_yellow@example.com" searches for matches
     Then the user "chelsea_blue@example.com" does not match
 
-  @ui
-  @block
+  @ui @block
   Scenario: I can block another user
     Given the following profiles exist:
-      | email                          | characteristics  | requirements   | city    | age |
-      | chelsea_blue@example.com       | Square, Blue     | Yellow, Circle | London  | 30  |
-      | westminster_yellow@example.com | Yellow, Circle   | Blue, Square   | London  | 30  |
+        | email                          | characteristics  | requirements   | city    | age |
+        | chelsea_blue@example.com       | Square, Blue     | Yellow, Circle | London  | 30  |
+        | westminster_yellow@example.com | Yellow, Circle   | Blue, Square   | London  | 30  |
     And I am logged in with "chelsea_blue@example.com"
     And I am on "/search"
     Then I should see "westminster_yellow"

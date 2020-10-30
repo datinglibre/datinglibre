@@ -20,7 +20,6 @@ use Webmozart\Assert\Assert;
 
 class SearchContext implements Context
 {
-    const TEST_RADIUS = 80_000;
     private MatchingService $matchingService;
     private UserService $userService;
     private ProfileRepository $profileRepository;
@@ -53,19 +52,24 @@ class SearchContext implements Context
      */
     public function theUserSearchesForMatches(string $email)
     {
-        $user = $this->userRepository->findOneBy([User::EMAIL => $email]);
-        Assert::notNull($user, "User not found");
+        $user = $this->userService->findByEmail($email);
+        Assert::notNull($user);
 
         $profile = $this->profileRepository->find($user->getId());
         Assert::notNull($profile);
 
         $city = $profile->getCity();
 
-        $this->profiles = $this->profileRepository->findProfilesByDistance(
+        $filter = $this->filterRepository->findOneBy(['user' => $user->getId()]);
+        Assert::notNull($filter);
+
+        $this->profiles = $this->profileRepository->findByRadius(
             $user->getId(),
             $city->getLatitude(),
             $city->getLongitude(),
-            self::TEST_RADIUS,
+            $filter->getDistance(),
+            $filter->getMinAge(),
+            $filter->getMaxAge(),
             false,
             0,
             10
@@ -75,17 +79,17 @@ class SearchContext implements Context
     /**
      * @Then the user :email matches
      */
-    public function theUserMatches($email)
+    public function theUserMatches(string $email)
     {
-        Assert::true($this->containsProfile($this->userRepository->findOneBy([User::EMAIL => $email])));
+        Assert::true($this->containsProfile($this->userService->findByEmail($email)));
     }
 
     /**
      * @Then the user :email does not match
      */
-    public function theUserDoesNotMatch($email)
+    public function theUserDoesNotMatch(string $email)
     {
-        Assert::false($this->containsProfile($this->userRepository->findOneBy([User::EMAIL => $email])));
+        Assert::false($this->containsProfile($this->userService->findByEmail($email)));
     }
 
     /**
@@ -106,7 +110,7 @@ class SearchContext implements Context
     /**
      * @Then I should see the user :email
      */
-    public function iShouldSeeTheUser($email)
+    public function iShouldSeeTheUser(string $email)
     {
         $user = $this->userService->findByEmail($email);
         Assert::notNull($user);
@@ -131,7 +135,7 @@ class SearchContext implements Context
     }
 
     /**
-     * @Given the following filters exist
+     * @Given the following filters exist:
      */
     public function theFollowingFiltersExist(TableNode $table)
     {

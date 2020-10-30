@@ -106,9 +106,9 @@ final class Version20200101000000 extends AbstractMigration
         $this->addSql('CREATE TABLE datinglibre.filters (
     user_id UUID NOT NULL REFERENCES datinglibre.users ON DELETE CASCADE,
     region_id UUID REFERENCES datinglibre.regions ON DELETE CASCADE,
-    distance integer,
-    min_age integer,
-    max_age integer
+    distance integer CHECK (distance > 0),
+    min_age integer CHECK (min_age >= 18 AND min_age <= max_age),
+    max_age integer CHECK (max_age >= 18 AND max_age >= min_age)
 )');
 
         $this->addSql('CREATE TABLE datinglibre.threads (

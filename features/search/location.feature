@@ -3,7 +3,7 @@ Feature:
     I want to be able to find other users near me
 
     @search @ui
-        Scenario:
+    Scenario:
         Given the following profiles exist:
             | email                          | characteristics  | requirements   | city    | age |
             | bristol_blue@example.com       | Square, Blue     | Yellow, Circle | Bristol | 30  |
@@ -17,6 +17,9 @@ Feature:
             | email                    | characteristics  | requirements   | city    | age |
             | bristol_blue@example.com | Square, Blue     | Yellow, Circle | Bristol | 30  |
             | bath_yellow@example.com  | Yellow, Circle   | Blue, Square   | Bath    | 30  |
+        And the following filters exist:
+            | email                    | distance | min_age | max_age |
+            | bristol_blue@example.com | 100000   | 18      | 100     |
         When the user "bristol_blue@example.com" searches for matches
         Then the user "bath_yellow@example.com" matches
 
@@ -26,6 +29,9 @@ Feature:
             | email                    | characteristics  | requirements   | city    | age |
             | bristol_blue@example.com | Square, Blue     | Yellow, Circle | Bristol | 30  |
             | bath_yellow@example.com  | Yellow, Circle   | Blue, Square   | Bath    | 30  |
+        And the following filters exist:
+            | email                    | distance | min_age | max_age |
+            | bath_yellow@example.com  | 100000   | 18      | 100     |
         When the user "bristol_blue@example.com" has uploaded a profile image
         And the user "bath_yellow@example.com" searches for matches
         Then the image of "bristol_blue@example.com" should not appear
@@ -37,6 +43,9 @@ Feature:
             | email                    | characteristics  | requirements   | city    | age |
             | bristol_blue@example.com | Square, Blue     | Yellow, Circle | Bristol | 30  |
             | bath_yellow@example.com  | Yellow, Circle   | Blue, Square   | Bath    | 30  |
+        And the following filters exist:
+            | email                    | distance | min_age | max_age |
+            | bath_yellow@example.com  | 100000   | 18      | 100     |
         When the user "bristol_blue@example.com" has uploaded a profile image
         And the profile image for "bristol_blue@example.com" has failed moderation
         And the user "bath_yellow@example.com" searches for matches
@@ -48,6 +57,9 @@ Feature:
             | email                    | characteristics  | requirements   | city    | age |
             | bristol_blue@example.com | Square, Blue     | Yellow, Circle | Bristol | 30  |
             | bath_yellow@example.com  | Yellow, Circle   | Blue, Square   | Bath    | 30  |
+        And the following filters exist:
+            | email                    | distance | min_age | max_age |
+            | bath_yellow@example.com  | 100000   | 18      | 100     |
         When the user "bristol_blue@example.com" has uploaded a profile image
         And the profile image for "bristol_blue@example.com" has passed moderation
         And the user "bath_yellow@example.com" searches for matches
@@ -59,6 +71,9 @@ Feature:
             | email                          | characteristics  | requirements   | city    | age |
             | bristol_blue@example.com       | Square, Blue     | Yellow, Circle | Bristol | 30  |
             | oxford_yellow@example.com      | Yellow, Circle   | Blue, Square   | Oxford  | 30  |
+        And the following filters exist:
+            | email                     | distance | min_age | max_age |
+            | bristol_blue@example.com | 100000   | 18      | 100     |
         When the user "bristol_blue@example.com" searches for matches
         Then the user "oxford_yellow@example.com" does not match
 
@@ -68,7 +83,7 @@ Feature:
             | email                          | characteristics  | requirements   | city    | age |
             | bristol_blue@example.com       | Square, Blue     | Yellow, Circle | Bristol | 30  |
             | bath_yellow@example.com        | Yellow, Circle   | Blue, Square   | Bath    | 30  |
-        And the following filters exist
+        And the following filters exist:
             | email                    | distance | min_age | max_age |
             | bristol_blue@example.com | 100000   | 25      | 35      |
         When I log in using email "bristol_blue@example.com"

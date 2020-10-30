@@ -6,8 +6,8 @@ namespace App\Service;
 
 use App\Entity\Profile;
 use App\Entity\ProfileProjection;
-use App\Entity\Region;
 use App\Repository\ProfileRepository;
+use Exception;
 use Ramsey\Uuid\UuidInterface;
 
 class ProfileService
@@ -23,32 +23,11 @@ class ProfileService
         $this->imageService = $imageService;
     }
 
-    public function findProfiles(
-        $userId,
-        ?int $radius,
-        ?Region $region,
-        ?int $minAge,
-        ?int $maxAge,
-        bool $previous,
-        int $sortId,
-        $limit
-    ): array {
-        if (!empty($radius)) {
-            return $this->findWithinRadius($userId, $radius, $minAge, $maxAge, $previous, $sortId, $limit);
-        }
-
-        if (!empty($region)) {
-            return $this->findWithinRegion($userId, $radius, $minAge, $maxAge, $previous, $sortId, $limit);
-        }
-
-        return [];
-    }
-
-    public function findWithinRadius(
+    public function findByRadius(
         UuidInterface $userId,
         int $radius,
-        ?int $minAge,
-        ?int $maxAge,
+        int $minAge,
+        int $maxAge,
         bool $previous,
         int $sortId,
         $limit
@@ -56,29 +35,21 @@ class ProfileService
         $profile = $this->profileRepository->find($userId);
         $city = $profile->getCity();
 
-        return $this->profileRepository->findProfilesByDistance(
+        if ($minAge > $maxAge) {
+            throw new Exception('Minimum greater than maximum age');
+        }
+
+        return $this->profileRepository->findByRadius(
             $userId,
             $city->getLatitude(),
             $city->getLongitude(),
             $radius,
+            $minAge,
+            $maxAge,
             $previous,
             $sortId,
             $limit
         );
-    }
-
-
-    private function findWithinRegion(
-        $userId,
-        ?int $radius,
-        ?int $minAge,
-        ?int $maxAge,
-        bool $previous,
-        ?int $sortId,
-        $limit
-    ) {
-        // TODO: find within regions
-        return [];
     }
 
     public function find($id): ?Profile

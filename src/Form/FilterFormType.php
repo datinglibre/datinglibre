@@ -54,8 +54,7 @@ class FilterFormType extends AbstractType
             'choice_label' => function ($choice) {
                 return $choice;
             },
-            'placeholder' => '',
-            'required' => false
+            'required' => true
          ]);
 
         $searchFormBuilder->add('max_age', ChoiceType::class, [
@@ -64,8 +63,7 @@ class FilterFormType extends AbstractType
             'choice_label' => function ($choice) {
                 return $choice;
             },
-            'placeholder' => '',
-            'required' => false
+            'required' => true
         ]);
 
         $searchFormBuilder->add('save', SubmitType::class, [

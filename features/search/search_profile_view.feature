@@ -8,7 +8,7 @@ Feature:
             | email                          | characteristics  | requirements   | city    | age |
             | chelsea_blue@example.com       | Square, Blue     | Yellow, Circle | London  | 30  |
             | westminster_yellow@example.com | Yellow, Circle   | Blue, Square   | London  | 30  |
-        And the following filters exist
+        And the following filters exist:
             | email                    | distance | min_age | max_age |
             | chelsea_blue@example.com | 100000   | 25      | 35      |
         And I am logged in with "chelsea_blue@example.com"

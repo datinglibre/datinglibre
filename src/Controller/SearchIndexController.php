@@ -86,10 +86,9 @@ class SearchIndexController extends AbstractController
         $sortId = (int) $request->query->get(self::SORT_ID, 0);
         $previous = (bool) $request->query->get(self::PREVIOUS, false);
 
-        $profiles = $this->profileService->findProfiles(
+        $profiles = $this->profileService->findByRadius(
             $user->getId(),
             $filter->getDistance(),
-            $filter->getRegion(),
             $filter->getMinAge(),
             $filter->getMaxAge(),
             $previous,

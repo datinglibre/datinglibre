@@ -12,7 +12,7 @@ Feature:
      | bath_3@example.com    | Yellow, Circle   | Blue, Square   | Bath    | 30  |
      | bath_4@example.com    | Yellow, Circle   | Blue, Square   | Bath    | 30  |
      | bath_5@example.com    | Yellow, Circle   | Blue, Square   | Bath    | 30  |
-    And the following filters exist
+    And the following filters exist:
       | email                    | distance | min_age | max_age |
       | bristol_1@example.com    | 100000   | 25      | 35      |
     And I am logged in with "bristol_1@example.com"
@@ -48,7 +48,7 @@ Feature:
       | bath_19@example.com   | Yellow, Circle   | Blue, Square   | Bath    | 30  |
       | bath_20@example.com   | Yellow, Circle   | Blue, Square   | Bath    | 30  |
       | bath_21@example.com   | Yellow, Circle   | Blue, Square   | Bath    | 30  |
-    And the following filters exist
+    And the following filters exist:
       | email                    | distance | min_age | max_age |
       | bristol_1@example.com    | 100000   | 25      | 35      |
     And I am logged in with "bristol_1@example.com"
