@@ -20,6 +20,7 @@ class Email
 {
     public const SIGNUP = 'SIGNUP';
     public const PASSWORD_RESET = 'PASSWORD_RESET';
+    public const ALREADY_EXISTS = 'ALREADY_EXISTS';
 
     /**
      * @var UuidInterface

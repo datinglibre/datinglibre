@@ -21,7 +21,7 @@ final class RegistrationContext implements Context
     private UserRepository $userRepository;
     private HttpClientInterface $httpClient;
     private string $signupEmail;
-
+    private string $alreadyExistsEmail;
     private ?string $email;
 
     public function __construct(
@@ -41,6 +41,7 @@ final class RegistrationContext implements Context
     public function setup()
     {
         $this->signupEmail = '';
+        $this->alreadyExistsEmail = '';
         $response = $this->httpClient->request('DELETE', sprintf(MailHogConstants::DELETE_EMAILS_URL, 'localhost'));
         Assert::eq($response->getStatusCode(), 200);
     }
@@ -73,9 +74,7 @@ final class RegistrationContext implements Context
      */
     public function iClickTheConfirmationLinkAndSee(string $message)
     {
-        $crawler = new Crawler($this->signupEmail);
-        $confirmLink = $crawler->filterXPath('//a/@href')->getNode(0)->nodeValue;
-        $confirmResponse = $this->clickConfirmLink($confirmLink);
+        $confirmResponse = $this->clickLink($this->getFirstLink($this->signupEmail));
         Assert::contains($confirmResponse->getContent(), $message);
     }
 
@@ -84,26 +83,53 @@ final class RegistrationContext implements Context
      */
     public function iClickTheConfirmationLinkWithTheIncorrectSecretAndSee(string $message)
     {
-        $crawler = new Crawler($this->signupEmail);
-
         // append a digit to invalid the secret before the query string,
         $confirmLink = str_replace(
             '?',
             '0?',
-            $crawler->filterXPath('//a/@href')->getNode(0)->nodeValue
+            $this->getFirstLink($this->signupEmail)
         );
 
-        $confirmResponse = $this->clickConfirmLink($confirmLink);
+        $confirmResponse = $this->clickLink($confirmLink);
 
         Assert::contains($confirmResponse->getContent(), $message);
+        Assert::eq($confirmResponse->getInfo()['response_headers'][0], 'HTTP/1.1 302 Found');
     }
 
-    private function clickConfirmLink($confirmLink): ResponseInterface
+    /**
+     * @Given I should receive an already exists email to :email
+     */
+    public function iShouldReceiveAnAlreadyExistsEmailTo(string $email)
     {
-        $confirmResponse = $this->httpClient->request('GET', $confirmLink);
-        Assert::eq($confirmResponse->getStatusCode(), 200);
-        Assert::eq($confirmResponse->getInfo()['response_headers'][0], 'HTTP/1.1 302 Found');
+        $emailResponse = $this->httpClient->request('GET', sprintf(MailHogConstants::EMAIL_REST_URL, 'localhost', $email));
+        Assert::eq($emailResponse->getStatusCode(), 200);
+        $emails = json_decode($emailResponse->getContent(), true);
+        $this->alreadyExistsEmail = quoted_printable_decode($emails['items'][0]['Content']['Body']);
+        Assert::eq($emails['items'][0]['Content']['Headers']['Subject'][0], 'An account for your email address already exists');
+        Assert::contains($this->alreadyExistsEmail, 'If you have forgotten your password please use the');
+        Assert::contains($this->alreadyExistsEmail, 'password reset form');
+    }
 
-        return $confirmResponse;
+    /**
+     * @Then I can reset my password using the link
+     */
+    public function iCanResetMyPasswordUsingTheLink()
+    {
+        $response = $this->clickLink($this->getFirstLink($this->alreadyExistsEmail));
+        Assert::contains($response->getContent(), 'Reset password');
+    }
+
+    private function getFirstLink($email): string
+    {
+        $crawler = new Crawler($email);
+        return $crawler->filterXPath('//a/@href')->getNode(0)->nodeValue;
+    }
+
+    private function clickLink($link): ResponseInterface
+    {
+        $response = $this->httpClient->request('GET', $link);
+        Assert::eq($response->getStatusCode(), 200);
+
+        return $response;
     }
 }

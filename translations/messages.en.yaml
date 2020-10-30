@@ -96,3 +96,6 @@ registration:
   read_terms_and_conditions: "Read terms and conditions"
   agree_terms: "I agree to the terms and conditions"
   terms_and_conditions: "Terms and conditions"
+  already_exists_subject: "An account for your email address already exists"
+  already_exists_body: "If you have forgotten your password please use the "
+  password_reset_form: "password reset form"

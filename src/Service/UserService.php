@@ -82,21 +82,34 @@ class UserService
         }
     }
 
-    public function signup(User $user, string $password)
+    public function signup(User $newUser, string $password): void
     {
-        $user->setPassword($this->passwordEncoder->encodePassword($user, $password));
-        $user = $this->userRepository->save($user);
+        $existingUser = $this->findByEmail($newUser->getEmail());
 
-        $token = $this->tokenService->save($user, Token::SIGNUP);
+        if (null !== $existingUser) {
+            $email = (new TemplatedEmail())
+                ->from($this->adminEmail)
+                ->subject($this->translator->trans('registration.already_exists_subject'))
+                ->to($newUser->getEmail())
+                ->htmlTemplate('user/email/already_exists.html.twig');
+
+            $this->emailService->send($email, $existingUser, Email::ALREADY_EXISTS);
+            return;
+        }
+
+        $newUser->setPassword($this->passwordEncoder->encodePassword($newUser, $password));
+        $savedUser = $this->userRepository->save($newUser);
+
+        $token = $this->tokenService->save($savedUser, Token::SIGNUP);
 
         $email = (new TemplatedEmail())
             ->from($this->adminEmail)
             ->subject($this->translator->trans('user.signup_subject'))
-            ->to($user->getEmail())
+            ->to($savedUser->getEmail())
             ->htmlTemplate('user/email/confirm.html.twig')
-            ->context(['secret' => $token->getSecret(), 'userId' => $user->getId()->toString()]);
+            ->context(['secret' => $token->getSecret(), 'userId' => $savedUser->getId()->toString()]);
 
-        $this->emailService->send($email, $user, Email::SIGNUP);
+        $this->emailService->send($email, $savedUser, Email::SIGNUP);
     }
 
     public function updatePassword(string $userId, string $secret, string $newPassword): bool
