@@ -2,11 +2,11 @@
 
 [![Build Status](https://travis-ci.com/datinglibre/datinglibre.svg?branch=master "Travis CI status")](https://travis-ci.com/github/datinglibre/datinglibre)
 
-[DatingLibre](https://datinglibre.com) is an alpha open source Symfony 4.4 `PHP` 7.4 project backed by PostgreSQL, which can introduce
+DatingLibre [demo](https://datinglibre.com) is a white-label open source Symfony 4.4 `PHP` 7.4 dating site backed by PostgreSQL, which can introduce
 people based on geographical location, requirements and attributes. The requirements and attributes can be setup
 not only for relationships, but also for hobbies, such as finding a tandem language partner.
 
-As an alpha release, it may include bugs and security issues.
+The project is currently in "alpha" stage, it may include bugs and security issues.
 
 ![Image showing profile edit page](https://raw.githubusercontent.com/datinglibre/datinglibre.github.io/main/profile.png "Profile edit page")
 
