@@ -96,8 +96,8 @@ AND (SELECT EXTRACT(YEAR FROM AGE(dob)) FROM datinglibre.profiles p WHERE p.user
 AND EXTRACT(YEAR FROM AGE(p.dob)) BETWEEN :minAge AND :maxAge 
 EOD;
 
-        $radiusSql = 'ST_DWithin(Geography(ST_MakePoint(city.longitude, city.latitude)), Geography(ST_MakePoint(:longitude, :latitude)), :radius, false)' ;
-        $regionSql = 'region.id = :regionId' ;
+        $radiusSql = 'ST_DWithin(Geography(ST_MakePoint(city.longitude, city.latitude)), Geography(ST_MakePoint(:longitude, :latitude)), :radius, false)';
+        $regionSql = 'region.id = :regionId ';
 
         if (null !== $distance && null === $regionId) {
             $sql .= 'AND ' . $radiusSql;

@@ -150,12 +150,21 @@ class SearchContext implements Context
 
             $filter = new Filter();
             $filter->setUser($user);
-            if (!empty($row['region'])) {
+
+            if (array_key_exists('region', $row)) {
                 $region = $this->regionRepository->findOneBy(['name' => $row['region']]);
                 Assert::notNull($region);
                 $filter->setRegion($region);
+            } else {
+                $filter->setRegion(null);
             }
-            $filter->setDistance((int) $row['distance']);
+
+            if (array_key_exists('distance', $row)) {
+                $filter->setDistance((int) $row['distance']);
+            } else {
+                $filter->setDistance(null);
+            }
+
             $filter->setMinAge((int) $row['min_age']);
             $filter->setMaxAge((int) $row['max_age']);
 

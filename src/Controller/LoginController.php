@@ -20,8 +20,7 @@ class LoginController extends AbstractController
         bool $isDemo,
         AuthenticationUtils $authenticationUtils,
         AuthorizationCheckerInterface $authChecker
-    ): Response
-    {
+    ): Response {
         if ($authChecker->isGranted(User::MODERATOR)) {
             return $this->redirectToRoute('moderate_profile_images');
         }

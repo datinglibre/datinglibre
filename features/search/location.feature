@@ -89,6 +89,18 @@ Feature:
        When the user "bristol_blue@example.com" searches for matches
        Then the user "london_yellow@example.com" matches
 
+    @search
+    Scenario: I can find users in a region only
+        Given the following profiles exist:
+            | email                          | characteristics  | requirements   | city    | age |
+            | bristol_blue@example.com       | Square, Blue     | Yellow, Circle | Bristol | 30  |
+            | london_yellow@example.com      | Yellow, Circle   | Blue, Square   | London  | 30  |
+        And the following filters exist:
+            | email                     | min_age | max_age | region  |
+            | bristol_blue@example.com  | 18      | 100     | England |
+        When the user "bristol_blue@example.com" searches for matches
+        Then the user "london_yellow@example.com" matches
+
     @search @ui
     Scenario: I can find users near me on the search page
         Given the following profiles exist:
