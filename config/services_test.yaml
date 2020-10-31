@@ -68,6 +68,7 @@ services:
             - '@App\Repository\ProfileRepository'
             - '@App\Service\MatchingService'
             - '@App\Repository\CityRepository'
+            - '@App\Repository\RegionRepository'
             - '@App\Tests\Behat\Page\SearchPage'
             - '@App\Repository\FilterRepository'
 

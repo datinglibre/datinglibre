@@ -26,11 +26,12 @@ class ProfileRepository extends ServiceEntityRepository
         parent::__construct($registry, Profile::class);
     }
 
-    public function findByRadius(
+    public function findByLocation(
         UuidInterface $userId,
         float $latitude,
         float $longitude,
-        int $radius,
+        ?int $distance,
+        ?UuidInterface $regionId,
         int $minAge,
         int $maxAge,
         bool $previous,
@@ -68,8 +69,7 @@ INNER JOIN datinglibre.regions AS region ON city.region_id = region.id
 INNER JOIN datinglibre.users AS u ON u.id = p.user_id
 LEFT JOIN datinglibre.images profileImage ON profileImage.user_id = p.user_id AND profileImage.is_profile = TRUE AND profileImage.state = 'ACCEPTED'
 LEFT JOIN datinglibre.filters filter ON filter.user_id = p.user_id
-WHERE ST_DWithin(Geography(ST_MakePoint(city.longitude, city.latitude)), Geography(ST_MakePoint(:longitude, :latitude)), :radius, false)
-AND p.user_id <> :userId
+WHERE p.user_id <> :userId
 AND EXISTS (SELECT matching_user_id FROM (
         SELECT ua.user_id AS matching_user_id FROM datinglibre.requirements r 
         LEFT JOIN datinglibre.user_attributes ua ON ua.attribute_id = r.attribute_id 
@@ -95,6 +95,22 @@ AND (SELECT EXTRACT(YEAR FROM AGE(dob)) FROM datinglibre.profiles p WHERE p.user
      BETWEEN COALESCE(filter.min_age, :defaultMinAge) AND COALESCE(filter.max_age, :defaultMaxAge)
 AND EXTRACT(YEAR FROM AGE(p.dob)) BETWEEN :minAge AND :maxAge 
 EOD;
+
+        $radiusSql = 'ST_DWithin(Geography(ST_MakePoint(city.longitude, city.latitude)), Geography(ST_MakePoint(:longitude, :latitude)), :radius, false)' ;
+        $regionSql = 'region.id = :regionId' ;
+
+        if (null !== $distance && null === $regionId) {
+            $sql .= 'AND ' . $radiusSql;
+        }
+
+        if (null !== $regionId && null === $distance) {
+            $sql .= 'AND ' . $regionSql;
+        }
+
+        if (null !== $regionId && null !== $distance) {
+            $sql .= 'AND (' . $radiusSql . 'OR ' . $regionSql . ') ';
+        }
+
         if ($previous === false && $sortId === 0) {
             $sql .= 'ORDER BY p.sort_id ASC';
         }
@@ -103,7 +119,7 @@ EOD;
             $sql .= 'AND p.sort_id > :sortId ORDER BY p.sort_id ASC';
         }
 
-        if ($previous == true && $sortId !== 0) {
+        if ($previous === true && $sortId !== 0) {
             $sql .= 'AND p.sort_id < :sortId ORDER BY p.sort_id DESC';
         }
 
@@ -113,7 +129,8 @@ EOD;
         $query->setParameter('userId', $userId);
         $query->setParameter('latitude', $latitude);
         $query->setParameter('longitude', $longitude);
-        $query->setParameter('radius', $radius);
+        $query->setParameter('radius', $distance);
+        $query->setParameter('regionId', $regionId);
         $query->setParameter('minAge', $minAge);
         $query->setParameter('maxAge', $maxAge);
         $query->setParameter('defaultMaxAge', self::DEFAULT_MAX_AGE);

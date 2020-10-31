@@ -10,6 +10,7 @@ use App\Entity\User;
 use App\Repository\CityRepository;
 use App\Repository\ProfileRepository;
 use App\Repository\FilterRepository;
+use App\Repository\RegionRepository;
 use App\Repository\UserRepository;
 use App\Service\MatchingService;
 use App\Service\UserService;
@@ -25,6 +26,7 @@ class SearchContext implements Context
     private ProfileRepository $profileRepository;
     private UserRepository $userRepository;
     private CityRepository $cityRepository;
+    private RegionRepository $regionRepository;
     private SearchPage $searchPage;
     private FilterRepository $filterRepository;
     private array $profiles;
@@ -35,6 +37,7 @@ class SearchContext implements Context
         ProfileRepository $profileRepository,
         MatchingService $matchingService,
         CityRepository $cityRepository,
+        RegionRepository $regionRepository,
         SearchPage $searchPage,
         FilterRepository $filterRepository
     ) {
@@ -45,6 +48,7 @@ class SearchContext implements Context
         $this->cityRepository = $cityRepository;
         $this->searchPage = $searchPage;
         $this->filterRepository = $filterRepository;
+        $this->regionRepository = $regionRepository;
     }
 
     /**
@@ -63,11 +67,12 @@ class SearchContext implements Context
         $filter = $this->filterRepository->findOneBy(['user' => $user->getId()]);
         Assert::notNull($filter);
 
-        $this->profiles = $this->profileRepository->findByRadius(
+        $this->profiles = $this->profileRepository->findByLocation(
             $user->getId(),
             $city->getLatitude(),
             $city->getLongitude(),
             $filter->getDistance(),
+            empty($filter->getRegion()) ? null : $filter->getRegion()->getId(),
             $filter->getMinAge(),
             $filter->getMaxAge(),
             false,
@@ -145,6 +150,11 @@ class SearchContext implements Context
 
             $filter = new Filter();
             $filter->setUser($user);
+            if (!empty($row['region'])) {
+                $region = $this->regionRepository->findOneBy(['name' => $row['region']]);
+                Assert::notNull($region);
+                $filter->setRegion($region);
+            }
             $filter->setDistance((int) $row['distance']);
             $filter->setMinAge((int) $row['min_age']);
             $filter->setMaxAge((int) $row['max_age']);

@@ -73,9 +73,21 @@ Feature:
             | oxford_yellow@example.com      | Yellow, Circle   | Blue, Square   | Oxford  | 30  |
         And the following filters exist:
             | email                     | distance | min_age | max_age |
-            | bristol_blue@example.com | 100000   | 18      | 100     |
+            | bristol_blue@example.com  | 100000   | 18      | 100     |
         When the user "bristol_blue@example.com" searches for matches
         Then the user "oxford_yellow@example.com" does not match
+
+   @search
+   Scenario: I can find users in a region when they are not near me
+       Given the following profiles exist:
+           | email                          | characteristics  | requirements   | city    | age |
+           | bristol_blue@example.com       | Square, Blue     | Yellow, Circle | Bristol | 30  |
+           | london_yellow@example.com      | Yellow, Circle   | Blue, Square   | London  | 30  |
+       And the following filters exist:
+           | email                     | distance | min_age | max_age | region  |
+           | bristol_blue@example.com  | 25000    | 18      | 100     | England |
+       When the user "bristol_blue@example.com" searches for matches
+       Then the user "london_yellow@example.com" matches
 
     @search @ui
     Scenario: I can find users near me on the search page

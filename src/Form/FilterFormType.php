@@ -36,7 +36,13 @@ class FilterFormType extends AbstractType
 
     public function buildForm(FormBuilderInterface $searchFormBuilder, array $options)
     {
-        $regions = $options['regions'];
+        $searchFormBuilder->add('region', EntityType::class, [
+            'choices' => $options['regions'],
+            'class' => Region::class,
+            'choice_label' => 'name',
+            'placeholder' => '',
+            'required' => false
+        ]);
 
         $searchFormBuilder->add('distance', ChoiceType::class, [
             'choices' => $this->distances,

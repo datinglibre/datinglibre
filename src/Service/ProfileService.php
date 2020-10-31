@@ -23,9 +23,10 @@ class ProfileService
         $this->imageService = $imageService;
     }
 
-    public function findByRadius(
+    public function findByLocation(
         UuidInterface $userId,
-        int $radius,
+        ?int $distance,
+        ?UuidInterface $regionId,
         int $minAge,
         int $maxAge,
         bool $previous,
@@ -39,11 +40,12 @@ class ProfileService
             throw new Exception('Minimum greater than maximum age');
         }
 
-        return $this->profileRepository->findByRadius(
+        return $this->profileRepository->findByLocation(
             $userId,
             $city->getLatitude(),
             $city->getLongitude(),
-            $radius,
+            $distance,
+            $regionId,
             $minAge,
             $maxAge,
             $previous,
