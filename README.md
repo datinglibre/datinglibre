@@ -6,23 +6,40 @@ DatingLibre ([demo](https://datinglibre.com)) is a white-label open source Symfo
 people based on geographical location, requirements and attributes. The requirements and attributes can be setup
 not only for relationships, but also for hobbies, such as finding a tandem language partner.
 
-The project is currently in "alpha" stage, it may include bugs and security issues.
+DatingLibre uses Amazon SES and S3 (or a compatible service) and can be installed and updated automatically using Ansible. The demo runs on two $5 virtual servers.
+
+The project is currently in "alpha".
+
+## Features
+
+- Register account, with a private reminder if an email address already exists. 
+- Confirm account through email.
+- Reset password.
+- Create a profile.
+- Upload a profile image.
+- Search by radius and/or region, through a provided [dataset](https://github.com/datinglibre/datinglibre#credits) of the latitudes and longitudes of the world's significant towns and cities.
+- Browse through profiles, using keyset pagination.
+- Block users.
+- Moderate profile images.
+- Delete account.
 
 ![Image showing profile edit page](https://raw.githubusercontent.com/datinglibre/datinglibre.github.io/main/profile.png "Profile edit page")
 
-
 ## Development
 
-To run all tests, install the following. Ubuntu 20.04 is recommended.
+Ubuntu 20.04 is recommended. Minimum requirements: 
 
-  - Chromium `snap install chromium`
-  - [Chromedriver](https://chromedriver.chromium.org/) (`sudo mv chromedriver /usr/local/bin`)
-  - [Java 11](https://docs.azul.com/zulu/zuludocs/ZuluUserGuide/PrepareZuluPlatform/AttachAPTRepositoryUbuntuOrDebianSys.htm) (for Selenium) 
-  - [Selenium Standalone](https://www.selenium.dev/downloads/)
   - `PHP` 7.4 (`sudo apt install php7.4 php7.4-json php7.4-curl php7.4-simplexml php7.4-pgsql php7.4-intl`)
   - Composer (`sudo apt install composer`)
   - Docker and docker compose (`sudo apt install docker docker-compose` `sudo usermod -aG docker your_username` `sudo systemctl enable docker`, log out then in again to refresh groups).
-  - [Symfony CLI](https://symfony.com/download).
+  - The [Symfony command line tool](https://symfony.com/download).
+
+Additional requirements to run Javascript tests:
+
+ - Chromium (`snap install chromium`)
+ - [Chromedriver](https://chromedriver.chromium.org/) (`sudo mv chromedriver /usr/local/bin`)
+ - Java 11 (`sudo apt install openjdk-11-jre`) 
+ - [Selenium Standalone](https://www.selenium.dev/downloads/)
   
 ### Code Style
 
@@ -31,20 +48,16 @@ To run all tests, install the following. Ubuntu 20.04 is recommended.
     ./vendor/bin/php-cs-fixer fix
         
 ### Testing 
-
-#### 1. Start Selenium:    
     
-    java -jar  selenium-server-standalone.jar
-    
-#### 2. Install dependencies:
+#### 1. Install dependencies:
 
     composer install    
     
-#### 4. Start the internal webserver:
+#### 2. Start the internal webserver:
 
     symfony serve       
     
-#### 5. Run the setup script
+#### 3. Run the setup script
 
 This will start `mailhog`, `S3Ninja` and `postgres` docker containers, run the database migrations
 and install test fixtures:
@@ -53,18 +66,22 @@ and install test fixtures:
     
 `docker` will expose the following services to `localhost`:
 
-| Service    | Ports         |
-| -----------|---------------|
-| [MailHog](https://github.com/mailhog/MailHog)    | 1025/SMTP     |
-| MailHog UI | 8025/HTTP     |
-| Postgres   | 5432/TCP      |
-| [S3 ninja](https://s3ninja.net/) | 9444/HTTP     | 
-    
-The setup script is required as the project repurposes Doctrine's entities as "projections", which are classes
-that are not entities in their own right, but are used to display combinations of entity data straight to the view.
-If the setup script isn't run, then doctrine will attempt to drop non-existent projection tables.
+| Service    | Ports                                        |
+| -----------|----------------------------------------------|
+| [MailHog](https://github.com/mailhog/MailHog) | 1025/SMTP |
+| MailHog UI                                    | 8025/HTTP |
+| Postgres                                      | 5432/TCP  |
+| [S3 ninja](https://s3ninja.net/)              | 9444/HTTP | 
 
-#### Run `behat` `BDD` scenarios:
+#### 4. (Additionally) Start Selenium:    
+    
+    java -jar  selenium-server-standalone.jar
+
+#### Run `behat` BDD scenarios without Javascript tests:
+
+    ./vendor/bin/behat --tags ~javascript
+
+#### Run all `behat` BDD scenarios:
 
     ./vendor/bin/behat
     
@@ -100,11 +117,12 @@ The path to private keys has to be hardcoded, so copy `hosts.dist` and edit the 
 
 #### 2. Create your own categories and attributes
 
-Copy the distribution file and edit the values, or keep them as they are.
+Copy the distribution file and edit the values. You will also need to change the `ProfileEditController.php` and 
+`SearchIndexController.php` to use your new values, and remove or edit the search-related Behat tests.
 
     cp deploy/roles/datinglibre/vars/datinglibre.yaml.dist deploy/roles/datinglibre/vars/datinglibre.yaml
 
-Ansible will parse these values and enter them into the `datinglibre.categories` and `datinglibre.attributes` tables.
+Ansible will parse these values and enter them into the `datinglibre.categories` and `datinglibre.attributes` tables. 
     
 #### 3. Install the location files
 
@@ -237,11 +255,10 @@ Synchronise Symfony `PHP` files and run migrations with:
 
     ansible-playbook -i ./deploy/inventories/production ./deploy/webservers.yml --vault-password-file=~/vault_password --tags sync
     
-#### 8. Add a user
+#### 8. Add a moderator 
 
 Connect to your webserver and run the `app:users:create` console command:
 
-    /var/www/datinglibre/bin/console app:users:create email@example.com pa$$w0rd USER
     /var/www/datinglibre/bin/console app:users:create admin@example.com p@ssw0rd MODERATOR
 
 ### Debugging
