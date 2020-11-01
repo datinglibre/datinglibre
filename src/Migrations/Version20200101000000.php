@@ -110,16 +110,12 @@ final class Version20200101000000 extends AbstractMigration
     min_age integer CHECK (min_age >= 18 AND min_age <= max_age),
     max_age integer CHECK (max_age >= 18 AND max_age >= min_age)
 )');
-
-        $this->addSql('CREATE TABLE datinglibre.threads (
-    id UUID NOT NULL PRIMARY KEY
-)');
         $this->addSql('CREATE TABLE datinglibre.messages (
     id UUID NOT NULL PRIMARY KEY,
     user_id UUID NOT NULL REFERENCES datinglibre.users ON DELETE CASCADE,
     sender_id UUID NOT NULL REFERENCES datinglibre.users ON DELETE CASCADE,
     content TEXT,
-    thread_id UUID REFERENCES datinglibre.threads ON DELETE CASCADE,
+    thread_id UUID NOT NULL, 
     type TEXT,
     sent_time TIMESTAMP WITH TIME ZONE
 );');
@@ -154,7 +150,6 @@ final class Version20200101000000 extends AbstractMigration
         $this->addSql('DROP TABLE datinglibre.block_reasons');
         $this->addSql('DROP TABLE datinglibre.searches');
         $this->addSql('DROP TABLE datinglibre.messages');
-        $this->addSql('DROP TABLE datinglibre.threads');
         $this->addSql('DROP TABLE datinglibre.tokens');
         $this->addSql('DROP TABLE datinglibre.emails');
         $this->addSql('DROP TABLE datinglibre.filters');

@@ -15,6 +15,9 @@ class MessageSendPage extends SymfonyPage
 
     public function sendMessage(string $message)
     {
+        // sleep as otherwise tests run too quickly for messages
+        // to display one after another
+        sleep(1);
         $this->getElement('content')->setValue($message);
         $this->getElement('send')->click();
     }

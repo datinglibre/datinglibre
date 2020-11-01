@@ -71,6 +71,7 @@ menu:
   message: "Message"
   images: "Images"
   block: "Block"
+  messages: "Messages"
 message:
   title: "Message"
   send: "Send"

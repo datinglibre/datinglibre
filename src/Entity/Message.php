@@ -50,10 +50,9 @@ class Message
     private $sentTime;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Thread", cascade={"persist"})
-     * @JoinColumn(name="thread_id", referencedColumnName="id")
+     * @ORM\Column
      */
-    private Thread $thread;
+    private UuidInterface $threadId;
 
     public function getId(): ?UuidInterface
     {
@@ -108,15 +107,15 @@ class Message
         return $this;
     }
 
-    public function setThread(Thread $thread): Message
+    public function setThreadId(UuidInterface $threadId): Message
     {
-        $this->thread = $thread;
+        $this->threadId = $threadId;
         return $this;
     }
 
-    public function getThread(): Thread
+    public function getThreadId(): UuidInterface
     {
-        return $this->thread;
+        return $this->threadId;
     }
 
     /**

@@ -9,6 +9,8 @@ use App\Entity\Thread;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query\ResultSetMapping;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidFactory;
 use Ramsey\Uuid\UuidInterface;
 
 /**
@@ -56,22 +58,26 @@ EOD;
 
     public function save(Message $message): Message
     {
-        $rsm = new ResultSetMapping();
-        $rsm->addEntityResult('App\Entity\Thread', 't');
-        $rsm->addFieldResult('t', 'id', 'id');
-        $findExistingThreadSql =<<<EOD
-        SELECT DISTINCT t.id FROM datinglibre.threads t
-        INNER JOIN datinglibre.messages m ON t.id = m.thread_id
-        WHERE (m.user_id = :recipient_id AND m.sender_id = :sender_id)
-        OR (m.user_id = :sender_id AND m.sender_id = :recipient_id);
+        $findExistingThreadIdSql =<<<EOD
+        SELECT DISTINCT m.thread_id FROM datinglibre.messages m
+        WHERE (m.user_id = :recipientId AND m.sender_id = :senderId)
+        OR (m.user_id = :senderId AND m.sender_id = :recipientId);
 EOD;
 
-        $query = $this->getEntityManager()->createNativeQuery($findExistingThreadSql, $rsm);
-        $query->setParameter('sender_id', $message->getUser()->getId());
-        $query->setParameter('recipient_id', $message->getSender()->getId());
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('thread_id', 'threadId');
 
-        $thread = $query->getOneOrNullResult();
-        $thread == null ? $message->setThread(new Thread()) : $message->setThread($thread);
+        $query = $this->getEntityManager()->createNativeQuery($findExistingThreadIdSql, $rsm);
+        $query->setParameter('senderId', $message->getUser()->getId());
+        $query->setParameter('recipientId', $message->getSender()->getId());
+
+        $result = $query->getOneOrNullResult();
+
+        if (null === $result) {
+            $message->setThreadId(Uuid::uuid4());
+        } else {
+            $message->setThreadId(UUID::fromString($result['threadId']));
+        }
 
         $this->getEntityManager()->persist($message);
         $this->getEntityManager()->flush();
