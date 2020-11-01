@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block title %}Profile{% endblock %}
 {% block menu %}
-    {% from "profile/profile.image.html.twig" import profile_image %}
-    <a href="{{ path('profile_image') }}">{{ profile_image(profile) }}</a>
+    {% from 'macros/profile.image.html.twig' import profile_image %}
+    <a href="{{ path('profile_image') }}">{{ profile_image(profile.imageUrl) }}</a>
     {% include 'profile/menu.html.twig' %}
 {% endblock %}
 {% block content %}

@@ -59,6 +59,11 @@ class ProfileService
         return $this->profileRepository->find($id);
     }
 
+    public function findProjectionByCurrentUser(UuidInterface $currentUserId, UuidInterface $userId): ?ProfileProjection
+    {
+        return $this->profileRepository->findProjectionByCurrentUser($currentUserId, $userId);
+    }
+
     public function findProjection(UuidInterface $userId): ProfileProjection
     {
         $profileProjection = $this->profileRepository->findProjection($userId);

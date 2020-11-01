@@ -47,6 +47,12 @@ services:
             - '@behat.mink.parameters'
             - '@router'
 
+    App\Tests\Behat\Page\BlockPage:
+        arguments:
+            - '@behat.mink.default_session'
+            - '@behat.mink.parameters'
+            - '@router'
+
     App\Tests\Behat\Page\ModerateProfileImagesPage:
         arguments:
             - '@behat.mink.default_session'
@@ -103,6 +109,8 @@ services:
             - '@App\Service\UserService'
             - '@App\Repository\BlockRepository'
             - '@App\Repository\BlockReasonRepository'
+            - '@App\Tests\Behat\Page\BlockPage'
+
     App\Tests\Behat\UserContext:
         public: true
         arguments:
@@ -117,7 +125,7 @@ services:
             - '@App\Repository\MessageRepository'
             - '@App\Tests\Behat\Page\MessageSendPage'
             - '@App\Tests\Behat\Page\MatchesPage'
-            -
+
     App\Tests\Behat\ImageContext:
         public: true
         arguments:

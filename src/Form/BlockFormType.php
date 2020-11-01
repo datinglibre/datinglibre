@@ -28,7 +28,7 @@ class BlockFormType extends AbstractType
     public function buildForm(FormBuilderInterface $blockForm, array $options)
     {
         $blockForm->add('reason', EntityType::class, [
-            'placeholder' => 'block.placeholder',
+            'placeholder' => '',
             'class' => BlockReason::class,
             'choice_label' => 'name',
             'label' => 'block.reason',

@@ -9,6 +9,7 @@ use App\Entity\BlockReason;
 use App\Repository\BlockReasonRepository;
 use App\Repository\BlockRepository;
 use App\Service\UserService;
+use App\Tests\Behat\Page\BlockPage;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Webmozart\Assert\Assert;
@@ -18,15 +19,18 @@ class BlockContext implements Context
     private BlockRepository $blockRepository;
     private BlockReasonRepository $blockReasonRepository;
     private UserService $userService;
+    private BlockPage $blockPage;
 
     public function __construct(
         UserService $userService,
         BlockRepository $blockRepository,
-        BlockReasonRepository $blockReasonRepository
+        BlockReasonRepository $blockReasonRepository,
+        BlockPage $blockPage
     ) {
         $this->userService = $userService;
         $this->blockRepository = $blockRepository;
         $this->blockReasonRepository = $blockReasonRepository;
+        $this->blockPage = $blockPage;
     }
 
     /**
@@ -46,5 +50,13 @@ class BlockContext implements Context
 
             $this->blockRepository->save($block);
         }
+    }
+
+    /**
+     * @Then I should see the anonymous profile image
+     */
+    public function iShouldSeeTheAnonymousProfileImage()
+    {
+        $this->blockPage->assertContains('profile.jpg');
     }
 }

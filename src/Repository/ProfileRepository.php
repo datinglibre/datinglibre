@@ -195,7 +195,7 @@ EOD, $rsm);
         return $query->getOneOrNullResult();
     }
 
-    public function findProjectionByCurrentUser(UuidInterface $currentUserId, UuidInterface $userId)
+    public function findProjectionByCurrentUser(UuidInterface $currentUserId, UuidInterface $userId): ?ProfileProjection
     {
         $rsm = new ResultSetMapping();
         $rsm->addEntityResult('App\Entity\ProfileProjection', 'pp');

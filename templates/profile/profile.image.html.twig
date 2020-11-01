@@ -1,7 +1,0 @@
-{% macro profile_image(profile) %}
-    {% if profile is null or not profile.isImagePresent %}
-        <img class="img-fluid center-block" src="/profile.jpg" />
-    {% else %}
-        <img class="img-fluid center-block" src="{{ profile.imageUrl }}" />
-    {% endif %}
-{% endmacro  %}

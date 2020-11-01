@@ -35,6 +35,35 @@ Feature:
     Then I should see "Hello"
 
   @message @ui
+  Scenario: I can see the moderated profile image of my match
+    Given the following profiles exist:
+      | email                 | characteristics | requirements   | city    | age |
+      | bristol_1@example.com | Square, Blue    | Yellow, Circle | Bristol | 30  |
+      | bath_1@example.com    | Yellow, Circle  | Blue, Square   | Bath    | 30  |
+    And the user "bristol_1@example.com" sends the message "Hello" to "bath_1@example.com"
+    And the user "bath_1@example.com" has uploaded a profile image
+    And the profile image for "bath_1@example.com" has passed moderation
+    And I am logged in with "bristol_1@example.com"
+    And I navigate to the matches page
+    Then I should see "Hello"
+    And I should see "bath_1"
+    And the profile image is displayed
+
+  @message @ui
+  Scenario: I cannot see the unmoderated profile image of my match
+    Given the following profiles exist:
+      | email                 | characteristics | requirements   | city    | age |
+      | bristol_1@example.com | Square, Blue    | Yellow, Circle | Bristol | 30  |
+      | bath_1@example.com    | Yellow, Circle  | Blue, Square   | Bath    | 30  |
+    And the user "bristol_1@example.com" sends the message "Hello" to "bath_1@example.com"
+    And the user "bath_1@example.com" has uploaded a profile image
+    And I am logged in with "bristol_1@example.com"
+    And I navigate to the matches page
+    Then I should see "Hello"
+    And I should see "bath_1"
+    And the anonymous profile image should be displayed
+
+  @message @ui
   Scenario: The recipient can see their matches
     Given the following profiles exist:
       | email                 | characteristics | requirements   | city    | age |

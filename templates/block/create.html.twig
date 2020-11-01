@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 {% block title %}{% endblock %}
 {% block menu %}
+    {% from 'macros/profile.image.html.twig' import profile_image %}
+    {{ profile_image(profile.imageUrl) }}
     {% include 'message/menu.html.twig' %}
 {% endblock %}
 {% block content %}
-    {% form_theme blockForm 'bootstrap_4_layout.html.twig' %}
     {{ form(blockForm) }}
 {% endblock %}

@@ -48,3 +48,17 @@ Feature:
     Then I should be on "/search"
     And I should see "Successfully blocked user"
     And I should not see "westminster_yellow"
+
+  @ui @block
+  Scenario: I should not see an unmoderated profile image on the user's block page
+    Given the following profiles exist:
+      | email                          | characteristics  | requirements   | city    | age |
+      | chelsea_blue@example.com       | Square, Blue     | Yellow, Circle | London  | 30  |
+      | westminster_yellow@example.com | Yellow, Circle   | Blue, Square   | London  | 30  |
+    And the user "westminster_yellow@example.com" has uploaded a profile image
+    And I am logged in with "chelsea_blue@example.com"
+    And I am on "/search"
+    Then I should see "westminster_yellow"
+    And I follow "westminster_yellow"
+    And I follow "Block"
+    Then I should see the anonymous profile image

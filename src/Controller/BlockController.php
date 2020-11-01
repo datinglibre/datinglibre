@@ -23,7 +23,7 @@ class BlockController extends AbstractController
         ProfileService $profileService,
         BlockService $blockService
     ) {
-        $profile = $profileService->findProjection($userId);
+        $profile = $profileService->findProjectionByCurrentUser($this->getUser()->getId(), $userId);
 
         if (null === $profile) {
             throw $this->createNotFoundException();

@@ -1,11 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block title %}Profile{% endblock %}
 {% block menu %}
-    <div class="panel panel-default">
-        <div class="panel-body">
-            {% include 'message/menu.html.twig' %}
-        </div>
-    </div>
+    {% from 'macros/profile.image.html.twig' import profile_image %}
+    {{ profile_image(profile.imageUrl) }}
+    {% include 'message/menu.html.twig' %}
 {% endblock %}
 {% block content %}
     <div class="panel panel-default">

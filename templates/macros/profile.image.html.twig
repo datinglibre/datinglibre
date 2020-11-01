@@ -1,0 +1,7 @@
+{% macro profile_image(secureImageUrl) %}
+    {% if secureImageUrl is null %}
+        <img class="img-fluid center-block" src="/profile.jpg" />
+    {% else %}
+        <img class="img-fluid center-block" src="{{ secureImageUrl }}" />
+    {% endif %}
+{% endmacro  %}

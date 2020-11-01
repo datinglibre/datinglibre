@@ -117,4 +117,20 @@ class MessageContext implements Context
     {
         $this->matchesPage->open();
     }
+
+    /**
+     * @Given the profile image is displayed
+     */
+    public function theProfileImageIsDisplayed()
+    {
+        $this->matchesPage->assertProfileImageDisplayed();
+    }
+
+    /**
+     * @Then the anonymous profile image should be displayed
+     */
+    public function theAnonymousProfileImageShouldBeDisplayed()
+    {
+        $this->matchesPage->assertAnonymousProfileImageDisplayed();
+    }
 }
