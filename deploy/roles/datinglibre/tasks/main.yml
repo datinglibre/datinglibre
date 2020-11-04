@@ -62,8 +62,8 @@
 - name: Copy datinglibre database certificate
   become: true
   copy:
-    content: "{{ database_cert }}"
-    dest: "{{ database_cert_path }}"
+    content: "{{ database_certificate }}"
+    dest: "{{ database_certificate_path }}"
     owner: datinglibre
     group: www-data
     mode: 0750

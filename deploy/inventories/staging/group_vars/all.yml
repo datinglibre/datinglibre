@@ -1,5 +1,6 @@
 profile: local
 ssh_port: 22
+# these must be private network server addresses
 webserver_host: 192.168.0.99
 database_host: 192.168.0.100
 storage_endpoint: http://datinglibretesting.local:9444/s3
@@ -27,7 +28,7 @@ storage_secret_key: !vault |
   3237373331386436350a656230373032666232626264633831653061653738313438383362663235
   31663737636633393237633034323166613339386562313663653565623331333561313637313164
   6331366335373139666162303036306334643238356133653835
-database_cert: |
+database_certificate: |
   -----BEGIN CERTIFICATE-----
   MIIFazCCA1OgAwIBAgIUUw92Jr2KA5yNtYM1fcj4uCImW6gwDQYJKoZIhvcNAQEL
   BQAwRTELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoM
@@ -60,7 +61,7 @@ database_cert: |
   qZfjgOrdZfbG8IEJmYIFULH7UI+9HLpwsJmApyXqwAV5n1dg1uA6UCf8RlVvShk=
   -----END CERTIFICATE-----
 # For staging, this file is the same as above
-database_root_cert: |
+database_root_certificate: |
   -----BEGIN CERTIFICATE-----
   MIIFazCCA1OgAwIBAgIUUw92Jr2KA5yNtYM1fcj4uCImW6gwDQYJKoZIhvcNAQEL
   BQAwRTELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoM

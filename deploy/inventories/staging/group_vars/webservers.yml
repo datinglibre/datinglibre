@@ -1,15 +1,14 @@
-server_hostname: datinglibre.local
-server_baseUrl: http://datinglibre.local
+domain_name: datinglibre.local
 mailer_dsn: smtp://192.168.0.101:1025
-admin_email: staging@datinglibre.com
-database_cert_path: /etc/datinglibre/database.crt
+admin_email: '"Dating Libre Staging" <admin@example.com>'
+database_certificate_path: /etc/datinglibre/database.crt
 database_key_path: /etc/datinglibre/database.key
 is_demo: false
 images_bucket: dlibreim
 disable_image_upload: false
 purge_users_params: NOT_ENABLED 24
 # used when we cannot go via pgbouncer as we require a session
-psql_direct_connection: PGSSLCERT={{ database_cert_path }} PGSSLKEY={{ database_key_path }} PGPASSWORD={{ database_password }} psql -U datinglibre -p5432 -h {{ database_host }} datinglibre
+psql_direct_connection: PGSSLCERT={{ database_certificate_path }} PGSSLKEY={{ database_key_path }} PGPASSWORD={{ database_password }} psql -U datinglibre -p5432 -h {{ database_host }} datinglibre
 datinglibre_certificate: |
   -----BEGIN CERTIFICATE-----
   MIIFozCCA4ugAwIBAgIUNckvQiWxkztBFy6PcNw5AzZ0n0owDQYJKoZIhvcNAQEL

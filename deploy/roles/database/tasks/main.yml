@@ -34,9 +34,9 @@
     dest: "{{ item.dest }}"
     mode: 0600
   with_items: 
-  - { content: "{{ database_cert }}", dest: "{{ database_cert_path }}"}
+  - { content: "{{ database_certificate }}", dest: "{{ database_certificate_path }}"}
   - { content: "{{ database_key }}", dest: "{{ database_key_path }}"}
-  - { content: "{{ database_root_cert }}", dest: "{{ database_root_cert_path }}" }
+  - { content: "{{ database_root_certificate }}", dest: "{{ database_root_certificate_path }}" }
 
 - name: Add certs to postgres
   become: true
@@ -47,7 +47,7 @@
     line: "{{ item.line }}"
     state: present
   with_items:
-  - { regexp: "^ssl_cert_file", line: "ssl_cert_file = '{{ database_cert_path }}'"}
+  - { regexp: "^ssl_cert_file", line: "ssl_cert_file = '{{ database_certificate_path }}'"}
   - { regexp: "^ssl_key_file", line: "ssl_key_file = '{{ database_key_path }}'"}
   notify: restart postgresql
 

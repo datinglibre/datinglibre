@@ -21,18 +21,6 @@ function LocationSelect(
     this.regionErrorMessage = regionErrorMessage;
     this.cityErrorMessage = cityErrorMessage;
 
-    this.regionSelect.selectpicker({
-        dropupAuto: false
-    });
-
-    this.countrySelect.selectpicker({
-        dropupAuto: false
-    });
-
-    this.citySelect.selectpicker({
-        dropupAuto: false
-    });
-
     this.countrySelect.on('hidden.bs.select', function (e) {
         console.log('populating regions');
         this.populateRegionsSelect();

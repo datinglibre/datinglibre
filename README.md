@@ -1,3 +1,4 @@
+
 # DatingLibre
 
 [![Build Status](https://travis-ci.com/datinglibre/datinglibre.svg?branch=master "Travis CI status")](https://travis-ci.com/github/datinglibre/datinglibre)
@@ -73,7 +74,7 @@ and install test fixtures:
 | Postgres                                      | 5432/TCP  |
 | [S3 ninja](https://s3ninja.net/)              | 9444/HTTP | 
 
-#### 4. (Additionally) Start Selenium:    
+#### 4. Start Selenium (optional, for Javascript tests):     
     
     java -jar  selenium-server-standalone.jar
 
@@ -95,14 +96,7 @@ The default password for all test accounts is `password`.
 
 ### Staging 
 
-A staging environment can be created using [Vagrant](https://www.vagrantup.com/). It is intended to work as closely as possible to production, so also 
-encrypts variables in the configuration using `ansible-vault`. Usually the Vault's password file should not be committed,
-however as these are staging values, the password is available as `staging_vault_password`, and is used in the `Vagrantfile`.
-
-The staging configuration contains self-signed certificates, so you will need to make a security exception for these
-when your browser displays an error page.  
-
-Install the following:
+A staging environment can be created using [Vagrant](https://www.vagrantup.com/). First, install the following:
 
     sudo apt install vagrant virtualbox ansible
     vagrant plugin install vagrant-hostmanager
@@ -111,11 +105,15 @@ Then follow these steps:
 
 #### 1. Update paths to the Vagrant private keys
 
-The path to private keys has to be hardcoded, so copy `hosts.dist` and edit the path to your `datinglibre` directory: 
+The path to private keys has to be hardcoded, so copy `hosts.dist`:
 
     cp deploy/inventories/staging/hosts.dist deploy/inventories/staging/hosts
+    
+Then edit the path to Vagrant's private key:
+    
+    ansible_ssh_private_key_file='/home/your_username/path/to/datinglibre/.vagrant/machines/datinglibre/virtualbox/private_key'
 
-#### 2. Create your own categories and attributes
+#### 2. Create your own categories and attributes (optional)
 
 Copy the distribution file and edit the values. You will also need to change the `ProfileEditController.php` and 
 `SearchIndexController.php` to use your new values, and remove or edit the search-related Behat tests.
@@ -135,7 +133,9 @@ Copy them to`deploy/roles/datinglibre/locations`.
 
 #### 4. Start the servers 
    
-    vagrant up 
+    vagrant up datinglibretesting
+    vagrant up datinglibredb
+    vagrant up datinglibre
 
 The virtual machines are setup as follows:
 
@@ -148,6 +148,16 @@ The virtual machines are setup as follows:
 If you need to provision any host again, use `vagrant provision`, e.g.:
 
     vagrant provision datinglibre
+    
+    
+The staging environment is supposed to work as closely as possible to production, so it also 
+encrypts variables in the configuration using `ansible-vault`.
+
+Usually the Vault's password file should not be committed, however as these are staging values, 
+the password is available as `staging_vault_password`, and is used in the `Vagrantfile`.
+
+The staging configuration contains self-signed certificates, so you will need to make a security exception for these
+when your browser displays an error page.  
     
 ### Production
 
@@ -172,8 +182,9 @@ Generate self-signed certificates for the database:
     openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout database.key -out database.crt -days 3650
     ansible-vault encrypt_string --vault-password-file=~/vault_password < database.key
 
-Copy and paste the output of the `ansible-vault` command into the `database_key` section of `all.yml`. 
-Copy and paste the contents of `database.crt` into the `database_cert` and `database_root_cert` sections of `all.yml`.
+Copy and paste the output of the `ansible-vault` command into the `database_key` section of `all.yml`.
+
+Copy and paste the contents of `database.crt` into the `database_certificate` and `database_root_certificate` sections of `all.yml`.
 Make sure there is a new line after `|` and `!vault |`. You can delete `database.crt` and `database.key` afterwards.
 
 Generate a certificate for your domain:
