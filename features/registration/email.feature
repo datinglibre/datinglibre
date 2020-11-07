@@ -19,8 +19,8 @@ Feature: I can register using my email address
     @registration
     Scenario: My email address is kept private if I already have an account on the site
         Given the following profiles exist:
-            | email                          | characteristics  | requirements   | city    | age |
-            | newuser@example.com            | Square, Blue     | Yellow, Circle | London  | 30  |
+            | email               | characteristics | requirements   | city   | age |
+            | newuser@example.com | Square, Blue    | Yellow, Circle | London | 30  |
         And I am on "/register"
         And I fill in "newuser@example.com" for "registration_form_email"
         And I fill in "password" for "registration_form_password"
