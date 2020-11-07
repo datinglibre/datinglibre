@@ -4,7 +4,11 @@ namespace App\Repository;
 
 use App\Entity\Image;
 use App\Entity\ImageProjection;
+use DateTimeImmutable;
+use DateTimeZone;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Ramsey\Uuid\UuidInterface;
@@ -42,12 +46,14 @@ class ImageRepository extends ServiceEntityRepository
         $rsm->addFieldResult('ip', 'id', 'id');
         $rsm->addFieldResult('ip', 'user_id', 'userId');
         $rsm->addFieldResult('ip', 'secure_url', 'secureUrl');
+        $rsm->addFieldResult('ip', 'secure_url_expiry', 'secureUrlExpiry');
         $rsm->addFieldResult('ip', 'state', 'state');
 
         $query = $this->getEntityManager()->createNativeQuery(<<<EOD
 SELECT id,
         user_id, 
         secure_url,
+        secure_url_expiry,
         state 
         FROM datinglibre.images 
         WHERE user_id = :userId AND is_profile = :isProfile
@@ -66,10 +72,12 @@ EOD, $rsm);
         $rsm->addFieldResult('pip', 'id', 'id');
         $rsm->addFieldResult('pip', 'user_id', 'userId');
         $rsm->addFieldResult('pip', 'secure_url', 'secureUrl');
+        $rsm->addFieldResult('pip', 'secure_url_expiry', 'secureUrlExpiry');
 
         $query = $this->getEntityManager()->createNativeQuery(<<<EOD
 SELECT id,
-        secure_url, 
+        secure_url,
+        secure_url_expiry,
         user_id 
         FROM datinglibre.images 
         WHERE state = :state
@@ -78,5 +86,14 @@ EOD, $rsm);
 
         $query->setParameter('state', Image::UNMODERATED);
         return $query->getOneOrNullResult();
+    }
+
+    public function findByExpiredSecureUrl(): Collection
+    {
+        $criteria = Criteria::create()
+            ->andWhere(Criteria::expr()
+                ->lt('secureUrlExpiry', new DateTimeImmutable('now', new DateTimeZone('UTC'))));
+
+        return $this->matching($criteria);
     }
 }

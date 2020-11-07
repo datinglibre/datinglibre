@@ -289,3 +289,11 @@
     minute: "*/5"
     job: "/var/www/datinglibre/bin/console app:users:purge {{ purge_users_params }}"
     user: datinglibre
+
+- name: Install refresh expired secure image urls cron
+  become: true
+  cron:
+    name: "Refresh expired image urls"
+    minute: "0"
+    job: "/var/www/datinglibre/bin/console app:secure_urls:refresh_image_urls"
+    user: datinglibre

@@ -3,5 +3,5 @@ Feature:
 
   @image
   Scenario:
-    When I upload "cat.jpg"
-    Then the image should be stored
+    When I upload "cat.jpg" as the profile image for "image@example.com"
+    Then the image should be set as the profile image for "image@example.com"

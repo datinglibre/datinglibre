@@ -6,12 +6,12 @@ namespace App\Service;
 
 use App\Entity\Image;
 use App\Entity\ImageProjection;
-use App\Entity\User;
 use App\Repository\ImageRepository;
 use App\Repository\UserRepository;
 use Aws\S3\S3Client;
 use DateInterval;
 use DateTime;
+use DateTimeInterface;
 use Ramsey\Uuid\UuidInterface;
 
 class ImageService
@@ -20,6 +20,8 @@ class ImageService
     private UserRepository $userRepository;
     private S3Client $s3Client;
     private string $imagesBucket;
+    // pre-signed URLs max expiry is 7 days, make it a bit earlier so enough time to refresh them
+    const EXPIRY_INTERVAL = 'P6D';
 
     public function __construct(
         string $imagesBucket,
@@ -46,17 +48,7 @@ class ImageService
         $image->setIsProfile($isProfile);
         $image = $this->imageRepository->save($image);
         $this->sendToS3($image, $payload);
-
-        $command = $this->s3Client->getCommand('GetObject', [
-            'Bucket' => $this->imagesBucket,
-            'Key' => $image->getFilename()
-        ]);
-
-        // pre-signed URLs max expiry is 7 days, make it a bit earlier
-        $expiry = (new DateTime())->add(new DateInterval('P6D'));
-        $secureUrl = $this->s3Client->createPresignedRequest($command, $expiry);
-        $image->setSecureUrl((string) $secureUrl->getUri());
-        $image->setSecureUrlExpiry($expiry);
+        $this->setPresignedUrl($image);
 
         return $this->imageRepository->save($image);
     }
@@ -115,8 +107,37 @@ class ImageService
         ]);
     }
 
-    public function findProfileImageProjection(UuidInterface $userId)
+    public function findProfileImageProjection(UuidInterface $userId): ?ImageProjection
     {
         return $this->imageRepository->findProjection($userId, true);
+    }
+
+    public function refreshSecureUrls(): void
+    {
+        /** @var Image $expired */
+        $expiredImages = $this->imageRepository->findByExpiredSecureUrl();
+
+        foreach ($expiredImages as $expiredImage) {
+            $this->setPresignedUrl($expiredImage);
+            $this->imageRepository->save($expiredImage);
+        }
+    }
+
+    private function setPresignedUrl(Image $image): void
+    {
+        $command = $this->s3Client->getCommand('GetObject', [
+            'Bucket' => $this->imagesBucket,
+            'Key' => $image->getFilename()
+        ]);
+
+        $expiry = $this->getExpiryDateTime();
+        $secureUrl = $this->s3Client->createPresignedRequest($command, $expiry);
+        $image->setSecureUrl((string) $secureUrl->getUri());
+        $image->setSecureUrlExpiry($expiry);
+    }
+
+    private function getExpiryDateTime(): DateTimeInterface
+    {
+        return (new DateTime())->add(new DateInterval(self::EXPIRY_INTERVAL));
     }
 }

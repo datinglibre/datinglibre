@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,6 +31,11 @@ class ImageProjection
      * @ORM\Column(type="string")
      */
     private $secureUrl;
+
+    /**
+     * @ORM\Column(type="datetimetz")
+     */
+    private $secureUrlExpiry;
 
     /**
      * @ORM\Column(type="string")
@@ -65,6 +71,16 @@ class ImageProjection
     {
         $this->secureUrl = $secureUrl;
         return $this;
+    }
+
+    public function getSecureUrlExpiry(): DateTimeInterface
+    {
+        return $this->secureUrlExpiry;
+    }
+
+    public function setSecureUrlExpiry($secureUrlExpiry): void
+    {
+        $this->secureUrlExpiry = $secureUrlExpiry;
     }
 
     public function getState()
