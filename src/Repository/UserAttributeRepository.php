@@ -86,4 +86,16 @@ EOD, $rsm);
 
         return $query->getResult();
     }
+
+    public function deleteByUser(UuidInterface $userId): void
+    {
+        $query = $this->getEntityManager()
+            ->createNativeQuery(<<<EOD
+DELETE FROM datinglibre.user_attributes ua
+WHERE ua.user_id = :userId 
+EOD, new ResultSetMapping());
+
+        $query->setParameter('userId', $userId);
+        $query->execute();
+    }
 }

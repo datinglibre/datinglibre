@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Repository\ProfileRepository;
-use App\Service\MatchingService;
 use App\Service\UserAttributeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -13,17 +12,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProfileIndexController extends AbstractController
 {
-    private MatchingService $matcherService;
     private ProfileRepository $profileRepository;
     private UserAttributeService $userAttributeService;
 
     public function __construct(
-        MatchingService $matcherService,
         ProfileRepository $profileRepository,
         UserAttributeService $userAttributeService
     ) {
         $this->profileRepository = $profileRepository;
-        $this->matcherService = $matcherService;
         $this->userAttributeService = $userAttributeService;
     }
 

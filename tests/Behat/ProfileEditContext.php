@@ -14,8 +14,9 @@ use App\Repository\CountryRepository;
 use App\Repository\ProfileRepository;
 use App\Repository\RegionRepository;
 use App\Repository\UserRepository;
-use App\Service\MatchingService;
 use App\Service\ProfileService;
+use App\Service\RequirementService;
+use App\Service\UserAttributeService;
 use App\Service\UserService;
 use App\Tests\Behat\Page\LoginPage;
 use App\Tests\Behat\Page\ProfileEditPage;
@@ -36,18 +37,20 @@ class ProfileEditContext implements Context
     private ProfileService $profileService;
     private SearchPage $searchPage;
     private ProfileRepository $profileRepository;
-    private MatchingService $matchingService;
     private CityRepository $cityRepository;
     private CountryRepository $countryRepository;
     private RegionRepository $regionRepository;
     private UserRepository $userRepository;
+    private UserAttributeService $userAttributeService;
+    private RequirementService $requirementService;
 
     public function __construct(
         UserService $userService,
         UserRepository $userRepository,
         ProfileRepository $profileRepository,
         ProfileService $profileService,
-        MatchingService $matchingService,
+        UserAttributeService $userAttributeService,
+        RequirementService $requirementService,
         CityRepository $cityRepository,
         RegionRepository $regionRepository,
         CountryRepository $countryRepository,
@@ -60,7 +63,6 @@ class ProfileEditContext implements Context
         $this->userRepository = $userRepository;
         $this->profileRepository = $profileRepository;
         $this->profileService = $profileService;
-        $this->matchingService = $matchingService;
         $this->loginPage = $loginPage;
         $this->profileViewPage = $profileIndexPage;
         $this->searchPage = $searchPage;
@@ -68,6 +70,8 @@ class ProfileEditContext implements Context
         $this->cityRepository = $cityRepository;
         $this->countryRepository = $countryRepository;
         $this->regionRepository = $regionRepository;
+        $this->userAttributeService = $userAttributeService;
+        $this->requirementService = $requirementService;
     }
 
     /**
@@ -94,11 +98,11 @@ class ProfileEditContext implements Context
             );
 
             if (array_key_exists('requirements', $row)) {
-                $this->createRequirements($user, explode(',', $row['requirements']));
+                $this->requirementService->createRequirementsByAttributeNames($user, explode(',', $row['requirements']));
             }
 
             if (array_key_exists('attributes', $row)) {
-                $this->createAttributes($user, explode(',', $row['attributes']));
+                $this->userAttributeService->createUserAttributesByAttributeNames($user, explode(',', $row['attributes']));
             }
         }
     }
@@ -135,20 +139,6 @@ class ProfileEditContext implements Context
         $this->profileRepository->save($profile);
 
         return $user;
-    }
-
-    private function createAttributes(User $user, array $characteristics)
-    {
-        foreach ($characteristics as $characteristic) {
-            $this->matchingService->createAttribute($user, trim($characteristic));
-        }
-    }
-
-    private function createRequirements(User $user, array $requirements)
-    {
-        foreach ($requirements as $requirement) {
-            $this->matchingService->createRequirement($user, $requirement);
-        }
     }
 
     private function getCity(string $city): City

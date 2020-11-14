@@ -11,7 +11,6 @@ use App\Repository\CountryRepository;
 use App\Repository\ProfileRepository;
 use App\Repository\RegionRepository;
 use App\Repository\UserRepository;
-use App\Service\MatchingService;
 use App\Service\ProfileService;
 use App\Service\UserAttributeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +20,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProfileEditController extends AbstractController
 {
-    private MatchingService $matcherService;
     private ProfileRepository $profileRepository;
     private UserRepository $userRepository;
     private RegionRepository $regionRepository;
@@ -30,7 +28,6 @@ class ProfileEditController extends AbstractController
     private ProfileService $profileService;
 
     public function __construct(
-        MatchingService $matcherService,
         ProfileRepository $profileRepository,
         ProfileService $profileService,
         UserRepository $userRepository,
@@ -39,7 +36,6 @@ class ProfileEditController extends AbstractController
         UserAttributeService $userAttributeService
     ) {
         $this->profileRepository = $profileRepository;
-        $this->matcherService = $matcherService;
         $this->userRepository = $userRepository;
         $this->regionRepository = $regionRepository;
         $this->countryRepository = $countryRepository;
@@ -69,15 +65,17 @@ class ProfileEditController extends AbstractController
         $profileForm->setAbout($profile->getAbout());
         $profileForm->setUsername($profile->getUsername());
         $profileForm->setDob($profile->getDob());
-        $profileForm->setColor($this->userAttributeService->getByCategory($user, 'color'));
-        $profileForm->setShape($this->userAttributeService->getByCategory($user, 'shape'));
+        $profileForm->setColor($this->userAttributeService->getOneByCategoryName($user, 'color'));
+        $profileForm->setShape($this->userAttributeService->getOneByCategoryName($user, 'shape'));
 
         $profileFormType = $this->createForm(ProfileFormType::class, $profileForm);
         $profileFormType->handleRequest($request);
 
         if ($profileFormType->isSubmitted() && $profileFormType->isValid()) {
-            $this->userAttributeService->save($user, $profileFormType->getData()->getColor());
-            $this->userAttributeService->save($user, $profileFormType->getData()->getShape());
+            $this->userAttributeService->createUserAttributes(
+                $user,
+                [$profileFormType->getData()->getColor(), $profileFormType->getData()->getShape()]
+            );
 
             $profile->setCity($profileFormType->getData()->getCity());
             $profile->setUsername($profileFormType->getData()->getUsername());

@@ -12,7 +12,6 @@ use App\Repository\ProfileRepository;
 use App\Repository\FilterRepository;
 use App\Repository\RegionRepository;
 use App\Repository\UserRepository;
-use App\Service\MatchingService;
 use App\Service\UserService;
 use App\Tests\Behat\Page\SearchPage;
 use Behat\Behat\Context\Context;
@@ -21,7 +20,6 @@ use Webmozart\Assert\Assert;
 
 class SearchContext implements Context
 {
-    private MatchingService $matchingService;
     private UserService $userService;
     private ProfileRepository $profileRepository;
     private UserRepository $userRepository;
@@ -35,7 +33,6 @@ class SearchContext implements Context
         UserService $userService,
         UserRepository $userRepository,
         ProfileRepository $profileRepository,
-        MatchingService $matchingService,
         CityRepository $cityRepository,
         RegionRepository $regionRepository,
         SearchPage $searchPage,
@@ -43,7 +40,6 @@ class SearchContext implements Context
     ) {
         $this->userService = $userService;
         $this->userRepository = $userRepository;
-        $this->matchingService = $matchingService;
         $this->profileRepository = $profileRepository;
         $this->cityRepository = $cityRepository;
         $this->searchPage = $searchPage;
@@ -215,7 +211,10 @@ class SearchContext implements Context
 
     private function containsMatches(array $users): void
     {
-        Assert::eq(count($this->profiles), count($users), 'Match count different');
+        Assert::eq(count($this->profiles), count($users), sprintf(
+            'Match count different, got %d',
+            count($this->profiles)
+        ));
 
         foreach ($users as $user) {
             Assert::true($this->containsProfile($user), $user->getId());

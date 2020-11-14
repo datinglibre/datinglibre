@@ -7,16 +7,24 @@ namespace App\Service;
 use App\Entity\Attribute;
 use App\Entity\Requirement;
 use App\Entity\User;
+use App\Repository\AttributeRepository;
 use App\Repository\RequirementRepository;
 use Ramsey\Uuid\UuidInterface;
 
 class RequirementService
 {
     private RequirementRepository $requirementRepository;
+    private AttributeRepository $attributeRepository;
 
-    public function __construct(RequirementRepository $requirementRepository)
+    public function __construct(RequirementRepository $requirementRepository, AttributeRepository $attributeRepository)
     {
         $this->requirementRepository = $requirementRepository;
+        $this->attributeRepository = $attributeRepository;
+    }
+
+    public function createRequirementsByAttributeNames(User $user, array $attributeNames): void
+    {
+        $this->createRequirements($user, $this->attributeRepository->getAttributesByNames($attributeNames));
     }
 
     public function createRequirements(User $user, array $attributes): void
