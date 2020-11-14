@@ -5,9 +5,9 @@ Feature:
     @block
     Scenario: I want to block another user
         Given the following profiles exist:
-            | email                          | characteristics | requirements   | city   | age |
-            | chelsea_blue@example.com       | Square, Blue    | Yellow, Circle | London | 30  |
-            | westminster_yellow@example.com | Yellow, Circle  | Blue, Square   | London | 30  |
+            | email                          | attributes     | requirements   | city   | age |
+            | chelsea_blue@example.com       | square, blue   | yellow, circle | London | 30  |
+            | westminster_yellow@example.com | yellow, circle | blue, square   | London | 30  |
         And the following filters exist:
             | email                    | distance | min_age | max_age |
             | chelsea_blue@example.com | 100000   | 18      | 100     |
@@ -20,9 +20,9 @@ Feature:
     @block
     Scenario: I have been blocked by another user
         Given the following profiles exist:
-            | email                          | characteristics | requirements   | city   | age |
-            | chelsea_blue@example.com       | Square, Blue    | Yellow, Circle | London | 30  |
-            | westminster_yellow@example.com | Yellow, Circle  | Blue, Square   | London | 30  |
+            | email                          | attributes     | requirements   | city   | age |
+            | chelsea_blue@example.com       | square, blue   | yellow, circle | London | 30  |
+            | westminster_yellow@example.com | yellow, circle | blue, square   | London | 30  |
         And the following filters exist:
             | email                          | distance | min_age | max_age |
             | westminster_yellow@example.com | 100000   | 18      | 100     |
@@ -35,9 +35,9 @@ Feature:
     @ui @block
     Scenario: I can block another user
         Given the following profiles exist:
-            | email                          | characteristics | requirements   | city   | age |
-            | chelsea_blue@example.com       | Square, Blue    | Yellow, Circle | London | 30  |
-            | westminster_yellow@example.com | Yellow, Circle  | Blue, Square   | London | 30  |
+            | email                          | attributes     | requirements   | city   | age |
+            | chelsea_blue@example.com       | square, blue   | yellow, circle | London | 30  |
+            | westminster_yellow@example.com | yellow, circle | blue, square   | London | 30  |
         And I am logged in with "chelsea_blue@example.com"
         And I am on "/search"
         Then I should see "westminster_yellow"
@@ -52,9 +52,9 @@ Feature:
     @ui @block
     Scenario: I should not see an unmoderated profile image on the user's block page
         Given the following profiles exist:
-            | email                          | characteristics | requirements   | city   | age |
-            | chelsea_blue@example.com       | Square, Blue    | Yellow, Circle | London | 30  |
-            | westminster_yellow@example.com | Yellow, Circle  | Blue, Square   | London | 30  |
+            | email                          | attributes     | requirements   | city   | age |
+            | chelsea_blue@example.com       | square, blue   | yellow, circle | London | 30  |
+            | westminster_yellow@example.com | yellow, circle | blue, square   | London | 30  |
         And the user "westminster_yellow@example.com" has uploaded a profile image
         And I am logged in with "chelsea_blue@example.com"
         And I am on "/search"

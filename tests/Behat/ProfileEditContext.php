@@ -97,8 +97,8 @@ class ProfileEditContext implements Context
                 $this->createRequirements($user, explode(',', $row['requirements']));
             }
 
-            if (array_key_exists('characteristics', $row)) {
-                $this->createCharacteristics($user, explode(',', $row['characteristics']));
+            if (array_key_exists('attributes', $row)) {
+                $this->createAttributes($user, explode(',', $row['attributes']));
             }
         }
     }
@@ -137,17 +137,17 @@ class ProfileEditContext implements Context
         return $user;
     }
 
-    private function createCharacteristics(User $user, array $characteristics)
+    private function createAttributes(User $user, array $characteristics)
     {
         foreach ($characteristics as $characteristic) {
-            $this->matchingService->createCharacteristic($user, trim($characteristic));
+            $this->matchingService->createAttribute($user, trim($characteristic));
         }
     }
 
     private function createRequirements(User $user, array $requirements)
     {
         foreach ($requirements as $requirement) {
-            $this->matchingService->createRequirement($user, trim($requirement));
+            $this->matchingService->createRequirement($user, $requirement);
         }
     }
 

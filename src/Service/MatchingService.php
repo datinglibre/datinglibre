@@ -33,7 +33,7 @@ class MatchingService
         $this->entityManager = $entityManager;
     }
 
-    public function createCharacteristic(User $user, string $attributeName): UserAttribute
+    public function createAttribute(User $user, string $attributeName): UserAttribute
     {
         $attribute = $this->getAttributeByName($attributeName);
 
@@ -59,7 +59,7 @@ class MatchingService
 
     public function getAttributeByName(string $attributeName): Attribute
     {
-        $attribute = $this->attributeRepository->findOneBy(['name' => $attributeName]);
+        $attribute = $this->attributeRepository->findOneBy(['name' => trim(strtolower($attributeName))]);
 
         if ($attribute == null) {
             throw new NoResultException();

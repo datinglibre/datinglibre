@@ -9,7 +9,7 @@ not only for relationships, but also for hobbies, such as finding a tandem langu
 
 DatingLibre uses Amazon SES and S3 (or a compatible service) and can be installed and updated automatically using Ansible. The demo runs on two $5 virtual servers.
 
-The project is currently in "alpha".
+The project is currently in alpha.
 
 ## Features
 
@@ -47,8 +47,8 @@ Additional requirements to run Javascript tests:
 `php-cs-fixer` is configured with PSR1 and PSR2 standards.
 
     ./vendor/bin/php-cs-fixer fix
-        
-### Testing 
+                
+### Testing
     
 #### 1. Install dependencies:
 
@@ -70,9 +70,9 @@ and install test fixtures:
 | Service    | Ports                                        |
 | -----------|----------------------------------------------|
 | [MailHog](https://github.com/mailhog/MailHog) | 1025/SMTP |
-| MailHog UI                                    | 8025/HTTP |
+| MailHog UI                                    | [8025/HTTP](http://localhost:8025) |
 | Postgres                                      | 5432/TCP  |
-| [S3 ninja](https://s3ninja.net/)              | 9444/HTTP | 
+| [S3 ninja](https://s3ninja.net/)              | [9444/HTTP](http://localhost:9444) | 
 
 #### 4. Start Selenium (optional, for Javascript tests):     
     
@@ -112,17 +112,8 @@ The path to private keys has to be hardcoded, so copy `hosts.dist`:
 Then edit the path to Vagrant's private key:
     
     ansible_ssh_private_key_file='/home/your_username/path/to/datinglibre/.vagrant/machines/datinglibre/virtualbox/private_key'
-
-#### 2. Create your own categories and attributes (optional)
-
-Copy the distribution file and edit the values. You will also need to change the `ProfileEditController.php` and 
-`SearchIndexController.php` to use your new values, and remove or edit the search-related Behat tests.
-
-    cp deploy/roles/datinglibre/vars/datinglibre.yaml.dist deploy/roles/datinglibre/vars/datinglibre.yaml
-
-Ansible will parse these values and enter them into the `datinglibre.categories` and `datinglibre.attributes` tables. 
     
-#### 3. Install the location files
+#### 2. Install the location files
 
 The following files are distributed as part of the [separate DatingLibre locations repository](https://github.com/datinglibre/datinglibrelocations).
  - `countries.sql`
@@ -131,7 +122,7 @@ The following files are distributed as part of the [separate DatingLibre locatio
 
 Copy them to`deploy/roles/datinglibre/locations`. 
 
-#### 4. Start the servers 
+#### 3. Start the servers 
    
     vagrant up datinglibretesting
     vagrant up datinglibredb
@@ -141,9 +132,9 @@ The virtual machines are setup as follows:
 
 | Hostname                 | IP            | Ports                                 |
 | -------------------------|---------------|---------------------------------------|
-| datinglibre.local        | 192.168.0.99  | 80/HTTP 443/HTTPS                     |
+| datinglibre.local        | 192.168.0.99  | 80/HTTP [443/HTTPS](https://datinglibre.local) |
 | datinglibredb.local      | 192.168.0.100 | 5432/POSTGRES SSL 6543/PGBOUNCER SSL  |
-| datinglibretesting.local | 192.168.0.101 | 8025/HTTP 1025/SMTP 9444/HTTP         | 
+| datinglibretesting.local | 192.168.0.101 | [8025/HTTP](http://datinglibretesting.local:8025) 1025/SMTP [9444/HTTP](http://datinglibretesting.local:9444) | 
 
 If you need to provision any host again, use `vagrant provision`, e.g.:
 
@@ -286,9 +277,9 @@ Connect to your webserver and run the `app:users:create` console command:
 
     sudo systemctl status
 
-## Design    
+## Customization
     
-### Matching
+### Categories and attributes
 
 There are four tables that define allow users to match either other:
 
@@ -343,6 +334,34 @@ and User A matches one of them in that category.
      |   - Triangle           +-------+ |   - Triangle           |
      |                        |    +----+   - Square             |
      +------------------------+         +------------------------+
+
+The categories and attributes can be configured by editing the values in `config/packages/dating_libre.yaml`. 
+The names are key values, so you should enter them in lowercase, using underscores for spaces e.g. `long_term`. You can add your own 
+translations by editing the attributes and messages translation files:
+
+    long_term: "Long term relationship"
+
+The values you enter into `dating_libre.yaml` will be automatically entered into the database, during
+Symfony fixtures processing (in `AppFixtures.php`), and during deployment with Ansible to staging or production. So if you change 
+the default values, you'll need to "find and replace" the appropriate values in the Behat tests:
+
+        @search
+        Scenario: I can find another user when our first and second categories match
+            Given the following profiles exist:
+                | email                    | attributes       | requirements   | city   | age |
+                | chelsea_blue@example.com | woman, long_term | man, long_term | London | 30  |
+        ...
+        
+You will also need to update the following files with your new categories:
+
+- ProfileEditController.php
+- SearchIndexController.php
+- ProfileForm.php
+- search/index.html.twig
+- profile/edit.html.twig
+- ProfileEditPage.php
+- RequirementsForm.php
+- RequirementsFormType.php
 
 ## Credits
 

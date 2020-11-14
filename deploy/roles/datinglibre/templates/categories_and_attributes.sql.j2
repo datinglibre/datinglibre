@@ -1,6 +1,6 @@
-{% for category in categories %}
+{% for category in dating_libre.categories %}
 INSERT INTO datinglibre.categories (id, name) VALUES (uuid_generate_v4(), '{{ category }}') ON CONFLICT DO NOTHING;
-{% for attribute in attributes[category] %}
+{% for attribute in dating_libre.attributes[category] %}
 INSERT INTO datinglibre.attributes (id, name, category_id) VALUES (uuid_generate_v4(), '{{ attribute }}', (SELECT id FROM datinglibre.categories WHERE name = '{{ category }}' LIMIT 1)) ON CONFLICT DO NOTHING;
 {% endfor %}
 {% endfor %}

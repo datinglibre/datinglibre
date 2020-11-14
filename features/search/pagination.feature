@@ -5,13 +5,13 @@ Feature:
     @search
     Scenario: I can view paginated profiles
         Given the following profiles exist:
-            | email                 | characteristics | requirements   | city    | age |
-            | bristol_1@example.com | Square, Blue    | Yellow, Circle | Bristol | 30  |
-            | bath_1@example.com    | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_2@example.com    | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_3@example.com    | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_4@example.com    | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_5@example.com    | Yellow, Circle  | Blue, Square   | Bath    | 30  |
+            | email                 | attributes     | requirements   | city    | age |
+            | bristol_1@example.com | square, blue   | yellow, circle | Bristol | 30  |
+            | bath_1@example.com    | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_2@example.com    | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_3@example.com    | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_4@example.com    | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_5@example.com    | yellow, circle | blue, square   | Bath    | 30  |
         And the following filters exist:
             | email                 | distance | min_age | max_age |
             | bristol_1@example.com | 100000   | 25      | 35      |
@@ -25,29 +25,29 @@ Feature:
     @search
     Scenario: I can select the next and previous page
         Given the following profiles exist:
-            | email                 | characteristics | requirements   | city    | age |
-            | bristol_1@example.com | Square, Blue    | Yellow, Circle | Bristol | 30  |
-            | bath_1@example.com    | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_2@example.com    | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_3@example.com    | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_4@example.com    | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_5@example.com    | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_6@example.com    | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_7@example.com    | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_8@example.com    | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_9@example.com    | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_10@example.com   | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_11@example.com   | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_12@example.com   | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_13@example.com   | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_14@example.com   | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_15@example.com   | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_16@example.com   | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_17@example.com   | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_18@example.com   | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_19@example.com   | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_20@example.com   | Yellow, Circle  | Blue, Square   | Bath    | 30  |
-            | bath_21@example.com   | Yellow, Circle  | Blue, Square   | Bath    | 30  |
+            | email                 | attributes     | requirements   | city    | age |
+            | bristol_1@example.com | square, blue   | yellow, circle | Bristol | 30  |
+            | bath_1@example.com    | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_2@example.com    | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_3@example.com    | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_4@example.com    | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_5@example.com    | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_6@example.com    | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_7@example.com    | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_8@example.com    | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_9@example.com    | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_10@example.com   | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_11@example.com   | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_12@example.com   | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_13@example.com   | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_14@example.com   | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_15@example.com   | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_16@example.com   | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_17@example.com   | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_18@example.com   | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_19@example.com   | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_20@example.com   | yellow, circle | blue, square   | Bath    | 30  |
+            | bath_21@example.com   | yellow, circle | blue, square   | Bath    | 30  |
         And the following filters exist:
             | email                 | distance | min_age | max_age |
             | bristol_1@example.com | 100000   | 25      | 35      |

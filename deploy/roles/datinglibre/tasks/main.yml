@@ -1,6 +1,6 @@
 ---
 - name: Include datinglibre vars
-  include_vars: datinglibre.yaml
+  include_vars: ../../../../config/packages/dating_libre.yaml
 
 - name: Add key for Postgres repo
   become: True

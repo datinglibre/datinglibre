@@ -17,14 +17,18 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
-    private $encoder;
-    private $objectManager;
+    private UserPasswordEncoderInterface $encoder;
+    private ObjectManager $objectManager;
     public const LONDON_LATITUDE = 51.50853;
     public const LONDON_LONGITUDE = -0.12574;
+    private array $categories;
+    private array $attributes;
 
-    public function __construct(UserPasswordEncoderInterface $encoder)
+    public function __construct(UserPasswordEncoderInterface $encoder, array $categories, array $attributes)
     {
         $this->encoder = $encoder;
+        $this->categories = $categories;
+        $this->attributes = $attributes;
     }
 
     public function load(ObjectManager $manager): void
@@ -32,21 +36,18 @@ class AppFixtures extends Fixture
         $this->objectManager = $manager;
 
         $this->createTestUser();
-
         $this->createLocations();
-
         $this->createBlockReason('block.no_reason');
         $this->createBlockReason('block.spam');
 
-        $colors = $this->createCategory("Color");
-        $this->createAttribute($colors, "Blue");
-        $this->createAttribute($colors, "Green");
-        $this->createAttribute($colors, "Yellow");
 
-        $shape = $this->createCategory("Shape");
-        $this->createAttribute($shape, "Square");
-        $this->createAttribute($shape, "Circle");
-        $this->createAttribute($shape, "Triangle");
+        foreach ($this->categories as $categoryName) {
+            $category = $this->createCategory($categoryName);
+
+            foreach ($this->attributes[$categoryName] as $attributeName) {
+                $this->createAttribute($category, $attributeName);
+            }
+        }
     }
 
     /**

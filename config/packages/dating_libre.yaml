@@ -1,0 +1,13 @@
+dating_libre:
+    categories:
+    - color
+    - shape
+    attributes:
+        color:
+        - blue
+        - green
+        - yellow
+        shape:
+        - square
+        - circle
+        - triangle

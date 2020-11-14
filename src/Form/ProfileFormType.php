@@ -43,7 +43,6 @@ class ProfileFormType extends AbstractType
         $resolver->setDefaults(['data_class' => ProfileForm::class]);
     }
 
-
     public function buildForm(FormBuilderInterface $profileFormBuilder, array $options)
     {
         $categories = $this->categoryRepository->findAll();
@@ -57,6 +56,7 @@ class ProfileFormType extends AbstractType
                     'choices' => $category->getAttributes(),
                     'class' => Attribute::class,
                     'choice_label' => 'name',
+                    'choice_translation_domain' => 'attributes',
                 ]
             );
         }

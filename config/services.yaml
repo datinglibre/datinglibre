@@ -10,6 +10,8 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
+            $categories: '%datinglibre.categories%'
+            $attributes: '%datinglibre.attributes%'
             $isDemo: '%env(bool:IS_DEMO)%'
             $adminEmail: '%env(resolve:ADMIN_EMAIL)%'
             $imagesBucket: '%env(resolve:IMAGES_BUCKET)%'

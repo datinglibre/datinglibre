@@ -31,8 +31,9 @@ class RequirementsFormType extends AbstractType
             'colors',
             ChoiceType::class,
             [
-                    'choices' => $this->categoryRepository->findOneBy(['name' => 'Color'])->getAttributes(),
+                    'choices' => $this->categoryRepository->findOneBy(['name' => 'color'])->getAttributes(),
                     'choice_label' => 'name',
+                    'choice_translation_domain' => 'attributes',
                     'multiple' => true,
                     'expanded' => true
             ]
@@ -42,8 +43,9 @@ class RequirementsFormType extends AbstractType
             'shapes',
             ChoiceType::class,
             [
-                'choices' => $this->categoryRepository->findOneBy(['name' => 'Shape'])->getAttributes(),
+                'choices' => $this->categoryRepository->findOneBy(['name' => 'shape'])->getAttributes(),
                 'choice_label' => 'name',
+                'choice_translation_domain' => 'attributes',
                 'multiple' => true,
                 'expanded' => true
             ]
