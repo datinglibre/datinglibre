@@ -352,16 +352,17 @@ the default values, you'll need to "find and replace" the appropriate values in 
                 | chelsea_blue@example.com | woman, long_term | man, long_term | London | 30  |
         ...
         
-You will also need to update the following files with your new categories:
+[Have a look at the demo pull request](https://github.com/datinglibre/datinglibre/pull/9/files) where this has been done for some new categories and attributes.
+Altogether, you will also need to update the following files with your new categories:
 
-- ProfileEditController.php
-- SearchIndexController.php
-- ProfileForm.php
-- search/index.html.twig
-- profile/edit.html.twig
-- ProfileEditPage.php
-- RequirementsForm.php
-- RequirementsFormType.php
+- `ProfileEditController.php`
+- `SearchIndexController.php`
+- `ProfileForm.php`
+- `search/index.html.twig`
+- `profile/edit.html.twig`
+- `ProfileEditPage.php`
+- `RequirementsForm.php`
+- `RequirementsFormType.php`
 
 ## Credits
 
