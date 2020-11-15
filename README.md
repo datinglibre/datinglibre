@@ -72,7 +72,7 @@ and install test fixtures:
 | [MailHog](https://github.com/mailhog/MailHog) | 1025/SMTP |
 | MailHog UI                                    | [8025/HTTP](http://localhost:8025) |
 | Postgres                                      | 5432/TCP  |
-| [S3 ninja](https://s3ninja.net/)              | [9444/HTTP](http://localhost:9444) | 
+| [S3 ninja](https://s3ninja.net/)              | [9444/HTTP](http://localhost:9444/ui) | 
 
 #### 4. Start Selenium (optional, for Javascript tests):     
     
@@ -134,7 +134,7 @@ The virtual machines are setup as follows:
 | -------------------------|---------------|---------------------------------------|
 | datinglibre.local        | 192.168.0.99  | 80/HTTP [443/HTTPS](https://datinglibre.local) |
 | datinglibredb.local      | 192.168.0.100 | 5432/POSTGRES SSL 6543/PGBOUNCER SSL  |
-| datinglibretesting.local | 192.168.0.101 | [8025/HTTP](http://datinglibretesting.local:8025) 1025/SMTP [9444/HTTP](http://datinglibretesting.local:9444) | 
+| datinglibretesting.local | 192.168.0.101 | [8025/HTTP](http://datinglibretesting.local:8025) 1025/SMTP [9444/HTTP](http://datinglibretesting.local:9444/ui) | 
 
 If you need to provision any host again, use `vagrant provision`, e.g.:
 
@@ -177,6 +177,10 @@ Copy and paste the output of the `ansible-vault` command into the `database_key`
 
 Copy and paste the contents of `database.crt` into the `database_certificate` and `database_root_certificate` sections of `all.yml`.
 Make sure there is a new line after `|` and `!vault |`. You can delete `database.crt` and `database.key` afterwards.
+
+The self-signed certificate will give you the following: "I want my data to be encrypted, and I accept the overhead. I trust that the network will make sure I always connect to the server I want",
+as explained by the [PostgreSQL documentation](https://www.postgresql.org/docs/13/libpq-ssl.html). To this point, Dating Libre disallows provisioning
+and connecting to a database using a public IP. 
 
 Generate a certificate for your domain:
 
