@@ -6,7 +6,7 @@ Feature:
     Scenario: I can find another user in my age range
         Given the following profiles exist:
             | email                    | attributes     | requirements   | city    | age |
-            | bristol_blue@example.com | square, blue   | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com | blue, square   | yellow, circle | Bristol | 30  |
             | bath_yellow@example.com  | yellow, circle | blue, square   | Bath    | 30  |
         And the following filters exist:
             | email                    | distance | min_age | max_age |
@@ -18,7 +18,7 @@ Feature:
     Scenario: I don't find users outside of my age range
         Given the following profiles exist:
             | email                    | attributes     | requirements   | city    | age |
-            | bristol_blue@example.com | square, blue   | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com | blue, square   | yellow, circle | Bristol | 30  |
             | bath_yellow@example.com  | yellow, circle | blue, square   | Bath    | 30  |
             | bath_green@example.com   | yellow, circle | blue, square   | Bath    | 28  |
         And the following filters exist:
@@ -32,7 +32,7 @@ Feature:
     Scenario: I can't find another user where they match my age range, but I don't match their range
         Given the following profiles exist:
             | email                    | attributes     | requirements   | city    | age |
-            | bristol_blue@example.com | square, blue   | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com | blue, square   | yellow, circle | Bristol | 30  |
             | bath_yellow@example.com  | yellow, circle | blue, square   | Bath    | 30  |
         And the following filters exist:
             | email                    | distance | min_age | max_age |
@@ -45,7 +45,7 @@ Feature:
     Scenario: I can't find another user where they don't match my age range, but I match their range
         Given the following profiles exist:
             | email                    | attributes     | requirements   | city    | age |
-            | bristol_blue@example.com | square, blue   | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com | blue, square   | yellow, circle | Bristol | 30  |
             | bath_yellow@example.com  | yellow, circle | blue, square   | Bath    | 30  |
         And the following filters exist:
             | email                    | distance | min_age | max_age |
@@ -58,7 +58,7 @@ Feature:
     Scenario: I can find a user for one exact year
         Given the following profiles exist:
             | email                    | attributes     | requirements   | city    | age |
-            | bristol_blue@example.com | square, blue   | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com | blue, square   | yellow, circle | Bristol | 30  |
             | bath_yellow@example.com  | yellow, circle | blue, square   | Bath    | 30  |
         And the following filters exist:
             | email                    | distance | min_age | max_age |

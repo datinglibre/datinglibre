@@ -6,7 +6,7 @@ Feature:
     Scenario: I can view paginated profiles
         Given the following profiles exist:
             | email                 | attributes     | requirements   | city    | age |
-            | bristol_1@example.com | square, blue   | yellow, circle | Bristol | 30  |
+            | bristol_1@example.com | blue, square   | yellow, circle | Bristol | 30  |
             | bath_1@example.com    | yellow, circle | blue, square   | Bath    | 30  |
             | bath_2@example.com    | yellow, circle | blue, square   | Bath    | 30  |
             | bath_3@example.com    | yellow, circle | blue, square   | Bath    | 30  |
@@ -26,7 +26,7 @@ Feature:
     Scenario: I can select the next and previous page
         Given the following profiles exist:
             | email                 | attributes     | requirements   | city    | age |
-            | bristol_1@example.com | square, blue   | yellow, circle | Bristol | 30  |
+            | bristol_1@example.com | blue, square   | yellow, circle | Bristol | 30  |
             | bath_1@example.com    | yellow, circle | blue, square   | Bath    | 30  |
             | bath_2@example.com    | yellow, circle | blue, square   | Bath    | 30  |
             | bath_3@example.com    | yellow, circle | blue, square   | Bath    | 30  |

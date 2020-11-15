@@ -40,7 +40,7 @@ Feature:
     Scenario: I can't see another user's un-moderated profile image on their profile
         Given the following profiles exist:
             | email                    | attributes     | requirements   | city    | age |
-            | bristol_blue@example.com | square, blue   | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com | blue, square   | yellow, circle | Bristol | 30  |
             | bath_yellow@example.com  | yellow, circle | blue, square   | Bath    | 30  |
         When the user "bristol_blue@example.com" has uploaded a profile image
         Then the user "bath_yellow@example.com" should not be able to see the profile image of "bristol_blue@example.com"
@@ -49,7 +49,7 @@ Feature:
     Scenario: I can see another user's profile image when it has been accepted
         Given the following profiles exist:
             | email                    | attributes     | requirements   | city    | age |
-            | bristol_blue@example.com | square, blue   | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com | blue, square   | yellow, circle | Bristol | 30  |
             | bath_yellow@example.com  | yellow, circle | blue, square   | Bath    | 30  |
         And the user "bristol_blue@example.com" has uploaded a profile image
         And the profile image for "bristol_blue@example.com" has passed moderation

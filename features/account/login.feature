@@ -10,7 +10,7 @@ Feature: Login
     Scenario: I am notified when I enter an incorrect password
         Given the following profiles exist:
             | email               | attributes   | requirements   | city   | age |
-            | newuser@example.com | square, blue | yellow, circle | London | 30  |
+            | newuser@example.com | blue, square | yellow, circle | London | 30  |
         And I am on "/"
         When I fill in "newuser@example.com" for "email"
         And I fill in "incorrect" for "password"

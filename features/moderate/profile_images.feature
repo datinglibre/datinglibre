@@ -4,14 +4,14 @@ Feature:
     Scenario: As a moderator I can see a list of new profile images
         Given the following profiles exist:
             | email                    | attributes   | requirements   | city    | age |
-            | bristol_blue@example.com | square, blue | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com | blue, square | yellow, circle | Bristol | 30  |
         And the user "bristol_blue@example.com" has uploaded a profile image
         Then I should see the new profile image for "bristol_blue@example.com"
 
     Scenario: As a moderator I should be able to accept a profile image
         Given the following profiles exist:
             | email                    | attributes   | requirements   | city    | age |
-            | bristol_blue@example.com | square, blue | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com | blue, square | yellow, circle | Bristol | 30  |
         And a moderator exists with email "moderator@example.com"
         And the user "bristol_blue@example.com" has uploaded a profile image
         And I am logged in with "moderator@example.com"
@@ -24,7 +24,7 @@ Feature:
     Scenario: As a moderator I should be able to reject a profile image
         Given the following profiles exist:
             | email                    | attributes   | requirements   | city    | age |
-            | bristol_blue@example.com | square, blue | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com | blue, square | yellow, circle | Bristol | 30  |
         And a moderator exists with email "moderator@example.com"
         And the user "bristol_blue@example.com" has uploaded a profile image
         And I am logged in with "moderator@example.com"

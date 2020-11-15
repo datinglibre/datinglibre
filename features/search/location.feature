@@ -6,7 +6,7 @@ Feature:
     Scenario:
         Given the following profiles exist:
             | email                    | attributes   | requirements   | city    | age |
-            | bristol_blue@example.com | square, blue | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com | blue, square | yellow, circle | Bristol | 30  |
         When I log in using email "bristol_blue@example.com"
         And I navigate to the search page
         Then I should see that no profiles match
@@ -15,7 +15,7 @@ Feature:
     Scenario: I can find another user when they are near me
         Given the following profiles exist:
             | email                    | attributes     | requirements   | city    | age |
-            | bristol_blue@example.com | square, blue   | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com | blue, square   | yellow, circle | Bristol | 30  |
             | bath_yellow@example.com  | yellow, circle | blue, square   | Bath    | 30  |
         And the following filters exist:
             | email                    | distance | min_age | max_age |
@@ -27,7 +27,7 @@ Feature:
     Scenario: I can't see another user's un-moderated profile image in a location search
         Given the following profiles exist:
             | email                    | attributes     | requirements   | city    | age |
-            | bristol_blue@example.com | square, blue   | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com | blue, square   | yellow, circle | Bristol | 30  |
             | bath_yellow@example.com  | yellow, circle | blue, square   | Bath    | 30  |
         And the following filters exist:
             | email                   | distance | min_age | max_age |
@@ -41,7 +41,7 @@ Feature:
     Scenario: I can't see another user's rejected profile image in a location search
         Given the following profiles exist:
             | email                    | attributes     | requirements   | city    | age |
-            | bristol_blue@example.com | square, blue   | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com | blue, square   | yellow, circle | Bristol | 30  |
             | bath_yellow@example.com  | yellow, circle | blue, square   | Bath    | 30  |
         And the following filters exist:
             | email                   | distance | min_age | max_age |
@@ -55,7 +55,7 @@ Feature:
     Scenario: I can see a accepted profile images in a location search
         Given the following profiles exist:
             | email                    | attributes     | requirements   | city    | age |
-            | bristol_blue@example.com | square, blue   | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com | blue, square   | yellow, circle | Bristol | 30  |
             | bath_yellow@example.com  | yellow, circle | blue, square   | Bath    | 30  |
         And the following filters exist:
             | email                   | distance | min_age | max_age |
@@ -69,7 +69,7 @@ Feature:
     Scenario: I should not find another user when they are not near me
         Given the following profiles exist:
             | email                     | attributes     | requirements   | city    | age |
-            | bristol_blue@example.com  | square, blue   | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com  | blue, square   | yellow, circle | Bristol | 30  |
             | oxford_yellow@example.com | yellow, circle | blue, square   | Oxford  | 30  |
         And the following filters exist:
             | email                    | distance | min_age | max_age |
@@ -81,7 +81,7 @@ Feature:
     Scenario: I can find users in a region when they are not near me
         Given the following profiles exist:
             | email                     | attributes     | requirements   | city    | age |
-            | bristol_blue@example.com  | square, blue   | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com  | blue, square   | yellow, circle | Bristol | 30  |
             | london_yellow@example.com | yellow, circle | blue, square   | London  | 30  |
         And the following filters exist:
             | email                    | distance | min_age | max_age | region  |
@@ -93,7 +93,7 @@ Feature:
     Scenario: I can find users in a region only
         Given the following profiles exist:
             | email                     | attributes     | requirements   | city    | age |
-            | bristol_blue@example.com  | square, blue   | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com  | blue, square   | yellow, circle | Bristol | 30  |
             | london_yellow@example.com | yellow, circle | blue, square   | London  | 30  |
         And the following filters exist:
             | email                    | min_age | max_age | region  |
@@ -105,7 +105,7 @@ Feature:
     Scenario: I can find users near me on the search page
         Given the following profiles exist:
             | email                    | attributes     | requirements   | city    | age |
-            | bristol_blue@example.com | square, blue   | yellow, circle | Bristol | 30  |
+            | bristol_blue@example.com | blue, square   | yellow, circle | Bristol | 30  |
             | bath_yellow@example.com  | yellow, circle | blue, square   | Bath    | 30  |
         And the following filters exist:
             | email                    | distance | min_age | max_age |

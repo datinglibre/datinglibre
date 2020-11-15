@@ -6,7 +6,7 @@ Feature:
     Scenario: I want to be able to view another user's profile
         Given the following profiles exist:
             | email                          | attributes     | requirements   | city   | age |
-            | chelsea_blue@example.com       | square, blue   | yellow, circle | London | 30  |
+            | chelsea_blue@example.com       | blue, square   | yellow, circle | London | 30  |
             | westminster_yellow@example.com | yellow, circle | blue, square   | London | 30  |
         And the following filters exist:
             | email                    | distance | min_age | max_age |

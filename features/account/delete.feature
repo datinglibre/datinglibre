@@ -5,7 +5,7 @@ Feature:
     Scenario: I successfully delete my account
         Given the following profiles exist:
             | email               | attributes   | requirements   | city   | age |
-            | newuser@example.com | square, blue | yellow, circle | London | 30  |
+            | newuser@example.com | blue, square | yellow, circle | London | 30  |
         And the user "newuser@example.com" has uploaded a profile image
         And I am logged in with "newuser@example.com"
         When I go to "/user/delete"

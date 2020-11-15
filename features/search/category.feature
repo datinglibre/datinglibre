@@ -6,7 +6,7 @@ Feature:
     Scenario: I can find another user when our first and second categories match
         Given the following profiles exist:
             | email                          | attributes     | requirements   | city   | age |
-            | chelsea_blue@example.com       | square, blue   | yellow, circle | London | 30  |
+            | chelsea_blue@example.com       | blue, square   | yellow, circle | London | 30  |
             | westminster_yellow@example.com | yellow, circle | blue, square   | London | 30  |
         And the following filters exist:
             | email                    | distance | min_age | max_age |

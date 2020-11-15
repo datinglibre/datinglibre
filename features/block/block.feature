@@ -6,7 +6,7 @@ Feature:
     Scenario: I want to block another user
         Given the following profiles exist:
             | email                          | attributes     | requirements   | city   | age |
-            | chelsea_blue@example.com       | square, blue   | yellow, circle | London | 30  |
+            | chelsea_blue@example.com       | blue, square   | yellow, circle | London | 30  |
             | westminster_yellow@example.com | yellow, circle | blue, square   | London | 30  |
         And the following filters exist:
             | email                    | distance | min_age | max_age |
@@ -21,7 +21,7 @@ Feature:
     Scenario: I have been blocked by another user
         Given the following profiles exist:
             | email                          | attributes     | requirements   | city   | age |
-            | chelsea_blue@example.com       | square, blue   | yellow, circle | London | 30  |
+            | chelsea_blue@example.com       | blue, square   | yellow, circle | London | 30  |
             | westminster_yellow@example.com | yellow, circle | blue, square   | London | 30  |
         And the following filters exist:
             | email                          | distance | min_age | max_age |
@@ -36,7 +36,7 @@ Feature:
     Scenario: I can block another user
         Given the following profiles exist:
             | email                          | attributes     | requirements   | city   | age |
-            | chelsea_blue@example.com       | square, blue   | yellow, circle | London | 30  |
+            | chelsea_blue@example.com       | blue, square   | yellow, circle | London | 30  |
             | westminster_yellow@example.com | yellow, circle | blue, square   | London | 30  |
         And I am logged in with "chelsea_blue@example.com"
         And I am on "/search"
@@ -53,7 +53,7 @@ Feature:
     Scenario: I should not see an unmoderated profile image on the user's block page
         Given the following profiles exist:
             | email                          | attributes     | requirements   | city   | age |
-            | chelsea_blue@example.com       | square, blue   | yellow, circle | London | 30  |
+            | chelsea_blue@example.com       | blue, square   | yellow, circle | London | 30  |
             | westminster_yellow@example.com | yellow, circle | blue, square   | London | 30  |
         And the user "westminster_yellow@example.com" has uploaded a profile image
         And I am logged in with "chelsea_blue@example.com"
