@@ -53,6 +53,7 @@ class ProfileFormType extends AbstractType
                 $category->getLowercaseName(),
                 EntityType::class,
                 [
+                    'placeholder' => '',
                     'choices' => $category->getAttributes(),
                     'class' => Attribute::class,
                     'choice_label' => 'name',
@@ -73,7 +74,7 @@ class ProfileFormType extends AbstractType
             'dob',
             DateType::class,
             [
-                'years' => range(date('Y')-100, date('Y')-18),
+                'years' => range(date('Y')-50, date('Y')-18),
                 'label' => 'profile.dob'
             ]
         );

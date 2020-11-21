@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Entity\Attribute;
 use App\Entity\Requirement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\ResultSetMapping;
@@ -18,9 +19,16 @@ use Ramsey\Uuid\UuidInterface;
  */
 class RequirementRepository extends ServiceEntityRepository
 {
+    private ResultSetMapping $attributeResultSetMapping;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Requirement::class);
+
+        $this->attributeResultSetMapping = new ResultSetMapping();
+        $this->attributeResultSetMapping->addEntityResult('App\Entity\Attribute', 'a');
+        $this->attributeResultSetMapping->addFieldResult('a', 'id', 'id');
+        $this->attributeResultSetMapping->addFieldResult('a', 'name', 'name');
     }
 
     public function save(Requirement $requirement): Requirement
@@ -41,23 +49,51 @@ EOD, new ResultSetMapping());
         $query->execute();
     }
 
-    public function getByUserAndCategory(?UuidInterface $userId, string $categoryName): array
+    public function deleteByUserAndCategory(UuidInterface $userId, string $categoryName)
     {
-        $rsm = new ResultSetMapping();
-        $rsm->addEntityResult('App\Entity\Attribute', 'a');
-        $rsm->addFieldResult('a', 'id', 'id');
-        $rsm->addFieldResult('a', 'name', 'name');
+        $query = $this->getEntityManager()
+            ->createNativeQuery(<<<EOD
+DELETE FROM datinglibre.requirements r
+USING datinglibre.attributes AS a,
+datinglibre.categories AS c 
+WHERE r.user_id = :userId 
+AND r.attribute_id = a.id
+AND a.category_id = c.id
+AND c.name = :categoryName
+EOD, new ResultSetMapping());
 
+        $query->setParameter('userId', $userId);
+        $query->setParameter('categoryName', $categoryName);
+        $query->execute();
+    }
+
+    public function getMultipleByUserAndCategory(?UuidInterface $userId, string $categoryName): array
+    {
         $query = $this->getEntityManager()->createNativeQuery(<<<EOD
 SELECT a.id, a.name FROM datinglibre.requirements r
 INNER JOIN datinglibre.attributes a ON r.attribute_id = a.id
 INNER JOIN datinglibre.categories c ON a.category_id = c.id
 WHERE r.user_id = :userId 
 AND c.name = :categoryName
-EOD, $rsm);
+EOD, $this->attributeResultSetMapping);
 
         $query->setParameter('userId', $userId);
         $query->setParameter('categoryName', $categoryName);
         return $query->getResult();
+    }
+
+    public function getOneByUserAndCategory(?UuidInterface $userId, string $categoryName): Attribute
+    {
+        $query = $this->getEntityManager()->createNativeQuery(<<<EOD
+SELECT a.id, a.name FROM datinglibre.requirements r
+INNER JOIN datinglibre.attributes a ON r.attribute_id = a.id
+INNER JOIN datinglibre.categories c ON a.category_id = c.id
+WHERE r.user_id = :userId 
+AND c.name = :categoryName
+EOD, $this->attributeResultSetMapping);
+
+        $query->setParameter('userId', $userId);
+        $query->setParameter('categoryName', $categoryName);
+        return $query->getOneOrNullResult();
     }
 }

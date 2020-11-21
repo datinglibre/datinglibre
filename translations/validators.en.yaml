@@ -1,0 +1,6 @@
+registration:
+  invalid_email: "Please enter a valid email address"
+  blank_password: "Please enter a password"
+  agree_terms: "Please agree to the terms and conditions"
+  blank_email: "Please enter an email address"
+  min_password: "Your password should be at least {{ limit }} characters"

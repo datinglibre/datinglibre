@@ -64,17 +64,24 @@ class SearchIndexController extends AbstractController
 
 
         $requirements = new RequirementsForm();
-        $requirements->setColors($this->requirementService->getByUserAndCategory($user->getId(), 'Color'));
-        $requirements->setShapes($this->requirementService->getByUserAndCategory($user->getId(), 'Shape'));
+        $requirements->setColors($this->requirementService->getMultipleByUserAndCategory($user->getId(), 'color'));
+        $requirements->setShapes($this->requirementService->getMultipleByUserAndCategory($user->getId(), 'shape'));
         $requirementsForm = $this->createForm(RequirementsFormType::class, $requirements);
 
         $filterForm->handleRequest($request);
         $requirementsForm->handleRequest($request);
 
         if ($requirementsForm->isSubmitted() && $requirementsForm->isValid()) {
-            $this->requirementService->createRequirements(
+            $this->requirementService->createRequirementsInCategory(
                 $user,
-                array_merge($requirementsForm->getData()->getColors(), $requirementsForm->getData()->getShapes())
+                'color',
+                $requirementsForm->getData()->getColors()
+            );
+
+            $this->requirementService->createRequirementsInCategory(
+                $user,
+                'shape',
+                $requirementsForm->getData()->getShapes()
             );
         }
 

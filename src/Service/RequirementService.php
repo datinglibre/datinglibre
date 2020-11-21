@@ -27,6 +27,15 @@ class RequirementService
         $this->createRequirements($user, $this->attributeRepository->getAttributesByNames($attributeNames));
     }
 
+    public function createRequirementsInCategory(User $user, string $category, array $attributes)
+    {
+        $this->requirementRepository->deleteByUserAndCategory($user->getId(), $category);
+
+        foreach ($attributes as $attribute) {
+            $this->createRequirement($user, $attribute);
+        }
+    }
+
     public function createRequirements(User $user, array $attributes): void
     {
         $this->requirementRepository->deleteByUser($user->getId());
@@ -45,8 +54,13 @@ class RequirementService
         return $requirement;
     }
 
-    public function getByUserAndCategory(?UuidInterface $userId, string $categoryName): array
+    public function getMultipleByUserAndCategory(?UuidInterface $userId, string $categoryName): array
     {
-        return $this->requirementRepository->getByUserAndCategory($userId, $categoryName);
+        return $this->requirementRepository->getMultipleByUserAndCategory($userId, $categoryName);
+    }
+
+    public function getOneByUserAndCategory(?UuidInterface $userId, string $categoryName): ?Attribute
+    {
+        return $this->requirementRepository->getOneByUserAndCategory($userId, $categoryName);
     }
 }

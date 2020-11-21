@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -22,7 +23,16 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'label' => 'user.email',
-                'required' => true
+                'constraints' => [
+                    new Email([
+                        'mode' => 'html5',
+                        'normalizer' => 'trim',
+                        'message' => 'registration.invalid_email'
+                    ]),
+                    new NotBlank([
+                        'message' => 'registration.blank_email'
+                    ])
+                ]
             ])
             ->add('password', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -31,13 +41,13 @@ class RegistrationFormType extends AbstractType
                 'label' => 'user.password',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'registration.blank_password',
                     ]),
                     new Length([
                         'min' => 8,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'registration.min_password',
                         // max length allowed by Symfony for security reasons
-                        'max' => 4096,
+                        'max' => 4096
                     ]),
                 ],
             ])
@@ -46,7 +56,7 @@ class RegistrationFormType extends AbstractType
                 'label' => 'registration.agree_terms',
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to the terms.',
+                        'message' => 'registration.agree_terms',
                     ]),
                 ],
             ]);

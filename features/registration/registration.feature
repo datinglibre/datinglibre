@@ -30,3 +30,43 @@ Feature:
         When I am on "/register"
         And I follow "Read terms and conditions"
         Then I should see "demonstration"
+
+    @ui
+    @registration
+    Scenario: I cannot register with an invalid email address
+        When I am on "/register"
+        And I check "registration_form_agreeTerms"
+        And I fill in "registration_form_email" with "userexample.com"
+        And I fill in "registration_form_password" with "password"
+        And I press "register"
+        Then I should see "Please enter a valid email address"
+
+    @ui
+    @registration
+    Scenario: I cannot register with a blank email address
+        When I am on "/register"
+        And I check "registration_form_agreeTerms"
+        And I fill in "registration_form_email" with ""
+        And I fill in "registration_form_password" with "password"
+        And I press "register"
+        Then I should see "Please enter an email address"
+
+    @ui
+    @registration
+    Scenario: I cannot register with a blank password
+        When I am on "/register"
+        And I check "registration_form_agreeTerms"
+        And I fill in "registration_form_email" with "user@example.com"
+        And I fill in "registration_form_password" with ""
+        And I press "register"
+        Then I should see "Please enter a password"
+
+    @ui
+    @registration
+    Scenario: Password should be at least 8 characters
+        When I am on "/register"
+        And I check "registration_form_agreeTerms"
+        And I fill in "registration_form_email" with "user@example.com"
+        And I fill in "registration_form_password" with "123456"
+        And I press "register"
+        Then I should see "Your password should be at least 8 characters"
