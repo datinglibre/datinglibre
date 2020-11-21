@@ -38,7 +38,9 @@
         "symfony/twig-bundle": "4.4.*",
         "symfony/validator": "4.4.*",
         "symfony/web-link": "4.4.*",
-        "symfony/yaml": "4.4.*"
+        "symfony/yaml": "4.4.*",
+        "twig/extra-bundle": "^3.1",
+        "twig/string-extra": "^3.1"
     },
     "require-dev": {
         "behat/behat": "^3.7.0",

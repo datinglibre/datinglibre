@@ -31,7 +31,7 @@
                 <img src="/profile.jpg" class="mr-3" alt="" height="64" width="64">
                 <div class="media-body">
                     <h5 class="mt-0 mb-1"><a href="{{ path('search_profile_view', {'userId': profile.id}) }}">{{ profile.username }}</a></h5>
-                    {{ profile.id }}
+                    <p>{{ profile.about|u.truncate(100, '...') }}</p>
             </li>
             {% endfor %}
         </ul>

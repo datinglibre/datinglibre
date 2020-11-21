@@ -27,7 +27,7 @@
                             <h5 class="media-heading">
                                 <a href="{{ path('message_send', {'userId': match.currentRecipientId}) }}">{{ match.currentRecipientUsername }}</a>
                             </h5>
-                            <div>{{ match.content }}</div>
+                            <div>{{ match.content|u.truncate('100', '...') }}</div>
                         </td>
                     </tr>
                 {% endfor %}
