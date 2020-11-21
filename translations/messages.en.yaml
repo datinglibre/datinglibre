@@ -72,6 +72,7 @@ menu:
   images: "Images"
   block: "Block"
   messages: "Messages"
+  matches: "Matches"
 message:
   title: "Message"
   send: "Send"
