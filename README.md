@@ -77,12 +77,21 @@ and install test fixtures:
 #### 4. Start Selenium (optional, for Javascript tests):     
     
     java -jar  selenium-server-standalone.jar
+    
+#### 5. Increase allowed number of open files
 
-#### Run `behat` BDD scenarios without Javascript tests:
+You might need to increase the number of open files that are allowed on your system, if running the tests
+fails with "too many open files". You can do this temporarily with:
+
+    ulimit -n 65535
+        
+#### 6. Run tests
+
+##### Run `behat` BDD scenarios without Javascript tests:
 
     ./vendor/bin/behat --tags ~javascript
 
-#### Run all `behat` BDD scenarios:
+##### Run all `behat` BDD scenarios:
 
     ./vendor/bin/behat
     
