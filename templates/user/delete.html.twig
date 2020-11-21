@@ -5,5 +5,8 @@
 {% endblock %}
 {% block content %}
     <p class="alert-danger alert">{{ 'account.delete_confirmation'|trans }}</p>
-    {{ form(deleteAccountForm) }}
+    {{ form_start(deleteAccountForm) }}
+    {{ form_row(deleteAccountForm.password) }}
+    {{ form_row(deleteAccountForm.submit, {'attr': {'class': 'btn btn-danger'}}) }}
+    {{ form_end(deleteAccountForm) }}
 {% endblock %}
