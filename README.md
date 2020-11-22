@@ -171,9 +171,11 @@ Create `production` inventory using `staging` inventory as a template:
 
     cp -R ./deploy/inventories/staging ./deploy/inventories/production    
 
-Create a long password in a file in your home directory called `vault_password`. This should not be committed 
-to source control. You can remove the `deploy/inventories/production/` exclusion in `.gitignore` if you want to commit
-your inventory to a private git repository. 
+Create a long password in a file in your home directory called `vault_password`. *This password file should not be committed 
+to GIT*. 
+
+You can remove the `deploy/inventories/production/` exclusion in `.gitignore` if you want to commit
+your inventory to a private GIT repository. 
 
 #### 2. Generate certificates
 
