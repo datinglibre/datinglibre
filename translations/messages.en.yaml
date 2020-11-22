@@ -84,8 +84,6 @@ matches:
 block:
   block: "Block"
   reason: "Reason"
-  spam: "Spam account"
-  no_reason: "No reason"
   placeholder: "Please choose a reason"
   success: "Successfully blocked user"
 moderate:

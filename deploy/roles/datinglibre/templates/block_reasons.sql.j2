@@ -1,0 +1,3 @@
+{% for block_reason in dating_libre.block_reasons %}
+INSERT INTO datinglibre.block_reasons (id, name) VALUES (uuid_generate_v4(), '{{ block_reason }}') ON CONFLICT DO NOTHING;
+{% endfor %}

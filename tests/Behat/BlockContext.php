@@ -45,7 +45,7 @@ class BlockContext implements Context
             $block = new Block();
             $block->setUser($user);
             $block->setBlockedUser($blockedUser);
-            $blockReason = $this->blockReasonRepository->findOneBy([BlockReason::NAME => 'block.spam']);
+            $blockReason = $this->blockReasonRepository->findOneBy([BlockReason::NAME => 'no_reason']);
             $block->setReason($blockReason);
 
             $this->blockRepository->save($block);

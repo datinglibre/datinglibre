@@ -11,3 +11,7 @@ dating_libre:
         - square
         - circle
         - triangle
+    block_reasons:
+    - no_reason
+    - spam
+    - abusive

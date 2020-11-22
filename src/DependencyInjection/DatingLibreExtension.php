@@ -14,5 +14,6 @@ class DatingLibreExtension extends Extension
         $configuration = $this->processConfiguration(new DatingLibreConfiguration(), $configs);
         $container->setParameter('datinglibre.categories', $configuration['categories']);
         $container->setParameter('datinglibre.attributes', $configuration['attributes']);
+        $container->setParameter('datinglibre.block_reasons', $configuration['block_reasons']);
     }
 }

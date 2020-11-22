@@ -32,7 +32,7 @@ class BlockFormType extends AbstractType
             'class' => BlockReason::class,
             'choice_label' => 'name',
             'label' => 'block.reason',
-            'choice_translation_domain' => 'messages',
+            'choice_translation_domain' => 'blocks',
             'choices' => $this->blockReasonRepository->findAll(),
             'required' => true
         ]);

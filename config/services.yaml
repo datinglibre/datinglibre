@@ -12,6 +12,7 @@ services:
         bind:
             $categories: '%datinglibre.categories%'
             $attributes: '%datinglibre.attributes%'
+            $blockReasons: '%datinglibre.block_reasons%'
             $isDemo: '%env(bool:IS_DEMO)%'
             $adminEmail: '%env(resolve:ADMIN_EMAIL)%'
             $imagesBucket: '%env(resolve:IMAGES_BUCKET)%'

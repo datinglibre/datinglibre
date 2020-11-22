@@ -23,12 +23,18 @@ class AppFixtures extends Fixture
     public const LONDON_LONGITUDE = -0.12574;
     private array $categories;
     private array $attributes;
+    private array $blockReasons;
 
-    public function __construct(UserPasswordEncoderInterface $encoder, array $categories, array $attributes)
-    {
+    public function __construct(
+        UserPasswordEncoderInterface $encoder,
+        array $categories,
+        array $attributes,
+        array $blockReasons
+    ) {
         $this->encoder = $encoder;
         $this->categories = $categories;
         $this->attributes = $attributes;
+        $this->blockReasons = $blockReasons;
     }
 
     public function load(ObjectManager $manager): void
@@ -37,9 +43,10 @@ class AppFixtures extends Fixture
 
         $this->createTestUser();
         $this->createLocations();
-        $this->createBlockReason('block.no_reason');
-        $this->createBlockReason('block.spam');
 
+        foreach ($this->blockReasons as $blockReason) {
+            $this->createBlockReason($blockReason);
+        }
 
         foreach ($this->categories as $categoryName) {
             $category = $this->createCategory($categoryName);
