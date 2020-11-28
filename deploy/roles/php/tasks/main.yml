@@ -2,4 +2,4 @@
 - name: Install php
   become: true
   apt:
-    name: ['php7.4', 'php7.4-fpm', 'php7.4-json', 'php7.4-curl', 'php7.4-simplexml', 'composer',  'php7.4-pgsql', 'php7.4-intl']
+    name: ['php7.4', 'php7.4-fpm', 'php7.4-json', 'php7.4-curl', 'php7.4-simplexml', 'composer',  'php7.4-pgsql', 'php7.4-intl', 'php-gd']

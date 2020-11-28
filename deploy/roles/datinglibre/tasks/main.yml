@@ -243,7 +243,7 @@
   args:
     executable: /bin/bash
 
-- name: Delete categories and attributes configuration
+- name: Cleanup categories, attributes, block reasons
   become: true
   file:
     path: "{{ item }}"
