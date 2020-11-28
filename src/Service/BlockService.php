@@ -8,7 +8,7 @@ use App\Entity\Block;
 use App\Entity\BlockReason;
 use App\Repository\BlockRepository;
 use App\Repository\UserRepository;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BlockService
@@ -23,8 +23,8 @@ class BlockService
     }
 
     public function block(
-        UuidInterface $currentUserId,
-        UuidInterface $userToBlockId,
+        Uuid $currentUserId,
+        Uuid $userToBlockId,
         BlockReason $reason
     ) {
         $currentUser = $this->userRepository->find($currentUserId);

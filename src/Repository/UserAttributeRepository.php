@@ -7,7 +7,7 @@ use App\Entity\UserAttribute;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query\ResultSetMapping;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @method UserAttribute|null find($id, $lockMode = null, $lockVersion = null)
@@ -30,7 +30,7 @@ class UserAttributeRepository extends ServiceEntityRepository
         return $userAttribute;
     }
 
-    public function deleteByCategory(UuidInterface $userId, UuidInterface $categoryId): void
+    public function deleteByCategory(Uuid $userId, Uuid $categoryId): void
     {
         $query = $this->getEntityManager()
             ->createNativeQuery(<<<EOD
@@ -46,7 +46,7 @@ EOD, new ResultSetMapping());
         $query->execute();
     }
 
-    public function getByUserAndCategory(UuidInterface $userId, string $categoryName): ?Attribute
+    public function getByUserAndCategory(Uuid $userId, string $categoryName): ?Attribute
     {
         $rsm = new ResultSetMapping();
         $rsm->addEntityResult('App\Entity\Attribute', 'a');
@@ -87,7 +87,7 @@ EOD, $rsm);
         return $query->getResult();
     }
 
-    public function deleteByUser(UuidInterface $userId): void
+    public function deleteByUser(Uuid $userId): void
     {
         $query = $this->getEntityManager()
             ->createNativeQuery(<<<EOD

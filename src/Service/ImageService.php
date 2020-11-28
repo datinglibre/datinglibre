@@ -12,7 +12,7 @@ use Aws\S3\S3Client;
 use DateInterval;
 use DateTime;
 use DateTimeInterface;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 
 class ImageService
 {
@@ -35,7 +35,7 @@ class ImageService
         $this->imagesBucket = $imagesBucket;
     }
 
-    public function save(UuidInterface $userId, $payload, string $type, bool $isProfile): Image
+    public function save(Uuid $userId, $payload, string $type, bool $isProfile): Image
     {
         $user = $this->userRepository->find($userId);
 
@@ -90,7 +90,7 @@ class ImageService
         $this->imageRepository->delete($image);
     }
 
-    public function deleteByUserId(?UuidInterface $userId): void
+    public function deleteByUserId(?Uuid $userId): void
     {
         $image = $this->imageRepository->findOneBy(['user' => $userId]);
         if ($image !== null) {
@@ -107,7 +107,7 @@ class ImageService
         ]);
     }
 
-    public function findProfileImageProjection(UuidInterface $userId): ?ImageProjection
+    public function findProfileImageProjection(Uuid $userId): ?ImageProjection
     {
         return $this->imageRepository->findProjection($userId, true);
     }

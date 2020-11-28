@@ -6,7 +6,7 @@ use App\Entity\Token;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Persistence\ManagerRegistry;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @method Token|null find($id, $lockMode = null, $lockVersion = null)
@@ -29,7 +29,7 @@ class TokenRepository extends ServiceEntityRepository
         return $token;
     }
 
-    public function deleteByUserIdAndType(UuidInterface $userId, string $type): void
+    public function deleteByUserIdAndType(Uuid $userId, string $type): void
     {
         $query = $this->getEntityManager()->createNativeQuery(<<<EOD
         DELETE FROM datinglibre.tokens where user_id = :userId AND type = :type

@@ -12,7 +12,7 @@ use DateInterval;
 use DateTimeImmutable;
 use DateTimeZone;
 use Doctrine\Common\Collections\Criteria;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -60,13 +60,13 @@ class UserService
         return $this->userRepository->save($user);
     }
 
-    public function delete(?UuidInterface $deletedById, UuidInterface $userId)
+    public function delete(?Uuid $deletedById, Uuid $userId)
     {
         $this->profileService->delete($userId);
         $this->userRepository->delete($userId);
     }
 
-    public function deleteByPassword(?UuidInterface $userId, string $password)
+    public function deleteByPassword(?Uuid $userId, string $password)
     {
         $user = $this->userRepository->find($userId);
 
@@ -107,7 +107,7 @@ class UserService
             ->subject($this->translator->trans('user.signup_subject'))
             ->to($savedUser->getEmail())
             ->htmlTemplate('user/email/confirm.html.twig')
-            ->context(['secret' => $token->getSecret(), 'userId' => $savedUser->getId()->toString()]);
+            ->context(['secret' => $token->getSecret(), 'userId' => $savedUser->getId()->toRfc4122()]);
 
         $this->emailService->send($email, $savedUser, Email::SIGNUP);
     }
@@ -144,7 +144,7 @@ class UserService
             ->subject($this->translator->trans('user.reset_password_subject'))
             ->to($user->getEmail())
             ->htmlTemplate('user/email/password_reset.html.twig')
-            ->context(['secret' => $token->getSecret(), 'userId' => $user->getId()->toString()]);
+            ->context(['secret' => $token->getSecret(), 'userId' => $user->getId()->toRfc4122()]);
 
         $this->emailService->send($email, $user, Email::PASSWORD_RESET);
     }

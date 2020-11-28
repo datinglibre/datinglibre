@@ -3,7 +3,6 @@ doctrine:
         default_connection: default
         # configure these for your database server
         types:
-            uuid: Ramsey\Uuid\Doctrine\UuidType
             jsonb: MartinGeorgiev\Doctrine\DBAL\Types\Jsonb
             jsonb[]: MartinGeorgiev\Doctrine\DBAL\Types\JsonbArray
             smallint[]: MartinGeorgiev\Doctrine\DBAL\Types\SmallIntArray

@@ -7,9 +7,9 @@ namespace App\Entity;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
+use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -24,11 +24,11 @@ class User implements UserInterface
     const ADMIN = 'ROLE_ADMIN';
 
     /**
-     * @var UuidInterface
+     * @var Uuid
      *
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
+     * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
      * @ORM\Column(type="uuid")
      */
     private $id;
@@ -66,7 +66,7 @@ class User implements UserInterface
      */
     private $lastLogin;
 
-    public function getId(): ?UuidInterface
+    public function getId(): ?Uuid
     {
         return $this->id;
     }

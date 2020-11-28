@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace App\Service;
 
 use Iterator;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ArgumentValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * Taken from https://github.com/ramsey/uuid/issues/163
@@ -19,7 +18,7 @@ final class UuidValueResolver implements ArgumentValueResolverInterface
 {
     public function supports(Request $request, ArgumentMetadata $argument): bool
     {
-        return is_a($argument->getType(), UuidInterface::class, true);
+        return is_a($argument->getType(), Uuid::class, true);
     }
 
     public function resolve(Request $request, ArgumentMetadata $argument): Iterator

@@ -8,7 +8,7 @@ use App\Entity\Region;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Persistence\ManagerRegistry;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @method Region|null find($id, $lockMode = null, $lockVersion = null)
@@ -23,7 +23,7 @@ class RegionRepository extends ServiceEntityRepository
         parent::__construct($registry, Region::class);
     }
 
-    public function findByCountry(UuidInterface $countryId): array
+    public function findByCountry(Uuid $countryId): array
     {
         $rsm = new ResultSetMapping();
 

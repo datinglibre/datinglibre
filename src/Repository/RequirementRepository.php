@@ -9,7 +9,7 @@ use App\Entity\Requirement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Persistence\ManagerRegistry;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @method Requirement|null find($id, $lockMode = null, $lockVersion = null)
@@ -39,7 +39,7 @@ class RequirementRepository extends ServiceEntityRepository
         return $requirement;
     }
 
-    public function deleteByUser(UuidInterface $userId): void
+    public function deleteByUser(Uuid $userId): void
     {
         $query = $this->getEntityManager()->createNativeQuery(<<<EOD
 DELETE FROM datinglibre.requirements r WHERE r.user_id = :userId
@@ -49,7 +49,7 @@ EOD, new ResultSetMapping());
         $query->execute();
     }
 
-    public function deleteByUserAndCategory(UuidInterface $userId, string $categoryName)
+    public function deleteByUserAndCategory(Uuid $userId, string $categoryName)
     {
         $query = $this->getEntityManager()
             ->createNativeQuery(<<<EOD
@@ -67,7 +67,7 @@ EOD, new ResultSetMapping());
         $query->execute();
     }
 
-    public function getMultipleByUserAndCategory(?UuidInterface $userId, string $categoryName): array
+    public function getMultipleByUserAndCategory(?Uuid $userId, string $categoryName): array
     {
         $query = $this->getEntityManager()->createNativeQuery(<<<EOD
 SELECT a.id, a.name FROM datinglibre.requirements r
@@ -82,7 +82,7 @@ EOD, $this->attributeResultSetMapping);
         return $query->getResult();
     }
 
-    public function getOneByUserAndCategory(?UuidInterface $userId, string $categoryName): Attribute
+    public function getOneByUserAndCategory(?Uuid $userId, string $categoryName): Attribute
     {
         $query = $this->getEntityManager()->createNativeQuery(<<<EOD
 SELECT a.id, a.name FROM datinglibre.requirements r

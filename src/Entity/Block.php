@@ -6,8 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToOne;
-use Ramsey\Uuid\UuidInterface;
-use Ramsey\Uuid\Doctrine\UuidGenerator;
+use Symfony\Component\Uid\Uuid;
+use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BlockRepository")
@@ -16,11 +16,11 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
 class Block
 {
     /**
-     * @var UuidInterface
+     * @var Uuid
      *
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
+     * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
      * @ORM\Column(type="uuid")
      */
     private $id;
@@ -43,7 +43,7 @@ class Block
      */
     private $reason;
 
-    public function getId(): ?UuidInterface
+    public function getId(): ?Uuid
     {
         return $this->id;
     }

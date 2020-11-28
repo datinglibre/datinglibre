@@ -7,8 +7,8 @@ use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
-use Ramsey\Uuid\UuidInterface;
-use Ramsey\Uuid\Doctrine\UuidGenerator;
+use Symfony\Component\Uid\Uuid;
+use Symfony\Bridge\Doctrine\IdGenerator\UuidV4Generator;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MessageRepository")
@@ -18,11 +18,11 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
 class Message
 {
     /**
-     * @var UuidInterface
+     * @var Uuid
      *
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
+     * @ORM\CustomIdGenerator(class=UuidV4Generator::class)
      * @ORM\Column(type="uuid")
      */
     private $id;
@@ -52,9 +52,9 @@ class Message
     /**
      * @ORM\Column
      */
-    private UuidInterface $threadId;
+    private Uuid $threadId;
 
-    public function getId(): ?UuidInterface
+    public function getId(): ?Uuid
     {
         return $this->id;
     }
@@ -107,13 +107,13 @@ class Message
         return $this;
     }
 
-    public function setThreadId(UuidInterface $threadId): Message
+    public function setThreadId(Uuid $threadId): Message
     {
         $this->threadId = $threadId;
         return $this;
     }
 
-    public function getThreadId(): UuidInterface
+    public function getThreadId(): Uuid
     {
         return $this->threadId;
     }

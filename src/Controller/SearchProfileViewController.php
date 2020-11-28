@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Repository\ProfileRepository;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,7 +21,7 @@ class SearchProfileViewController extends AbstractController
     /**
      * @Route("/profile/{userId}/view", name="search_profile_view")
      */
-    public function index(UuidInterface $userId)
+    public function index(Uuid $userId)
     {
         $profile = $this->profileRepository->findProjectionByCurrentUser($this->getUser()->getId(), $userId);
 

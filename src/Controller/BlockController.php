@@ -7,10 +7,10 @@ namespace App\Controller;
 use App\Form\BlockFormType;
 use App\Service\BlockService;
 use App\Service\ProfileService;
-use Ramsey\Uuid\UuidInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Uid\Uuid;
 
 class BlockController extends AbstractController
 {
@@ -18,7 +18,7 @@ class BlockController extends AbstractController
      * @Route("/block/{userId}", name="block_user")
      */
     public function block(
-        UuidInterface $userId,
+        Uuid $userId,
         Request $request,
         ProfileService $profileService,
         BlockService $blockService

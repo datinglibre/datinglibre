@@ -9,7 +9,7 @@ use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Persistence\ManagerRegistry;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -53,7 +53,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    public function delete(UuidInterface $userId): void
+    public function delete(Uuid $userId): void
     {
         $user = $this->find($userId);
 
@@ -65,7 +65,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    public function updateCreatedAt(UuidInterface $userId, DateTimeImmutable $dateTime): void
+    public function updateCreatedAt(Uuid $userId, DateTimeImmutable $dateTime): void
     {
         $query = $this->getEntityManager()->createNativeQuery(<<<EOD
 UPDATE datinglibre.users SET created_at = :createdAt WHERE id = :userId

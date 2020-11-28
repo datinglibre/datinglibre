@@ -10,7 +10,7 @@ use App\Form\MessageFormType;
 use App\Repository\MessageRepository;
 use App\Repository\ProfileRepository;
 use App\Repository\UserRepository;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,7 +35,7 @@ class MessageSendController extends AbstractController
     /**
      * @Route("/message/{userId}", name="message_send")
      */
-    public function message(Request $request, UuidInterface $userId)
+    public function message(Request $request, Uuid $userId)
     {
         $sender = $this->userRepository->find($this->getUser()->getId());
         $recipient = $this->userRepository->find($userId);

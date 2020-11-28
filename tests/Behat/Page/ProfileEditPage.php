@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Behat\Page;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 use Webmozart\Assert\Assert;
 
 class ProfileEditPage extends SymfonyPage
@@ -37,7 +37,7 @@ class ProfileEditPage extends SymfonyPage
         $this->getElement('username')->setValue($username);
     }
 
-    public function setCountry(UuidInterface $countryId): void
+    public function setCountry(Uuid $countryId): void
     {
         $this->getSession()->wait(5000, sprintf(
             self::IS_OPTION_PRESENT,
@@ -59,7 +59,7 @@ class ProfileEditPage extends SymfonyPage
             ));
     }
 
-    public function setRegion(UuidInterface $regionId): void
+    public function setRegion(Uuid $regionId): void
     {
         $this->getSession()->wait(5000, sprintf(
             self::IS_OPTION_PRESENT,
@@ -81,7 +81,7 @@ class ProfileEditPage extends SymfonyPage
             ));
     }
 
-    public function setCity(UuidInterface $cityId): void
+    public function setCity(Uuid $cityId): void
     {
         $this->getSession()->wait(5000, sprintf(
             self::IS_OPTION_PRESENT,

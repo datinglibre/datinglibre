@@ -12,7 +12,7 @@ use DateInterval;
 use DateTime;
 use DateTimeInterface;
 use PHPUnit\Framework\TestCase;
-use Ramsey\Uuid\Uuid;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class TokenServiceTest extends TestCase
@@ -55,7 +55,7 @@ class TokenServiceTest extends TestCase
         $testSecret = 'abc';
 
         $user->method('getId')
-            ->willReturn(Uuid::uuid4());
+            ->willReturn(Uuid::v4());
 
         $token = $this->getMockBuilder(Token::class)
             ->getMock();

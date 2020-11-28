@@ -115,7 +115,7 @@ class SearchContext implements Context
     {
         $user = $this->userService->findByEmail($email);
         Assert::notNull($user);
-        $this->searchPage->assertContains($user->getId()->toString());
+        $this->searchPage->assertContains($user->getId()->toRfc4122());
     }
 
     /**
@@ -224,7 +224,7 @@ class SearchContext implements Context
     private function getProfile(User $user): ?ProfileProjection
     {
         foreach ($this->profiles as $profile) {
-            if ($user->getId()->toString() === $profile->getId()) {
+            if ($user->getId()->toRfc4122() === $profile->getId()) {
                 return $profile;
             }
         }
@@ -237,7 +237,7 @@ class SearchContext implements Context
         $found = false;
 
         foreach ($this->profiles as $profile) {
-            if ($user->getId()->toString() === $profile->getId()) {
+            if ($user->getId()->toRfc4122() === $profile->getId()) {
                 $found = true;
             }
         }

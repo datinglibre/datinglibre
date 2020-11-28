@@ -8,7 +8,7 @@ use App\Entity\Profile;
 use App\Entity\ProfileProjection;
 use App\Repository\ProfileRepository;
 use Exception;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 
 class ProfileService
 {
@@ -24,9 +24,9 @@ class ProfileService
     }
 
     public function findByLocation(
-        UuidInterface $userId,
+        Uuid $userId,
         ?int $distance,
-        ?UuidInterface $regionId,
+        ?Uuid $regionId,
         int $minAge,
         int $maxAge,
         bool $previous,
@@ -59,12 +59,12 @@ class ProfileService
         return $this->profileRepository->find($id);
     }
 
-    public function findProjectionByCurrentUser(UuidInterface $currentUserId, UuidInterface $userId): ?ProfileProjection
+    public function findProjectionByCurrentUser(Uuid $currentUserId, Uuid $userId): ?ProfileProjection
     {
         return $this->profileRepository->findProjectionByCurrentUser($currentUserId, $userId);
     }
 
-    public function findProjection(UuidInterface $userId): ProfileProjection
+    public function findProjection(Uuid $userId): ProfileProjection
     {
         $profileProjection = $this->profileRepository->findProjection($userId);
 
@@ -85,7 +85,7 @@ class ProfileService
         return $profileProjection;
     }
 
-    public function delete(UuidInterface $userId)
+    public function delete(Uuid $userId)
     {
         $profile = $this->profileRepository->find($userId);
 

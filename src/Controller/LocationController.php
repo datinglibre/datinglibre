@@ -8,7 +8,7 @@ use App\Repository\CategoryRepository;
 use App\Repository\CityRepository;
 use App\Repository\CountryRepository;
 use App\Repository\RegionRepository;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,7 +38,7 @@ class LocationController extends AbstractController
     /**
      * @Route("/location/country/{countryId}/regions", name="country_regions")
      */
-    public function displayRegions(UuidInterface $countryId)
+    public function displayRegions(Uuid $countryId)
     {
         if ($countryId == null) {
             throw $this->createNotFoundException('Country does not exist');
@@ -51,7 +51,7 @@ class LocationController extends AbstractController
     /**
      * @Route("/location/region/{regionId}/cities", name="region_cities")
      */
-    public function displayCities(UuidInterface $regionId)
+    public function displayCities(Uuid $regionId)
     {
         if ($regionId == null) {
             throw $this->createNotFoundException('Region does not exist');

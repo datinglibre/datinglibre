@@ -9,7 +9,7 @@ use App\Entity\Requirement;
 use App\Entity\User;
 use App\Repository\AttributeRepository;
 use App\Repository\RequirementRepository;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 
 class RequirementService
 {
@@ -54,12 +54,12 @@ class RequirementService
         return $requirement;
     }
 
-    public function getMultipleByUserAndCategory(?UuidInterface $userId, string $categoryName): array
+    public function getMultipleByUserAndCategory(?Uuid $userId, string $categoryName): array
     {
         return $this->requirementRepository->getMultipleByUserAndCategory($userId, $categoryName);
     }
 
-    public function getOneByUserAndCategory(?UuidInterface $userId, string $categoryName): ?Attribute
+    public function getOneByUserAndCategory(?Uuid $userId, string $categoryName): ?Attribute
     {
         return $this->requirementRepository->getOneByUserAndCategory($userId, $categoryName);
     }

@@ -9,7 +9,7 @@ use App\Entity\ProfileProjection;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query\ResultSetMapping;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @method Profile|null find($id, $lockMode = null, $lockVersion = null)
@@ -27,11 +27,11 @@ class ProfileRepository extends ServiceEntityRepository
     }
 
     public function findByLocation(
-        UuidInterface $userId,
+        Uuid $userId,
         float $latitude,
         float $longitude,
         ?int $distance,
-        ?UuidInterface $regionId,
+        ?Uuid $regionId,
         int $minAge,
         int $maxAge,
         bool $previous,
@@ -158,7 +158,7 @@ EOD;
         return $profile;
     }
 
-    public function findProjection(UuidInterface $userId): ?ProfileProjection
+    public function findProjection(Uuid $userId): ?ProfileProjection
     {
         $rsm = new ResultSetMapping();
         $rsm->addEntityResult('App\Entity\ProfileProjection', 'pv');
@@ -195,7 +195,7 @@ EOD, $rsm);
         return $query->getOneOrNullResult();
     }
 
-    public function findProjectionByCurrentUser(UuidInterface $currentUserId, UuidInterface $userId): ?ProfileProjection
+    public function findProjectionByCurrentUser(Uuid $currentUserId, Uuid $userId): ?ProfileProjection
     {
         $rsm = new ResultSetMapping();
         $rsm->addEntityResult('App\Entity\ProfileProjection', 'pp');

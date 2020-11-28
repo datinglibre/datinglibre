@@ -6,7 +6,7 @@ use App\Entity\City;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\Persistence\ManagerRegistry;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @method City|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,7 +21,7 @@ class CityRepository extends ServiceEntityRepository
         parent::__construct($registry, City::class);
     }
 
-    public function findByRegion(UuidInterface $regionId)
+    public function findByRegion(Uuid $regionId)
     {
         $rsm = new ResultSetMapping();
 

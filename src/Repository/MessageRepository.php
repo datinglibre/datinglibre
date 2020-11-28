@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Message;
-use App\Entity\Thread;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query\ResultSetMapping;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidFactory;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @method Message|null find($id, $lockMode = null, $lockVersion = null)
@@ -26,7 +23,7 @@ class MessageRepository extends ServiceEntityRepository
         parent::__construct($registry, Message::class);
     }
     
-    public function findMessagesBetweenUsers(UuidInterface $userId, UuidInterface $participantId)
+    public function findMessagesBetweenUsers(Uuid $userId, Uuid $participantId)
     {
         $rsm = new ResultSetMapping();
         $rsm->addEntityResult('App\Entity\MessageProjection', 'mp');
@@ -74,7 +71,7 @@ EOD;
         $result = $query->getOneOrNullResult();
 
         if (null === $result) {
-            $message->setThreadId(Uuid::uuid4());
+            $message->setThreadId(Uuid::v4());
         } else {
             $message->setThreadId(UUID::fromString($result['threadId']));
         }
@@ -85,7 +82,7 @@ EOD;
         return $message;
     }
 
-    public function findLatestMessages(UuidInterface $userId)
+    public function findLatestMessages(Uuid $userId)
     {
         $rsm = new ResultSetMapping();
         $rsm->addEntityResult('App\Entity\LatestMessageProjection', 'lm');

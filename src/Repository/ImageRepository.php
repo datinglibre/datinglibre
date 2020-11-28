@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query\ResultSetMapping;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @method Image|null find($id, $lockMode = null, $lockVersion = null)
@@ -39,7 +39,7 @@ class ImageRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-    public function findProjection(UuidInterface $userId, bool $isProfile): ?ImageProjection
+    public function findProjection(Uuid $userId, bool $isProfile): ?ImageProjection
     {
         $rsm = new ResultSetMapping();
         $rsm->addEntityResult('App\Entity\ImageProjection', 'ip');
