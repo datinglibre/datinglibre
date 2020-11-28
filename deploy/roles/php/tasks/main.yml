@@ -2,4 +2,17 @@
 - name: Install php
   become: true
   apt:
-    name: ['php7.4', 'php7.4-fpm', 'php7.4-json', 'php7.4-curl', 'php7.4-simplexml', 'composer',  'php7.4-pgsql', 'php7.4-intl', 'php-gd']
+    name: ['php7.4', 'php7.4-fpm', 'php7.4-json', 'php7.4-curl', 'php7.4-simplexml', 'composer',  'php7.4-pgsql', 'php7.4-intl', 'php-gd', 'php-opcache']
+
+- name: Enable opcache
+  become: true
+  lineinfile:
+    dest: /etc/php/7.4/fpm/php.ini
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  with_items:
+    - { regexp: "^;opcache.enable=1", line: "opcache.enable=1"}
+    - { regexp: "^;opcache.memory_consumption=128", line: "opcache.memory_consumption=256"}
+    - { regexp: "^;opcache.max_accelerated_files=10000", line: "opcache.max_accelerated_files=20000"}
+    - { regexp: "^;opcache.validate_timestamps=1", line: "opcache.validate_timestamps=0"}
