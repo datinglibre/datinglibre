@@ -6,6 +6,8 @@ namespace App\Controller;
 
 use App\Service\ImageService;
 use App\Service\ProfileService;
+use Gumlet\ImageResize;
+use Gumlet\ImageResizeException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,6 +17,8 @@ class ProfileImageController extends AbstractController
     private ImageService $imageService;
     private ProfileService $profileService;
     private bool $disableImageUpload;
+    private const HEIGHT = 255;
+    private const WIDTH = 255;
 
     public function __construct(
         ImageService $imageService,
@@ -28,6 +32,7 @@ class ProfileImageController extends AbstractController
 
     /**
      * @Route("/profile/image", name="profile_image")
+     * @throws ImageResizeException
      */
     public function index(Request $request)
     {
@@ -41,7 +46,9 @@ class ProfileImageController extends AbstractController
             $image = $request->files->get('image', null);
 
             if ($image != null) {
-                $this->imageService->save($userId, file_get_contents($image->getRealPath()), 'jpg', true);
+                $image = new ImageResize($image->getRealPath());
+                $image->resize(self::HEIGHT, self::WIDTH);
+                $this->imageService->save($userId, $image->getImageAsString(), 'jpg', true);
             }
         }
 
