@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Form\PasswordResetFormType;
 use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use function strtolower;
 
 class PasswordResetController extends AbstractController
 {
@@ -20,14 +20,11 @@ class PasswordResetController extends AbstractController
      */
     public function password(Request $request, SessionInterface $session, UserService $userService): Response
     {
-        $form = $this->createFormBuilder()
-            ->add('email', TextType::class, ['required' => true])
-            ->getForm();
+        $passwordResetFormType = $this->createForm(PasswordResetFormType::class);
+        $passwordResetFormType->handleRequest($request);
 
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $userService->resetPassword($form->getData()['email']);
+        if ($passwordResetFormType->isSubmitted() && $passwordResetFormType->isValid()) {
+            $userService->resetPassword(strtolower($passwordResetFormType->getData()['email']));
 
             $session->getFlashBag()->add('success', 'user.password_reset_email_sent');
 
@@ -35,7 +32,7 @@ class PasswordResetController extends AbstractController
         }
 
         return $this->render('user/password_reset.html.twig', [
-            'passwordResetForm' => $form->createView(),
+            'passwordResetForm' => $passwordResetFormType->createView(),
         ]);
     }
 }

@@ -19,7 +19,7 @@
         {% if is_granted('ROLE_MODERATOR') or is_granted('ROLE_ADMIN')  %}
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link {{ is_active('moderate') }}" href="{{ path('moderate_profile_images') }}">{{ 'nav.moderate'|trans  }}</a>
+                <a class="nav-link" href="{{ path('moderate_profile_images') }}">{{ 'nav.moderate'|trans  }}</a>
             </li>
         </ul>
         {% endif %}

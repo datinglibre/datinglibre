@@ -10,7 +10,12 @@
         </div>
     {% endif %}
     {% if profileImage is not null %}
-        <img src="{{ profileImage.secureUrl|raw }}" class="rounded mx-auto d-block" width="180" height="180" />
-        {{ form(moderateForm) }}
+        <div class="d-flex justify-content-center">
+            {{ form_start(moderateForm) }}
+            <div class="p-2">{{ form_widget(moderateForm.accept,  {'attr': {'class': 'btn btn-success'}}) }}</div>
+            <div class="p-2"><img src="{{ profileImage.secureUrl|raw }}" alt="" width="180" height="180" /></div>
+            <div class="p-2">{{ form_widget(moderateForm.reject, {'attr': {'class': 'btn btn-danger'}}) }}</div>
+            {{ form_end(moderateForm) }}
+        </div>
     {% endif %}
 {% endblock %}
