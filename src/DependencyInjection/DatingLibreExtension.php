@@ -15,5 +15,9 @@ class DatingLibreExtension extends Extension
         $container->setParameter('datinglibre.categories', $configuration['categories']);
         $container->setParameter('datinglibre.attributes', $configuration['attributes']);
         $container->setParameter('datinglibre.block_reasons', $configuration['block_reasons']);
+        $container->setParameter('datinglibre.image_upload', $configuration['image_upload']);
+        $container->setParameter('datinglibre.is_demo', $configuration['is_demo']);
+        $container->setParameter('datinglibre.admin_email', $configuration['admin_email']);
+        $container->setParameter('datinglibre.images_bucket', $configuration['images_bucket']);
     }
 }

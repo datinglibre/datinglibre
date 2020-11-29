@@ -219,7 +219,7 @@ In `all.yml` you will need to generate a password for `database_password`:
 The site saves images in a single private `S3` bucket. You will need to create a private bucket in the `AWS` 
 administration panel and a user that can access `S3` in the `IAM` panel. 
 
-Copy and paste the bucket name into `images_bucket` in `webservers.yml`. You need to enter the access and secret keys of the `S3` user you created 
+Copy and paste the bucket name into `images_bucket` in `dating_libre.yaml`. You need to enter the access and secret keys of the `S3` user you created 
 as encrypted values `storage_access_key`and `storage_secret_key` in `all.yml`, again using `ansible-vault` as above:
 
      ansible-vault encrypt_string --vault-password-file=~/vault_password AKIAZXYWVUTSRQP
@@ -252,10 +252,9 @@ Encrypt the `DSN` and enter is into `mailer_dsn`:
 
     ansible-vault encrypt_string --vault-password-file=~/vault_password ses+smtp://AKIABCDEFGH:s3cr3tp%2F4assw0r%3Fd@default?region=us-east-1
  
-Enter the email address that will send users notifications and confirmation emails in `admin_email`. If you 
-use the full format address, you'll need to escape the quotes for Ansible e.g.:
+Enter the email address that will send users notifications and confirmation emails in `dating_libre.yaml`, e.g.
 
-    admin_email: "\"Dating Libre\" <admin@datinglibre.com>"
+    admin_email: '"Dating Libre" <admin@example.com>'
 
 #### 7. Run Ansible
 

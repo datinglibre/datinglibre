@@ -1,4 +1,8 @@
 dating_libre:
+    admin_email: '"Dating Libre Staging" <admin@example.com>'
+    images_bucket: dlibreim
+    image_upload: true
+    is_demo: true
     categories:
     - color
     - shape
@@ -15,3 +19,4 @@ dating_libre:
     - no_reason
     - spam
     - abusive
+

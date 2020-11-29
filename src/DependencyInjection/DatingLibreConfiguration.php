@@ -15,9 +15,23 @@ class DatingLibreConfiguration implements ConfigurationInterface
 
         $treeBuilder->getRootNode()
             ->children()
-                ->arrayNode('categories')->scalarPrototype()->end()->end()
-                ->arrayNode('attributes')->arrayPrototype()->scalarPrototype()->end()->end()->end()
-                ->arrayNode('block_reasons')->scalarPrototype()->end()->end();
+                ->arrayNode('categories')
+                    ->scalarPrototype()->end()
+                ->end()
+                ->arrayNode('attributes')
+                    ->arrayPrototype()
+                        ->scalarPrototype()->end()
+                    ->end()
+                ->end()
+                ->arrayNode('block_reasons')
+                    ->scalarPrototype()->end()
+                ->end()
+                ->booleanNode('image_upload')->end()
+                ->booleanNode('is_demo')->end()
+                ->scalarNode('admin_email')->end()
+                ->scalarNode('images_bucket')->end()
+            ->end();
+
 
         return $treeBuilder;
     }

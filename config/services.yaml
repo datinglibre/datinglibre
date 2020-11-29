@@ -13,10 +13,10 @@ services:
             $categories: '%datinglibre.categories%'
             $attributes: '%datinglibre.attributes%'
             $blockReasons: '%datinglibre.block_reasons%'
-            $isDemo: '%env(bool:IS_DEMO)%'
-            $adminEmail: '%env(resolve:ADMIN_EMAIL)%'
-            $imagesBucket: '%env(resolve:IMAGES_BUCKET)%'
-            $disableImageUpload: '%env(bool:DISABLE_IMAGE_UPLOAD)%'
+            $isDemo: '%datinglibre.is_demo%'
+            $adminEmail: '%datinglibre.admin_email%'
+            $imagesBucket: '%datinglibre.images_bucket%'
+            $imageUpload: '%datinglibre.image_upload%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

@@ -11,7 +11,7 @@
             <div class="alert alert-success collapse" id="profileImageSuccessMessage" role="alert">{{ 'profile.image.success'|trans }}</div>
             <div class="alert alert-danger collapse" id="profileImageFailureMessage" role="alert">{{ 'profile.image.failure'|trans }}</div>
 
-            {% if disableImageUpload %}
+            {% if not imageUpload %}
             <div class="alert alert-danger" id="disableImageUpload" role="alert">{{ 'profile.image.disabled'|trans }}</div>
             {% endif %}
 
