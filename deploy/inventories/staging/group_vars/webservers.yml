@@ -2,7 +2,6 @@ domain_name: datinglibre.local
 mailer_dsn: smtp://192.168.0.101:1025
 database_certificate_path: /etc/datinglibre/database.crt
 database_key_path: /etc/datinglibre/database.key
-images_bucket: dlibreim
 purge_users_params: NOT_ENABLED 24
 # used when we cannot go via pgbouncer as we require a session
 psql_direct_connection: PGSSLCERT={{ database_certificate_path }} PGSSLKEY={{ database_key_path }} PGPASSWORD={{ database_password }} psql -U datinglibre -p5432 -h {{ database_host }} datinglibre
