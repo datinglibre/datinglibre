@@ -109,6 +109,5 @@
             "allow-contrib": false,
             "require": "5.2.*"
         }
-    },
-    "minimum-stability": "RC"
+    }
 }
