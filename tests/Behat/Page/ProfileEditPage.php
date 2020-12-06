@@ -32,11 +32,6 @@ class ProfileEditPage extends SymfonyPage
         Assert::contains($this->getDriver()->getContent(), $country);
     }
 
-    public function setUsername($username)
-    {
-        $this->getElement('username')->setValue($username);
-    }
-
     public function setCountry(Uuid $countryId): void
     {
         $this->getSession()->wait(5000, sprintf(
@@ -121,29 +116,5 @@ class ProfileEditPage extends SymfonyPage
         $this->getElement('year')->selectOption($year);
         $this->getElement('month')->selectOption($month);
         $this->getElement('day')->selectOption($day);
-    }
-
-    public function fillInShape(string $shape): void
-    {
-        $this->getElement('shape')->selectOption($shape);
-    }
-
-    public function fillInColor(string $color): void
-    {
-        $this->getElement('color')->selectOption($color);
-    }
-
-    protected function getDefinedElements(): array
-    {
-        return array_merge(parent::getDefinedElements(), [
-            'year' => '#profile_form_dob_year',
-            'month' => '#profile_form_dob_month',
-            'day' => '#profile_form_dob_day',
-            'username' => '#profile_form_username',
-            'save' => '#profile_form_save',
-            'about' => '#profile_form_about',
-            'color' => '#profile_form_color',
-            'shape' => '#profile_form_shape'
-        ]);
     }
 }

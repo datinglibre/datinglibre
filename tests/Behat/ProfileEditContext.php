@@ -167,22 +167,6 @@ class ProfileEditContext implements Context
     }
 
     /**
-     * @Given the country :country should be displayed
-     */
-    public function theCountryShouldBeDisplayed($country)
-    {
-        $this->profileEditPage->assertCountryIsDisplayed($country);
-    }
-
-    /**
-     * @Given I fill in :username as my username
-     */
-    public function iFillInAsMyUsername($username)
-    {
-        $this->profileEditPage->setUsername($username);
-    }
-
-    /**
      * @Given I select :regionName as my region
      */
     public function iSelectAsMyRegion($regionName)
@@ -213,78 +197,28 @@ class ProfileEditContext implements Context
     }
 
     /**
-     * @Given I save my profile
+     * @When I select the location:
      */
-    public function iSaveMyProfile()
-    {
-        $this->profileEditPage->save();
-    }
-
-    /**
-     * @Then I should see :username as my username
-     */
-    public function iShouldSeeAsMyUsername(string $username)
-    {
-        Assert::true($this->profileViewPage->isOpen());
-        $this->profileViewPage->assertContains($username);
-    }
-
-
-    private function iFillInMyAbout($about): void
-    {
-        $this->profileEditPage->setAbout($about);
-    }
-
-    private function iFillInMyDob($day, $month, $year): void
-    {
-        $this->profileEditPage->fillInDob($day, $month, $year);
-    }
-
-    private function iFillInMyShape(string $shape): void
-    {
-        $this->profileEditPage->fillInShape($shape);
-    }
-
-    private function iFillInMyColor(string $color): void
-    {
-        $this->profileEditPage->fillInColor($color);
-    }
-
-    /**
-     * @Given I fill in my profile with the following details
-     */
-    public function iFillInMyProfileWithTheFollowingDetails(TableNode $table): void
+    public function iSelectTheLocation(TableNode $table): void
     {
         foreach ($table as $row) {
-            $this->iFillInAsMyUsername($row['username']);
             $this->iSelectAsMyCountry($row['country']);
             $this->iSelectAsMyRegion($row['region']);
             $this->iSelectAsMyCity($row['city']);
-            $this->iFillInMyAbout($row['about']);
-            $this->iFillInMyDob($row['day'], $row['month'], $row['year']);
-            $this->iFillInMyShape($row['shape']);
-            $this->iFillInMyColor($row['color']);
         }
     }
 
     /**
-     * @Then I should see the following profile details
+     * @Then I should see the age for :year :month :day
      */
-    public function iShouldSeeTheFollowingProfileDetails(TableNode $table)
+    public function iShouldSeeTheAgeFor(int $year, int $month, int $day)
     {
-        foreach ($table as $row) {
-            $this->profileEditPage->assertContains($row['username']);
-            $this->profileEditPage->assertContains($row['region']);
-            $this->profileEditPage->assertContains($row['city']);
-            $this->profileEditPage->assertContains($row['about']);
-            $this->profileEditPage->assertContains(DateTime::createFromFormat(
-                'j-n-Y',
-                sprintf('%d-%d-%d', $row['day'], $row['month'], $row['year'])
-            )
-                    ->diff(new DateTime())
-                    ->format('%Y'));
-            $this->profileEditPage->assertContains($row['color']);
-            $this->profileEditPage->assertContains($row['shape']);
-        }
+        // this is actually the profile view page
+        $this->profileEditPage->assertContains(DateTime::createFromFormat(
+            'j-n-Y',
+            sprintf('%d-%d-%d', $day, $month, $year)
+        )
+                ->diff(new DateTime())
+                ->format('%Y'));
     }
 }
