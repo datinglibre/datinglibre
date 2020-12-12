@@ -62,8 +62,9 @@ Feature:
         And I select the location:
             | country        | region  | city   |
             | United Kingdom | England | London |
-        And I select "Green" from "profile_form_color"
-        And I select "Circle" from "profile_form_shape"
+        And I select "man" from "profile_form_sex"
+        And I select "a long term relationship" from "profile_form_relationship"
+        And I check "a woman"
         And I fill in "This is some text about me" for "profile_form_about"
         And I select "1990" from "profile_form_dob_year"
         And I select "1" from "profile_form_dob_month"
@@ -74,6 +75,7 @@ Feature:
         And I should see "England"
         And I should see "London"
         And I should see "This is some text about me"
-        And I should see "Green"
-        And I should see "Circle"
+        And I should see "a man"
+        And I should see "a long term relationship"
+        And I should see "a woman"
         And I should see the age for "1990" "1" "1"

@@ -12,6 +12,7 @@ use App\Repository\ProfileRepository;
 use App\Repository\RegionRepository;
 use App\Repository\UserRepository;
 use App\Service\ProfileService;
+use App\Service\RequirementService;
 use App\Service\UserAttributeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -25,6 +26,7 @@ class ProfileEditController extends AbstractController
     private RegionRepository $regionRepository;
     private CountryRepository $countryRepository;
     private UserAttributeService $userAttributeService;
+    private RequirementService $requirementService;
     private ProfileService $profileService;
 
     public function __construct(
@@ -33,7 +35,8 @@ class ProfileEditController extends AbstractController
         UserRepository $userRepository,
         RegionRepository $regionRepository,
         CountryRepository $countryRepository,
-        UserAttributeService $userAttributeService
+        UserAttributeService $userAttributeService,
+        RequirementService $requirementService
     ) {
         $this->profileRepository = $profileRepository;
         $this->userRepository = $userRepository;
@@ -41,6 +44,7 @@ class ProfileEditController extends AbstractController
         $this->countryRepository = $countryRepository;
         $this->userAttributeService = $userAttributeService;
         $this->profileService = $profileService;
+        $this->requirementService = $requirementService;
     }
 
     /**
@@ -65,16 +69,27 @@ class ProfileEditController extends AbstractController
         $profileForm->setAbout($profile->getAbout());
         $profileForm->setUsername($profile->getUsername());
         $profileForm->setDob($profile->getDob());
-        $profileForm->setColor($this->userAttributeService->getOneByCategoryName($user, 'color'));
-        $profileForm->setShape($this->userAttributeService->getOneByCategoryName($user, 'shape'));
+        $profileForm->setSexes($this->requirementService->getMultipleByUserAndCategory($user->getId(), 'sex'));
+        $profileForm->setSex($this->userAttributeService->getOneByCategoryName($user, 'sex'));
+        $profileForm->setRelationship($this->userAttributeService->getOneByCategoryName($user, 'relationship'));
 
         $profileFormType = $this->createForm(ProfileFormType::class, $profileForm);
         $profileFormType->handleRequest($request);
 
         if ($profileFormType->isSubmitted() && $profileFormType->isValid()) {
+            $relationship = $profileFormType->getData()->getRelationship();
+
             $this->userAttributeService->createUserAttributes(
                 $user,
-                [$profileFormType->getData()->getColor(), $profileFormType->getData()->getShape()]
+                [$profileFormType->getData()->getSex(), $relationship]
+            );
+
+            // in this case, a user's relationship style attribute is also a requirement
+            $this->requirementService->createRequirementsInCategory($user, 'relationship', [$relationship]);
+            $this->requirementService->createRequirementsInCategory(
+                $user,
+                'sex',
+                $profileFormType->getData()->getSexes()
             );
 
             $profile->setCity($profileFormType->getData()->getCity());

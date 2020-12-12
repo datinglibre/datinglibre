@@ -6,26 +6,15 @@ namespace App\Form;
 
 class RequirementsForm
 {
-    private $colors;
-    private $shapes;
+    private $sexes;
 
-    public function getColors()
+    public function getSexes()
     {
-        return $this->colors;
+        return $this->sexes;
     }
 
-    public function setColors($colors): void
+    public function setSexes($sexes): void
     {
-        $this->colors = $colors;
-    }
-
-    public function getShapes()
-    {
-        return $this->shapes;
-    }
-
-    public function setShapes($shapes): void
-    {
-        $this->shapes = $shapes;
+        $this->sexes = $sexes;
     }
 }

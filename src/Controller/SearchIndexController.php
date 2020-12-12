@@ -61,28 +61,7 @@ class SearchIndexController extends AbstractController
             ['regions' => $profile->getCity()->getRegion()->getCountry()->getRegions()]
         );
 
-
-        $requirements = new RequirementsForm();
-        $requirements->setColors($this->requirementService->getMultipleByUserAndCategory($user->getId(), 'color'));
-        $requirements->setShapes($this->requirementService->getMultipleByUserAndCategory($user->getId(), 'shape'));
-        $requirementsForm = $this->createForm(RequirementsFormType::class, $requirements);
-
         $filterForm->handleRequest($request);
-        $requirementsForm->handleRequest($request);
-
-        if ($requirementsForm->isSubmitted() && $requirementsForm->isValid()) {
-            $this->requirementService->createRequirementsInCategory(
-                $user,
-                'color',
-                $requirementsForm->getData()->getColors()
-            );
-
-            $this->requirementService->createRequirementsInCategory(
-                $user,
-                'shape',
-                $requirementsForm->getData()->getShapes()
-            );
-        }
 
         if ($filterForm->isSubmitted() && $filterForm->isValid()) {
             $this->filterRepository->save($filter);
@@ -108,8 +87,7 @@ class SearchIndexController extends AbstractController
             'previous' => $this->getPrevious($profiles, $next),
             'page' => 'search',
             'profiles' => $profiles,
-            'filterForm' => $filterForm->createView(),
-            'requirementsForm' => $requirementsForm->createView()
+            'filterForm' => $filterForm->createView()
         ]);
     }
 

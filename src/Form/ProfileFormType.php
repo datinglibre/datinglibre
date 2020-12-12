@@ -12,6 +12,7 @@ use App\Repository\RegionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -47,22 +48,35 @@ class ProfileFormType extends AbstractType
 
     public function buildForm(FormBuilderInterface $profileFormBuilder, array $options)
     {
-        $categories = $this->categoryRepository->findAll();
         $countries = $this->countryRepository->findAll();
+        $sex = $this->categoryRepository->findOneBy(['name' => 'sex']);
+        $relationship = $this->categoryRepository->findOneBy(['name' => 'relationship']);
 
-        foreach ($categories as $category) {
-            $profileFormBuilder->add(
-                $category->getLowercaseName(),
-                EntityType::class,
-                [
+        $profileFormBuilder->add(
+            'sex',
+            EntityType::class,
+            [
+                    'label' => 'sex.profile',
                     'placeholder' => '',
-                    'choices' => $category->getAttributes(),
+                    'choices' => $sex->getAttributes(),
                     'class' => Attribute::class,
                     'choice_label' => 'name',
                     'choice_translation_domain' => 'attributes',
-                ]
-            );
-        }
+            ]
+        );
+
+        $profileFormBuilder->add(
+            'relationship',
+            EntityType::class,
+            [
+                'label' => 'relationship.profile',
+                'placeholder' => '',
+                'choices' => $relationship->getAttributes(),
+                'class' => Attribute::class,
+                'choice_label' => 'name',
+                'choice_translation_domain' => 'attributes',
+            ]
+        );
 
         $profileFormBuilder->add(
             'username',
@@ -101,6 +115,21 @@ class ProfileFormType extends AbstractType
                 'choice_label' => 'name',
                 'placeholder' => '',
                 'constraints' => [new NotBlank()]
+            ]
+        );
+
+        $profileFormBuilder->add(
+            'sexes',
+            ChoiceType::class,
+            [
+               'label' => 'sex.search',
+               'choices' => $this->categoryRepository->findOneBy(['name' => 'sex'])->getAttributes(),
+               'choice_label' => 'name',
+               'choice_value' => 'id',
+               'choice_translation_domain' => 'attributes',
+               'multiple' => true,
+               'expanded' => true,
+               'constraints' => [new NotBlank()]
             ]
         );
 

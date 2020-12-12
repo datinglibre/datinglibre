@@ -28,29 +28,17 @@ class RequirementsFormType extends AbstractType
     public function buildForm(FormBuilderInterface $requirementsFormBuilder, array $options)
     {
         $requirementsFormBuilder->add(
-            'colors',
+            'sexes',
             ChoiceType::class,
             [
-                    'choices' => $this->categoryRepository->findOneBy(['name' => 'color'])->getAttributes(),
+                    'label' => 'sex.search',
+                    'choices' => $this->categoryRepository->findOneBy(['name' => 'sex'])->getAttributes(),
                     'choice_label' => 'name',
                     'choice_translation_domain' => 'attributes',
                     'multiple' => true,
                     'expanded' => true
             ]
         );
-
-        $requirementsFormBuilder->add(
-            'shapes',
-            ChoiceType::class,
-            [
-                'choices' => $this->categoryRepository->findOneBy(['name' => 'shape'])->getAttributes(),
-                'choice_label' => 'name',
-                'choice_translation_domain' => 'attributes',
-                'multiple' => true,
-                'expanded' => true
-            ]
-        );
-
 
         $requirementsFormBuilder->add('save', SubmitType::class, [
             'label' => 'search.search'

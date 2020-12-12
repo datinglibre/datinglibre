@@ -12,17 +12,24 @@
     <div class="panel-body">
         <h2>
             {{ profile.username }}
-            <small class="text-muted">{{ profile.age }}. {{ profile.cityName }}, {{ profile.regionName }}.</small>
+            <small class="text-muted">{{ sex.name|trans({}, 'attributes') }}, {{ profile.age }}. {{ profile.cityName }}, {{ profile.regionName }}.</small>
         </h2>
 
-        {% if attributes is not empty %}
-            <ul>
-                {% for attribute in attributes %}
-                    <li>{{ attribute.name|trans({}, 'attributes') }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-
+        <table class="table table-striped" style="width: auto;">
+            <tr>
+                <td>{{ 'relationship.looking_for'|trans }}</td>
+                <td><ul>
+                        {% for sex in sexes %}
+                            <li>{{ sex.name|trans({}, 'attributes') }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>{{ 'relationship.relationship'|trans }}</td>
+                <td>{{ relationship.name|trans({}, 'attributes') }}</td>
+            </tr>
+        </table>
         {{ profile.about|nl2br }}
     </div>
 {% endblock %}

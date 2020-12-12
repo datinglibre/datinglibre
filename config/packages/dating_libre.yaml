@@ -1,20 +1,18 @@
 dating_libre:
-    admin_email: '"Dating Libre Staging" <admin@example.com>'
+    admin_email: '"Dating Libre" <admin@datinglibre.com>'
     images_bucket: dlibreim
-    image_upload: true
-    is_demo: false
+    image_upload: false
+    is_demo: true
     categories:
-    - color
-    - shape
+    - sex
+    - relationship
     attributes:
-        color:
-        - blue
-        - green
-        - yellow
-        shape:
-        - square
-        - circle
-        - triangle
+        sex:
+        - man
+        - woman
+        relationship:
+        - long_term
+        - short_term
     block_reasons:
     - no_reason
     - spam

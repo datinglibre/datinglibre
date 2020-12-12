@@ -4,8 +4,8 @@ Feature:
     @account
     Scenario: I successfully delete my account
         Given the following profiles exist:
-            | email               | attributes   | requirements   | city   | age |
-            | newuser@example.com | blue, square | yellow, circle | London | 30  |
+            | email               | attributes       | requirements   | city   | age |
+            | newuser@example.com | woman, long_term | man, long_term | London | 30  |
         And the user "newuser@example.com" has uploaded a profile image
         And I am logged in with "newuser@example.com"
         When I go to "/user/delete"

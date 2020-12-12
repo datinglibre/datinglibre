@@ -18,8 +18,9 @@
             <div id="countryId" value="{{ profileForm.vars.value.country == null ? null : profileForm.vars.value.country.id }}"></div>
             {{ form_start(profileForm) }}
             {{ form_row(profileForm.username) }}
-            {{ form_row(profileForm.color) }}
-            {{ form_row(profileForm.shape) }}
+            {{ form_row(profileForm.sex) }}
+            {{ form_row(profileForm.sexes) }}
+            {{ form_row(profileForm.relationship) }}
             {{ form_row(profileForm.dob) }}
             {{ form_row(profileForm.country) }}
             {{ form_row(profileForm.region) }}

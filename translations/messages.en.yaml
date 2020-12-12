@@ -99,3 +99,11 @@ registration:
   already_exists_subject: "An account for your email address already exists"
   already_exists_body: "If you have forgotten your password please use the "
   password_reset_form: "password reset form"
+sex:
+  profile: "I am"
+  search: "I would like to meet "
+relationship:
+  relationship: "Relationship"
+  search: "for a "
+  looking_for: "Looking for"
+  profile: "Looking for "

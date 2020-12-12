@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Repository\ProfileRepository;
-use App\Service\UserAttributeService;
+use App\Repository\RequirementRepository;
+use App\Repository\UserAttributeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,14 +14,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileIndexController extends AbstractController
 {
     private ProfileRepository $profileRepository;
-    private UserAttributeService $userAttributeService;
+    private UserAttributeRepository $userAttributeRepository;
+    private RequirementRepository $requirementRepository;
 
     public function __construct(
         ProfileRepository $profileRepository,
-        UserAttributeService $userAttributeService
+        UserAttributeRepository $userAttributeRepository,
+        RequirementRepository $requirementRepository
     ) {
         $this->profileRepository = $profileRepository;
-        $this->userAttributeService = $userAttributeService;
+        $this->userAttributeRepository = $userAttributeRepository;
+        $this->requirementRepository = $requirementRepository;
     }
 
     /**
@@ -36,9 +40,11 @@ class ProfileIndexController extends AbstractController
         }
 
         return $this->render('profile/index.html.twig', [
-            'attributes' => $this->userAttributeService->getAttributesByUser($profile->getId()),
+            'sex' => $this->userAttributeRepository->getOneByUserAndCategory($this->getUser()->getId(), 'sex'),
+            'relationship' => $this->userAttributeRepository->getOneByUserAndCategory($this->getUser()->getId(), 'relationship'),
+            'sexes' => $this->requirementRepository->getMultipleByUserAndCategory($this->getUser()->getId(), 'sex'),
             'profile' => $profile,
-            'controller_name' => 'ProfileController',
+            'controller_name' => 'ProfileController'
         ]);
     }
 }

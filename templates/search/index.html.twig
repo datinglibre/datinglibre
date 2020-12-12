@@ -11,18 +11,9 @@
 {% endblock %}
 
 {% block content %}
-    {{ form_start(requirementsForm) }}
-    <div class="form-row">
-        <div class="col-md-5">{{ form_row(requirementsForm.shapes) }}</div>
-        <div class="col-md-5">{{ form_row(requirementsForm.colors) }}</div>
-        <div class="col-md-2">{{ form_widget(requirementsForm.save) }}</div>
-    </div>
-
     {% if profiles is empty %}
         <p class="alert-warning alert">{{ 'search.no_results'|trans }}</p>
     {% endif %}
-
-    {{ form_end(requirementsForm) }}
 
     {% if profiles is not empty %}
         <ul class="list-unstyled">

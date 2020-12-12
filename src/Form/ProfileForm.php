@@ -14,8 +14,9 @@ class ProfileForm
     private $username;
     private $about;
     private $dob;
-    private ?Attribute $color;
-    private ?Attribute $shape;
+    private ?Attribute $sex;
+    private array $sexes;
+    private ?Attribute $relationship;
     private ?City $city;
     private ?Region $region;
     private ?Country $country;
@@ -25,8 +26,8 @@ class ProfileForm
         $this->city = null;
         $this->region = null;
         $this->country = null;
-        $this->color = null;
-        $this->shape = null;
+        $this->sex = null;
+        $this->relationship = null;
     }
 
     public function setUsername($username): ProfileForm
@@ -95,23 +96,33 @@ class ProfileForm
         return $this->dob;
     }
 
-    public function getColor(): ?Attribute
+    public function getSex(): ?Attribute
     {
-        return $this->color;
+        return $this->sex;
     }
 
-    public function setColor(?Attribute $color): void
+    public function setSex(?Attribute $sex): void
     {
-        $this->color = $color;
+        $this->sex = $sex;
     }
 
-    public function getShape(): ?Attribute
+    public function getRelationship(): ?Attribute
     {
-        return $this->shape;
+        return $this->relationship;
     }
 
-    public function setShape(?Attribute $shape): void
+    public function setRelationship(?Attribute $relationship): void
     {
-        $this->shape = $shape;
+        $this->relationship = $relationship;
+    }
+
+    public function getSexes(): array
+    {
+        return $this->sexes;
+    }
+
+    public function setSexes(array $sexes): void
+    {
+        $this->sexes = $sexes;
     }
 }
