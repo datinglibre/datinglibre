@@ -366,7 +366,6 @@ the default values, you'll need to "find and replace" the appropriate values in 
                 | chelsea_blue@example.com | woman, long_term | man, long_term | London | 30  |
         ...
         
-[Have a look at the demo pull request](https://github.com/datinglibre/datinglibre/pull/9/files) where this has been done for some new categories and attributes.
 Altogether, you will also need to update the following files with your new categories:
 
 - `ProfileEditController.php`
@@ -377,6 +376,12 @@ Altogether, you will also need to update the following files with your new categ
 - `ProfileEditPage.php`
 - `RequirementsForm.php`
 - `RequirementsFormType.php`
+
+You can view a pull request that shows where this has been done for the demo site. GitHub's file filters are useful to show 
+what has changed: 
+
+- [View `PHP`, `YAML` and twig changes](https://github.com/datinglibre/datinglibre/pull/9/files?file-filters%5B%5D=.php&file-filters%5B%5D=.twig&file-filters%5B%5D=.yaml).
+- [View `.feature` test file changes](https://github.com/datinglibre/datinglibre/pull/9/files?file-filters%5B%5D=.feature). 
 
 ## Credits
 
