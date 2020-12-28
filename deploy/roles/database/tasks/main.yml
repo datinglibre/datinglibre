@@ -47,6 +47,7 @@
     line: "{{ item.line }}"
     state: present
   with_items:
+  - { regexp: "^#ssl_ca_file", line: "ssl_ca_file = '{{ database_certificate_path }}'" }
   - { regexp: "^ssl_cert_file", line: "ssl_cert_file = '{{ database_certificate_path }}'"}
   - { regexp: "^ssl_key_file", line: "ssl_key_file = '{{ database_key_path }}'"}
   notify: restart postgresql

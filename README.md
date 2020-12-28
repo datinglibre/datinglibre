@@ -34,6 +34,8 @@ Ubuntu 20.04 is recommended. Minimum requirements:
   - Composer (`sudo apt install composer`)
   - Docker and docker compose (`sudo apt install docker docker-compose` `sudo usermod -aG docker your_username` `sudo systemctl enable docker`, log out then in again to refresh groups).
   - The [Symfony command line tool](https://symfony.com/download).
+  - Ansible (`sudo apt install ansible`)
+  - The Ansible general collection (`ansible-galaxy collection install community.general:==1.3.1`)
 
 Additional requirements to run Javascript tests:
 
