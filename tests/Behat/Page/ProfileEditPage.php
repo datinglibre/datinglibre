@@ -98,12 +98,11 @@ class ProfileEditPage extends SymfonyPage
             ));
     }
 
-    public function save(): void
+    public function closeToolbar(): void
     {
         // we want to keep the toolbar for convenience,
         // but it covers the "save" button here, so remove it.
         $this->getSession()->executeScript('$(".sf-toolbar").hide();');
-        $this->getElement('save')->click();
     }
 
     public function setAbout($about): void

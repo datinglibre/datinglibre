@@ -209,6 +209,14 @@ class ProfileEditContext implements Context
     }
 
     /**
+     * @When I close the toolbar
+     */
+    public function closeToolbar()
+    {
+        $this->profileEditPage->closeToolbar();
+    }
+
+    /**
      * @Then I should see the age for :year :month :day
      */
     public function iShouldSeeTheAgeFor(int $year, int $month, int $day)
