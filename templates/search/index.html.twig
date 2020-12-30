@@ -30,8 +30,9 @@
             <li class="media">
                 <img src="/profile.jpg" class="mr-3" alt="" height="64" width="64">
                 <div class="media-body">
-                    <h5 class="mt-0 mb-1"><a href="{{ path('search_profile_view', {'userId': profile.id}) }}">{{ profile.username }}</a></h5>
+                    <h5 class="mt-0 mb-1"><a href="{{ path('search_profile_view', {'userId': profile.id}) }}">{{ profile.username }}</a>, <small>{{ profile.age }}</small>. <small>{{ profile.cityName }}, {{ profile.regionName }}.</small></h5>
                     <p>{{ profile.about|u.truncate(100, '...') }}</p>
+                </div>
             </li>
             {% endfor %}
         </ul>

@@ -269,7 +269,7 @@ You can provision the webserver and database separately with:
     ansible-playbook -i ./deploy/inventories/production ./deploy/webservers.yml --vault-password-file=~/vault_password
     ansible-playbook -i ./deploy/inventories/production ./deploy/databases.yml --vault-password-file=~/vault_password
     
-Synchronise Symfony `PHP` files and run migrations with:
+Synchronize Symfony `PHP` files and run migrations with:
 
     ansible-playbook -i ./deploy/inventories/production ./deploy/webservers.yml --vault-password-file=~/vault_password --tags sync
     
