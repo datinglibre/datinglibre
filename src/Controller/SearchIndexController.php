@@ -21,9 +21,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class SearchIndexController extends AbstractController
 {
-    const SORT_ID = 'sortId';
-    const DATETIME_FORMAT = 'Y-m-dh:s';
     const PREVIOUS = 'previous';
+    const NEXT = 'next';
     const LIMIT = 10;
     private ProfileService $profileService;
     private UserRepository $userRepository;
@@ -90,8 +89,8 @@ class SearchIndexController extends AbstractController
             return new RedirectResponse($this->generateUrl('search'));
         }
 
-        $sortId = (int) $request->query->get(self::SORT_ID, 0);
-        $previous = (bool) $request->query->get(self::PREVIOUS, false);
+        $previous = (int) $request->query->get(self::PREVIOUS, 0);
+        $next = (int) $request->query->get(self::NEXT, 0);
 
         $profiles = $this->profileService->findByLocation(
             $user->getId(),
@@ -100,13 +99,13 @@ class SearchIndexController extends AbstractController
             $filter->getMinAge(),
             $filter->getMaxAge(),
             $previous,
-            $sortId,
+            $next,
             self::LIMIT
         );
 
         return $this->render('search/index.html.twig', [
-            'next' => $this->getNext($profiles, self::LIMIT),
-            self::PREVIOUS => $this->getPrevious($profiles, $sortId),
+            'next' => $this->getNext($profiles, $previous),
+            'previous' => $this->getPrevious($profiles, $next),
             'page' => 'search',
             'profiles' => $profiles,
             'filterForm' => $filterForm->createView(),
@@ -114,41 +113,38 @@ class SearchIndexController extends AbstractController
         ]);
     }
 
-
-    private function getNext(array $profiles, int $limit): array
-    {
-        // if not even enough profiles for this page
-        if (!(count($profiles) === $limit)) {
-            return [];
-        }
-
-        $lastProfile = $profiles[$limit - 1];
-
-        return [self::SORT_ID => $lastProfile->getSortId()];
-    }
-
-    private function getPrevious(array $profiles, ?int $sortId): array
-    {
-        // if no profiles or sort ID, disable previous
-        // this works for first load of the search page
-        // it is a bug that it doesn't work when the
-        // user navigates forwards, then backwards.
-        if (count($profiles) === 0 || $sortId === 0) {
-            return [];
-        }
-
-        // if this page didn't have any profiles use existing query params
-        if (count($profiles) === 0) {
-            return [self::SORT_ID => $sortId, self::PREVIOUS => true];
-        }
-
-        return [self::SORT_ID => $profiles[0]->getSortId(), self::PREVIOUS => true];
-    }
-
     public function createDefaultFilter(User $user): Filter
     {
         $filter = new Filter();
         $filter->setUser($user);
         return $this->filterRepository->save($filter);
+    }
+
+    private function getPrevious(array &$profiles, ?int $next): array
+    {
+        if ($next !== 0) {
+            return [self::PREVIOUS => $next - 1];
+        }
+
+        if (count($profiles) === self::LIMIT + 1) {
+            $previous = array_shift($profiles);
+            return [self::PREVIOUS => $previous->getSortId()];
+        }
+
+        return [];
+    }
+
+    private function getNext(array &$profiles, ?int $previous): array
+    {
+        if ($previous !== 0) {
+            return [self::NEXT => $previous + 1];
+        }
+
+        if (count($profiles) === self::LIMIT + 1) {
+            $next = array_pop($profiles);
+            return [self::NEXT => $next->getSortId()];
+        }
+
+        return [];
     }
 }

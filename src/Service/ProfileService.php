@@ -29,8 +29,8 @@ class ProfileService
         ?Uuid $regionId,
         int $minAge,
         int $maxAge,
-        bool $previous,
-        int $sortId,
+        int $previous,
+        int $next,
         $limit
     ): array {
         $profile = $this->profileRepository->find($userId);
@@ -49,7 +49,7 @@ class ProfileService
             $minAge,
             $maxAge,
             $previous,
-            $sortId,
+            $next,
             $limit
         );
     }

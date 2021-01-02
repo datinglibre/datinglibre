@@ -34,8 +34,8 @@ class ProfileRepository extends ServiceEntityRepository
         ?Uuid $regionId,
         int $minAge,
         int $maxAge,
-        bool $previous,
-        int $sortId,
+        int $previous,
+        int $next,
         int $limit
     ): array {
         $rsm = new ResultSetMapping();
@@ -111,16 +111,16 @@ EOD;
             $sql .= 'AND (' . $radiusSql . 'OR ' . $regionSql . ') ';
         }
 
-        if ($previous === false && $sortId === 0) {
+        if ($previous === 0 && $next === 0) {
             $sql .= 'ORDER BY p.sort_id ASC';
         }
 
-        if ($previous === false && $sortId !== 0) {
-            $sql .= 'AND p.sort_id > :sortId ORDER BY p.sort_id ASC';
+        if ($next !== 0) {
+            $sql .= 'AND p.sort_id >= :next ORDER BY p.sort_id ASC';
         }
 
-        if ($previous === true && $sortId !== 0) {
-            $sql .= 'AND p.sort_id < :sortId ORDER BY p.sort_id DESC';
+        if ($previous !== 0) {
+            $sql .= 'AND p.sort_id <= :previous ORDER BY p.sort_id DESC';
         }
 
         $sql .= ' LIMIT :limit';
@@ -137,11 +137,15 @@ EOD;
         $query->setParameter('defaultMinAge', self::DEFAULT_MIN_AGE);
 
 
-        if ($sortId !== 0) {
-            $query->setParameter('sortId', $sortId);
+        if ($previous !== 0) {
+            $query->setParameter('previous', $previous);
         }
 
-        $query->setParameter('limit', $limit);
+        if ($next !== 0) {
+            $query->setParameter('next', $next);
+        }
+
+        $query->setParameter('limit', $limit + 1);
 
         $profiles = $query->getResult();
 

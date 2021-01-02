@@ -71,7 +71,7 @@ class SearchContext implements Context
             empty($filter->getRegion()) ? null : $filter->getRegion()->getId(),
             $filter->getMinAge(),
             $filter->getMaxAge(),
-            false,
+            0,
             0,
             10
         );

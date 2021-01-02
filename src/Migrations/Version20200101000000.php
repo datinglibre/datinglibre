@@ -57,6 +57,10 @@ final class Version20200101000000 extends AbstractMigration
     longitude DOUBLE PRECISION NOT NULL,
     latitude DOUBLE PRECISION NOT NULL
 );');
+        $this->addSql('CREATE INDEX city_location_index ON datinglibre.cities USING gist (
+    public.geography(public.st_makepoint(longitude, latitude))
+);');
+
         $this->addSql('CREATE TABLE datinglibre.profiles (
     user_id UUID NOT NULL PRIMARY KEY REFERENCES datinglibre.users ON DELETE CASCADE,
     username TEXT UNIQUE,
@@ -66,9 +70,10 @@ final class Version20200101000000 extends AbstractMigration
     city_id UUID REFERENCES datinglibre.cities,
     state TEXT DEFAULT \'CREATED\'::TEXT NOT NULL,
     status TEXT,
-    sort_id SERIAL,
+    sort_id BIGSERIAL,
     updated_at TIMESTAMP WITH TIME ZONE
 );');
+        $this->addSql('CREATE INDEX profile_sort_order ON datinglibre.profiles(sort_id);');
         $this->addSql('CREATE TABLE datinglibre.categories (
     id UUID NOT NULL PRIMARY KEY,
     name TEXT UNIQUE
