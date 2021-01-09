@@ -167,6 +167,14 @@ class ProfileEditContext implements Context
     }
 
     /**
+     * @When I fill in a profile about section that is too long
+     */
+    public function iFillInAProfileAboutSectionThatIsTooLong()
+    {
+        $this->profileEditPage->setAbout(str_repeat('a', 6001));
+    }
+
+    /**
      * @Given I select :regionName as my region
      */
     public function iSelectAsMyRegion($regionName)

@@ -18,6 +18,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ProfileFormType extends AbstractType
 {
@@ -66,7 +68,17 @@ class ProfileFormType extends AbstractType
             'username',
             TextType::class,
             [
-                'label' => 'profile.username'
+                'label' => 'profile.username',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'profile.blank_username',
+                    ]),
+                    new Length([
+                        'minMessage' => "profile.username_invalid_length",
+                        'maxMessage' => "profile.username_invalid_length",
+                        'min' => 3,
+                        'max' => 32
+                    ])]
             ]
         );
 
@@ -87,7 +99,8 @@ class ProfileFormType extends AbstractType
                 'choices' => $countries,
                 'class' => Country::class,
                 'choice_label' => 'name',
-                'placeholder' => ''
+                'placeholder' => '',
+                'constraints' => [new NotBlank()]
             ]
         );
 
@@ -104,7 +117,14 @@ class ProfileFormType extends AbstractType
             [
                 'attr' => ['rows' => 5],
                 'required' => false,
-                'label' => 'profile.about'
+                'label' => 'profile.about',
+                'constraints' => [
+                    new Length([
+                        'minMessage' => "profile.about_invalid_length",
+                        'maxMessage' => "profile.about_invalid_length",
+                        'min' => 0,
+                        'max' => 6000
+                    ])]
             ]
         );
 

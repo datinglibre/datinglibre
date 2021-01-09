@@ -17,6 +17,42 @@ Feature:
         And I should see "Please complete your profile"
         And I should see "United Kingdom"
 
+    @ui @profile
+    Scenario: I have to enter a username
+        Given a user with email "newuser@example.com"
+        And I am logged in with "newuser@example.com"
+        When I am on the profile edit page
+        And I fill in "" for "profile_form_username"
+        And I press "Save"
+        Then I should see "Please enter a username"
+
+    @ui @profile
+    Scenario: My username has to be a valid length
+        Given a user with email "newuser@example.com"
+        And I am logged in with "newuser@example.com"
+        When I am on the profile edit page
+        And I fill in "a" for "profile_form_username"
+        And I press "Save"
+        Then I should see "Your username must be between 3 and 32 characters"
+
+    @ui @profile
+    Scenario: My username has to be a valid length
+        Given a user with email "newuser@example.com"
+        And I am logged in with "newuser@example.com"
+        When I am on the profile edit page
+        And I fill in "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" for "profile_form_username"
+        And I press "Save"
+        Then I should see "Your username must be between 3 and 32 characters"
+
+    @ui @profile
+    Scenario: My about section must not be too long
+        Given a user with email "newuser@example.com"
+        And I am logged in with "newuser@example.com"
+        When I am on the profile edit page
+        And I fill in a profile about section that is too long
+        And I press "Save"
+        Then I should see "Your about section is too long"
+
     @javascript
     Scenario: I can fill in my profile
         Given a user with email "newuser@example.com"

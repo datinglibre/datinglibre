@@ -7,3 +7,7 @@ registration:
 reset_password:
   invalid_email: "Please enter a valid email address"
   blank_email: "Please enter an email address"
+profile:
+  blank_username: "Please enter a username"
+  username_invalid_length: "Your username must be between 3 and 32 characters"
+  about_invalid_length: "Your about section is too long"

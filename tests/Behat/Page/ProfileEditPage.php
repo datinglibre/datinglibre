@@ -110,10 +110,8 @@ class ProfileEditPage extends SymfonyPage
         $this->getElement('about')->setValue($about);
     }
 
-    public function fillInDob($day, $month, $year)
+    public function getDefinedElements(): array
     {
-        $this->getElement('year')->selectOption($year);
-        $this->getElement('month')->selectOption($month);
-        $this->getElement('day')->selectOption($day);
+        return ['about' => '#profile_form_about'];
     }
 }
