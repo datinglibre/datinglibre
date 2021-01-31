@@ -186,6 +186,9 @@
             ".php_cs.dist"
         ]
     },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.3"
+    },
     "gumlet/php-image-resize": {
         "version": "2.0.0"
     },
@@ -227,9 +230,6 @@
     },
     "ocramius/package-versions": {
         "version": "1.4.0"
-    },
-    "ocramius/proxy-manager": {
-        "version": "2.2.3"
     },
     "php": {
         "version": "7.4"
@@ -661,9 +661,6 @@
     },
     "twig/twig": {
         "version": "v2.11.3"
-    },
-    "webimpress/safe-writer": {
-        "version": "2.0.1"
     },
     "webmozart/assert": {
         "version": "1.4.0"
