@@ -46,7 +46,7 @@ EOD, new ResultSetMapping());
         $query->execute();
     }
 
-    public function getByUserAndCategory(Uuid $userId, string $categoryName): ?Attribute
+    private function getByUserAndCategoryQuery(Uuid $userId, string $categoryName)
     {
         $rsm = new ResultSetMapping();
         $rsm->addEntityResult('App\Entity\Attribute', 'a');
@@ -65,10 +65,23 @@ EOD, $rsm);
         $query->setParameter('userId', $userId);
         $query->setParameter('categoryName', $categoryName);
 
-        return $query->getOneOrNullResult();
+        return $query;
     }
 
-    public function getAttributesByUser(string $userId)
+
+    public function getOneByUserAndCategory(Uuid $userId, string $categoryName): ?Attribute
+    {
+        return $this->getByUserAndCategoryQuery($userId, $categoryName)
+            ->getOneOrNullResult();
+    }
+
+    public function getMultipleByUserAndCategory(Uuid $userId, string $categoryName): array
+    {
+        return $this->getByUserAndCategoryQuery($userId, $categoryName)
+            ->getResult();
+    }
+
+    public function getAttributesByUser(string $userId): array
     {
         $rsm = new ResultSetMapping();
         $rsm->addEntityResult('App\Entity\Attribute', 'a');

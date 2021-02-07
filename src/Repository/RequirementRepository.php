@@ -67,7 +67,7 @@ EOD, new ResultSetMapping());
         $query->execute();
     }
 
-    public function getMultipleByUserAndCategory(?Uuid $userId, string $categoryName): array
+    private function getByUserAndCategoryQuery(Uuid $userId, string $categoryName)
     {
         $query = $this->getEntityManager()->createNativeQuery(<<<EOD
 SELECT a.id, a.name FROM datinglibre.requirements r
@@ -79,21 +79,19 @@ EOD, $this->attributeResultSetMapping);
 
         $query->setParameter('userId', $userId);
         $query->setParameter('categoryName', $categoryName);
-        return $query->getResult();
+
+        return $query;
     }
 
-    public function getOneByUserAndCategory(?Uuid $userId, string $categoryName): Attribute
+    public function getMultipleByUserAndCategory(Uuid $userId, string $categoryName): array
     {
-        $query = $this->getEntityManager()->createNativeQuery(<<<EOD
-SELECT a.id, a.name FROM datinglibre.requirements r
-INNER JOIN datinglibre.attributes a ON r.attribute_id = a.id
-INNER JOIN datinglibre.categories c ON a.category_id = c.id
-WHERE r.user_id = :userId 
-AND c.name = :categoryName
-EOD, $this->attributeResultSetMapping);
+        return $this->getByUserAndCategoryQuery($userId, $categoryName)
+            ->getResult();
+    }
 
-        $query->setParameter('userId', $userId);
-        $query->setParameter('categoryName', $categoryName);
-        return $query->getOneOrNullResult();
+    public function getOneByUserAndCategory(Uuid $userId, string $categoryName): ?Attribute
+    {
+        return $this->getByUserAndCategoryQuery($userId, $categoryName)
+            ->getOneOrNullResult();
     }
 }

@@ -53,7 +53,12 @@ class UserAttributeService
 
     public function getOneByCategoryName(User $user, string $categoryName): ?Attribute
     {
-        return $this->userAttributeRepository->getByUserAndCategory($user->getId(), $categoryName);
+        return $this->userAttributeRepository->getOneByUserAndCategory($user->getId(), $categoryName);
+    }
+
+    public function getMultipleByCategoryName(User $user, string $categoryName): array
+    {
+        return $this->userAttributeRepository->getMultipleByUserAndCategory($user->getId(), $categoryName);
     }
 
     public function getAttributesByUser(string $userId): array
