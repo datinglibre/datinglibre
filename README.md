@@ -126,7 +126,7 @@ Then edit the path to Vagrant's private key:
     
 #### 2. Install the location files
 
-The following files are distributed as part of the [separate DatingLibre locations repository](https://github.com/datinglibre/datinglibrelocations).
+The following files are distributed as part of the [separate DatingLibre locations repository](https://github.com/datinglibre/datinglibre-locations).
  - `countries.sql`
  - `regions.sql`
  - `cities.sql`
