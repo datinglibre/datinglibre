@@ -9,7 +9,6 @@
   become: true
   become_user: postgres
   community.general.postgresql_ext:
-    version: 3.1.0
     name: postgis
     db: datinglibre
 
