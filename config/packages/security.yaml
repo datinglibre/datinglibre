@@ -1,7 +1,7 @@
 security:
     hide_user_not_found: true
     encoders:
-        App\Entity\User:
+        DatingLibre\AppBundle\Entity\User:
             algorithm: auto
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
@@ -9,7 +9,7 @@ security:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
-                class: App\Entity\User
+                class: DatingLibre\AppBundle\Entity\User
                 property: email
     firewalls:
         dev:
@@ -19,7 +19,7 @@ security:
             anonymous: true
             guard:
                 authenticators:
-                    - App\Security\LoginFormAuthenticator
+                    - DatingLibre\AppBundle\Security\LoginFormAuthenticator
             logout:
                 path: logout
                 # where to redirect after logout

@@ -8,19 +8,15 @@ services:
 cache:
   directories:
     - $HOME/.composer/cache/files
-    - ./bin/.phpunit
     - $HOME/.symfony/bin
 env:
   global:
-    - SYMFONY_PHPUNIT_DIR=./bin/.phpunit
     - PATH="$HOME/.symfony/bin:$PATH"
 before_install:
   - if symfony self:version; then symfony self:update --yes ; else wget https://get.symfony.com/cli/installer -O - | bash ; fi
 install:
   - composer install
-  - ./bin/phpunit install
   - ./setup.sh
   - symfony serve --port 8000 --no-tls --daemon
 script:
-  - SYMFONY_DEPRECATIONS_HELPER=disabled ./bin/phpunit
   - ./vendor/bin/behat features/ --tags ~javascript

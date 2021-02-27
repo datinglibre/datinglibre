@@ -1,144 +1,141 @@
 services:
-    App\Tests\Behat\Page\LoginPage:
+    DatingLibre\AppBundle\Behat\Page\LoginPage:
         arguments:
             - '@behat.mink.default_session'
             - '@behat.mink.parameters'
             - '@router'
 
-    App\Tests\Behat\Page\RegistrationPage:
+    DatingLibre\AppBundle\Behat\Page\RegistrationPage:
         arguments:
             - '@behat.mink.default_session'
             - '@behat.mink.parameters'
             - '@router'
 
-    App\Tests\Behat\Page\ProfileIndexPage:
+    DatingLibre\AppBundle\Behat\Page\ProfileIndexPage:
         arguments:
             - '@behat.mink.default_session'
             - '@behat.mink.parameters'
             - '@router'
 
-    App\Tests\Behat\Page\ProfileEditPage:
+    DatingLibre\AppBundle\Behat\Page\ProfileEditPage:
         arguments:
             - '@behat.mink.default_session'
             - '@behat.mink.parameters'
             - '@router'
 
-    App\Tests\Behat\Page\ProfileImagePage:
+    DatingLibre\AppBundle\Behat\Page\ProfileImagePage:
         arguments:
             - '@behat.mink.default_session'
             - '@behat.mink.parameters'
             - '@router'
 
-    App\Tests\Behat\Page\SearchPage:
+    DatingLibre\AppBundle\Behat\Page\SearchPage:
         arguments:
             - '@behat.mink.default_session'
             - '@behat.mink.parameters'
             - '@router'
             -
-    App\Tests\Behat\Page\MessageSendPage:
+    DatingLibre\AppBundle\Behat\Page\MessageSendPage:
         arguments:
             - '@behat.mink.default_session'
             - '@behat.mink.parameters'
             - '@router'
 
-    App\Tests\Behat\Page\MatchesPage:
+    DatingLibre\AppBundle\Behat\Page\MatchesPage:
         arguments:
             - '@behat.mink.default_session'
             - '@behat.mink.parameters'
             - '@router'
 
-    App\Tests\Behat\Page\BlockPage:
+    DatingLibre\AppBundle\Behat\Page\BlockPage:
         arguments:
             - '@behat.mink.default_session'
             - '@behat.mink.parameters'
             - '@router'
 
-    App\Tests\Behat\Page\ModerateProfileImagesPage:
+    DatingLibre\AppBundle\Behat\Page\ModerateProfileImagesPage:
         arguments:
             - '@behat.mink.default_session'
             - '@behat.mink.parameters'
             - '@router'
 
-    App\Tests\Behat\RegistrationContext:
+    DatingLibre\AppBundle\Behat\RegistrationContext:
         public: true
         arguments:
-            - '@App\Tests\Behat\Page\LoginPage'
-            - '@App\Tests\Behat\Page\RegistrationPage'
-            - '@App\Repository\UserRepository'
+            - '@DatingLibre\AppBundle\Behat\Page\LoginPage'
+            - '@DatingLibre\AppBundle\Behat\Page\RegistrationPage'
+            - '@DatingLibre\AppBundle\Repository\UserRepository'
 
-    App\Tests\Behat\SearchContext:
+    DatingLibre\AppBundle\Behat\SearchContext:
         public: true
         arguments:
-            - '@App\Service\UserService'
-            - '@App\Repository\UserRepository'
-            - '@App\Repository\ProfileRepository'
-            - '@App\Repository\CityRepository'
-            - '@App\Repository\RegionRepository'
-            - '@App\Tests\Behat\Page\SearchPage'
-            - '@App\Repository\FilterRepository'
+            - '@DatingLibre\AppBundle\Service\UserService'
+            - '@DatingLibre\AppBundle\Repository\UserRepository'
+            - '@DatingLibre\AppBundle\Repository\ProfileRepository'
+            - '@DatingLibre\AppBundle\Repository\CityRepository'
+            - '@DatingLibre\AppBundle\Repository\RegionRepository'
+            - '@DatingLibre\AppBundle\Behat\Page\SearchPage'
+            - '@DatingLibre\AppBundle\Repository\FilterRepository'
 
-    App\Tests\Behat\ProfileEditContext:
+    DatingLibre\AppBundle\Behat\ProfileEditContext:
         public: true
         arguments:
-            - '@App\Service\UserService'
-            - '@App\Repository\UserRepository'
-            - '@App\Repository\ProfileRepository'
-            - '@App\Service\ProfileService'
-            - '@App\Service\UserAttributeService'
-            - '@App\Service\RequirementService'
-            - '@App\Repository\CityRepository'
-            - '@App\Repository\RegionRepository'
-            - '@App\Repository\CountryRepository'
-            - '@App\Tests\Behat\Page\LoginPage'
-            - '@App\Tests\Behat\Page\ProfileIndexPage'
-            - '@App\Tests\Behat\Page\ProfileEditPage'
-            - '@App\Tests\Behat\Page\SearchPage'
+            - '@DatingLibre\AppBundle\Service\UserService'
+            - '@DatingLibre\AppBundle\Repository\UserRepository'
+            - '@DatingLibre\AppBundle\Repository\ProfileRepository'
+            - '@DatingLibre\AppBundle\Service\ProfileService'
+            - '@DatingLibre\AppBundle\Service\UserAttributeService'
+            - '@DatingLibre\AppBundle\Service\RequirementService'
+            - '@DatingLibre\AppBundle\Repository\CityRepository'
+            - '@DatingLibre\AppBundle\Repository\RegionRepository'
+            - '@DatingLibre\AppBundle\Repository\CountryRepository'
+            - '@DatingLibre\AppBundle\Behat\Page\LoginPage'
+            - '@DatingLibre\AppBundle\Behat\Page\ProfileIndexPage'
+            - '@DatingLibre\AppBundle\Behat\Page\ProfileEditPage'
+            - '@DatingLibre\AppBundle\Behat\Page\SearchPage'
 
-    App\Tests\Behat\ProfileImageContext:
+    DatingLibre\AppBundle\Behat\ProfileImageContext:
         public: true
         arguments:
-            - '@App\Tests\Behat\Page\ProfileImagePage'
-            - '@App\Service\ProfileService'
-            - '@App\Repository\ProfileRepository'
-            - '@App\Repository\UserRepository'
-            - '@App\Service\ImageService'
+            - '@DatingLibre\AppBundle\Behat\Page\ProfileImagePage'
+            - '@DatingLibre\AppBundle\Service\ProfileService'
+            - '@DatingLibre\AppBundle\Repository\ProfileRepository'
+            - '@DatingLibre\AppBundle\Repository\UserRepository'
+            - '@DatingLibre\AppBundle\Service\ImageService'
 
-    App\Tests\Behat\BlockContext:
+    DatingLibre\AppBundle\Behat\BlockContext:
         public: true
         arguments:
-            - '@App\Service\UserService'
-            - '@App\Repository\BlockRepository'
-            - '@App\Repository\BlockReasonRepository'
-            - '@App\Tests\Behat\Page\BlockPage'
+            - '@DatingLibre\AppBundle\Service\UserService'
+            - '@DatingLibre\AppBundle\Repository\BlockRepository'
+            - '@DatingLibre\AppBundle\Repository\BlockReasonRepository'
+            - '@DatingLibre\AppBundle\Behat\Page\BlockPage'
 
-    App\Tests\Behat\UserContext:
+    DatingLibre\AppBundle\Behat\UserContext:
         public: true
         arguments:
-            - '@App\Repository\UserRepository'
-            - '@App\Service\UserService'
-            - '@App\Tests\Behat\Page\LoginPage'
+            - '@DatingLibre\AppBundle\Repository\UserRepository'
+            - '@DatingLibre\AppBundle\Service\UserService'
+            - '@DatingLibre\AppBundle\Behat\Page\LoginPage'
 
-    App\Tests\Behat\MessageContext:
+    DatingLibre\AppBundle\Behat\MessageContext:
          public: true
          arguments:
-            - '@App\Service\UserService'
-            - '@App\Repository\MessageRepository'
-            - '@App\Tests\Behat\Page\MessageSendPage'
-            - '@App\Tests\Behat\Page\MatchesPage'
+            - '@DatingLibre\AppBundle\Service\UserService'
+            - '@DatingLibre\AppBundle\Repository\MessageRepository'
+            - '@DatingLibre\AppBundle\Behat\Page\MessageSendPage'
+            - '@DatingLibre\AppBundle\Behat\Page\MatchesPage'
 
-    App\Tests\Behat\ImageContext:
+    DatingLibre\AppBundle\Behat\ImageContext:
         public: true
         arguments:
-            - '@App\Service\UserService'
-            - '@App\Repository\ImageRepository'
-            - '@App\Service\ImageService'
+            - '@DatingLibre\AppBundle\Service\UserService'
+            - '@DatingLibre\AppBundle\Repository\ImageRepository'
+            - '@DatingLibre\AppBundle\Service\ImageService'
 
-    App\Tests\Behat\ModerateContext:
+    DatingLibre\AppBundle\Behat\ModerateContext:
         public: true
         arguments:
-            - '@App\Service\ImageService'
-            - '@App\Repository\UserRepository'
-            - '@App\Tests\Behat\Page\ModerateProfileImagesPage'
-
-
-
+            - '@DatingLibre\AppBundle\Service\ImageService'
+            - '@DatingLibre\AppBundle\Repository\UserRepository'
+            - '@DatingLibre\AppBundle\Behat\Page\ModerateProfileImagesPage'

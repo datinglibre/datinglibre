@@ -9,14 +9,7 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        bind:
-            $categories: '%datinglibre.categories%'
-            $attributes: '%datinglibre.attributes%'
-            $blockReasons: '%datinglibre.block_reasons%'
-            $isDemo: '%datinglibre.is_demo%'
-            $adminEmail: '%datinglibre.admin_email%'
-            $imagesBucket: '%datinglibre.images_bucket%'
-            $imageUpload: '%datinglibre.image_upload%'
+
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -33,17 +26,10 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\EventListener\LoginListener:
+    DatingLibre\AppBundle\EventListener\LoginListener:
         tags:
             - { name: 'kernel.event_listener', event: 'security.interactive_login' }
 
-    App\Service\UuidValueResolver:
+    DatingLibre\AppBundle\Service\UuidValueResolver:
         tags:
             - { name: controller.argument_value_resolver, priority: 500 }
-
-    App\Service\S3Service:
-        arguments:
-            $endpoint: '%env(resolve:STORAGE_ENDPOINT)%'
-            $accessKey: '%env(resolve:STORAGE_ACCESS_KEY)%'
-            $secretKey: '%env(resolve:STORAGE_SECRET_KEY)%'
-            $region: '%env(resolve:STORAGE_REGION)%'

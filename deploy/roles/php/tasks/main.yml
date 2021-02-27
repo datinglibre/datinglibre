@@ -2,7 +2,7 @@
 - name: Install php
   become: true
   apt:
-    name: ['php7.4', 'php7.4-fpm', 'php7.4-json', 'php7.4-curl', 'php7.4-simplexml', 'composer',  'php7.4-pgsql', 'php7.4-intl', 'php-gd', 'php-opcache']
+    name: ['php7.4', 'php7.4-fpm', 'php7.4-json', 'php7.4-curl', 'php7.4-simplexml',  'php7.4-pgsql', 'php7.4-intl', 'php-gd', 'php-opcache']
 
 - name: Enable opcache
   become: true
@@ -16,3 +16,37 @@
     - { regexp: "^;opcache.memory_consumption=128", line: "opcache.memory_consumption=256"}
     - { regexp: "^;opcache.max_accelerated_files=10000", line: "opcache.max_accelerated_files=20000"}
     - { regexp: "^;opcache.validate_timestamps=1", line: "opcache.validate_timestamps=0"}
+
+# Copied from geerlinguy/ansible-role-composer
+
+- name: Check if Composer is installed.
+  stat: "path=/usr/local/bin/composer"
+  register: composer_bin
+
+- name: Get Composer installer signature.
+  uri:
+    url: https://composer.github.io/installer.sig
+    return_content: true
+  register: composer_installer_signature
+  when: not composer_bin.stat.exists
+
+- name: Download Composer installer.
+  get_url:
+    url: https://getcomposer.org/installer
+    dest: /tmp/composer-installer.php
+    mode: 0755
+    checksum: "sha384:{{ composer_installer_signature.content }}"
+  when: not composer_bin.stat.exists
+
+- name: Run Composer installer.
+  command: >
+    php composer-installer.php
+    chdir=/tmp
+  when: not composer_bin.stat.exists
+
+- name: Move Composer into globally-accessible location.
+  become: true
+  command: >
+    mv /tmp/composer.phar /usr/local/bin/composer
+    creates=/usr/local/bin/composer
+  when: not composer_bin.stat.exists

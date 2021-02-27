@@ -1,4 +1,4 @@
-dating_libre:
+dating_libre_app:
     admin_email: '"Dating Libre Staging" <admin@example.com>'
     images_bucket: dlibreim
     image_upload: true

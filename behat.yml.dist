@@ -2,15 +2,15 @@ default:
     suites:
         default:
             contexts:
-                - App\Tests\Behat\UserContext
-                - App\Tests\Behat\RegistrationContext
-                - App\Tests\Behat\ProfileEditContext
-                - App\Tests\Behat\ProfileImageContext
-                - App\Tests\Behat\SearchContext
-                - App\Tests\Behat\BlockContext
-                - App\Tests\Behat\MessageContext
-                - App\Tests\Behat\ModerateContext
-                - App\Tests\Behat\ImageContext
+                - DatingLibre\AppBundle\Behat\UserContext
+                - DatingLibre\AppBundle\Behat\RegistrationContext
+                - DatingLibre\AppBundle\Behat\ProfileEditContext
+                - DatingLibre\AppBundle\Behat\ProfileImageContext
+                - DatingLibre\AppBundle\Behat\SearchContext
+                - DatingLibre\AppBundle\Behat\BlockContext
+                - DatingLibre\AppBundle\Behat\MessageContext
+                - DatingLibre\AppBundle\Behat\ModerateContext
+                - DatingLibre\AppBundle\Behat\ImageContext
                 - Behat\MinkExtension\Context\MinkContext
 
     extensions:

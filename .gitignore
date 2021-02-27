@@ -13,7 +13,7 @@
 .vagrant
 /src/.preload.php
 deploy/inventories/staging/hosts
-deploy/inventories/production/
+deploy/inventories/production
 deploy/roles/datinglibre/vars/datinglibre.yaml
 deploy/roles/datinglibre/files/countries.sql
 deploy/roles/datinglibre/files/region.sql
