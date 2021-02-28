@@ -112,11 +112,11 @@ as a local repository.
 
 ## Deployment
 
-See the [Deployment](https://github.com/datinglibre/DatingLibre/wiki/Deployment) page on the Wiki on how to deploy the site using Ansible.
+See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/).
 
 ## Customization
     
-See the [Customization](https://github.com/datinglibre/DatingLibre/wiki/Customization) page on the Wiki.
+See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/).
 
 ## Credits
 
