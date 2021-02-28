@@ -2,7 +2,7 @@
 - name: Install php
   become: true
   apt:
-    name: ['php7.4', 'php7.4-fpm', 'php7.4-json', 'php7.4-curl', 'php7.4-simplexml',  'php7.4-pgsql', 'php7.4-intl', 'php-gd', 'php-opcache']
+    name: ['php7.4', 'php7.4-fpm', 'php7.4-json', 'php7.4-curl', 'php7.4-simplexml',  'php7.4-pgsql', 'php7.4-intl', 'php-gd', 'php-opcache', 'php-mbstring']
 
 - name: Enable opcache
   become: true
