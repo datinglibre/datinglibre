@@ -97,7 +97,7 @@ fails with "too many open files". You can do this temporarily with:
     
 The default password for all test accounts is `password`.
 
-### Download the `datinglibre-app-bundle`
+### Download and edit the `datinglibre-app-bundle`
 
 This project is used as a skeleton to run the [datinglibre-app-bundle](https://github.com/datinglibre-app-bundle). The
 project is separated in this way, so that developers can [override parts of the project](https://symfony.com/doc/current/bundles/override.html)
@@ -109,9 +109,6 @@ whilst keeping the ability to update the admin section of the site, which is exp
 In order to contribute to the DatingLibre project, you will need to setup your own version of the `datinglibre-app-bundle`
 as a local repository.
 
-#### Run `phpunit` tests:
-
-    ./bin/phpunit
 
 ## Deployment
 
