@@ -3,13 +3,11 @@
 
 [![Build Status](https://travis-ci.com/datinglibre/datinglibre.svg?branch=master "Travis CI status")](https://travis-ci.com/github/datinglibre/datinglibre)
 
-DatingLibre ([demo](https://datinglibre.com)) is a white-label open source Symfony 5.2 `PHP` 7.4 dating site backed by PostgreSQL, which can introduce
+DatingLibre ([demo](https://github.com/datinglibre/DatingLibreDemo)) is a white-label open source Symfony 5.2 `PHP` 7.4 dating site backed by PostgreSQL, which can introduce
 people based on geographical location, requirements and attributes. The requirements and attributes can be setup
 not only for relationships, but also for hobbies, such as finding a tandem language partner.
 
 DatingLibre uses Amazon SES and S3 (or a compatible service) and can be installed and updated automatically using Ansible. The demo runs on two $5 virtual servers.
-
-The project is currently in alpha.
 
 ## Features
 
