@@ -7,6 +7,12 @@ DatingLibre ([demo](https://github.com/datinglibre/DatingLibreDemo)) is a white-
 people based on geographical location, requirements and attributes. The requirements and attributes can be setup
 not only for relationships, but also for hobbies, such as finding a tandem language partner.
 
+DatingLibre is made up of the following repositories:
+- the reference implementation (this repository) which uses the dummy categories `color` and `shape`, and contains the database schema, and Behat features.
+- the [datinglibre-app-bundle](https://github.com/datinglibre/datinglibre-app-bundle) which contains overridable Behat test contexts, controllers, repositories, services, entities.
+- the [DatingLibreDemo](https://github.com/datinglibre/DatingLibreDemo) site, which shows how the `datinglibre-app-bundle` can be 
+overridden to build a custom website: overriding functionality as required, whilst leaving the rest of the bundle upgradable via `composer upgrade`. 
+
 DatingLibre uses Amazon SES and S3 (or a compatible service) and can be installed and updated automatically using Ansible.
 
 ## Features
@@ -101,7 +107,7 @@ The default password for all test accounts is `password`.
 
 This project is used as a skeleton to run the [datinglibre-app-bundle](https://github.com/datinglibre/datinglibre-app-bundle). The
 project is separated in this way, so that [parts of the bundle can be overridden](https://symfony.com/doc/current/bundles/override.html),
-whilst keeping the ability to keep updated with new DatingLibre features using `composer update`. This has been done in the 
+whilst keeping the ability to keep updated with new DatingLibre features using `composer upgrade`. This has been done in the 
 [DatingLibreDemo](https://github.com/datinglibre/DatingLibreDemo) project.
 
 In order to contribute to the DatingLibre project, you will need to setup your own version of the [datinglibre-app-bundle](https://github.com/datinglibre/datinglibre-app-bundle)
