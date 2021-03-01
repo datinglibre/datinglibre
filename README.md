@@ -3,17 +3,19 @@
 
 [![Build Status](https://travis-ci.com/datinglibre/datinglibre.svg?branch=master "Travis CI status")](https://travis-ci.com/github/datinglibre/datinglibre)
 
-DatingLibre ([demo](https://github.com/datinglibre/DatingLibreDemo)) is a white-label open source Symfony 5.2 `PHP` 7.4 dating site backed by PostgreSQL, which can introduce
-people based on geographical location, requirements and attributes. The requirements and attributes can be setup
+DatingLibre ([demo](https://github.com/datinglibre/DatingLibreDemo)) is a white-label open source Symfony 5.2 `PHP` 7.4 dating site backed by PostgreSQL,
+Amazon `SES` and `S3` (or a compatible service). It can be installed and updated using Ansible.
+
+DatingLibre can introduce people based on geographical location, requirements and attributes. The requirements and attributes can be setup
 not only for relationships, but also for hobbies, such as finding a tandem language partner.
 
 DatingLibre is made up of the following repositories:
 - the reference implementation (this repository) which uses the dummy categories `color` and `shape`, and contains the database schema, and Behat features.
 - the [datinglibre-app-bundle](https://github.com/datinglibre/datinglibre-app-bundle) which contains overridable Behat test contexts, controllers, repositories, services, entities.
 - the [DatingLibreDemo](https://github.com/datinglibre/DatingLibreDemo) site, which shows how the `datinglibre-app-bundle` can be 
-overridden to build a custom website: overriding functionality as required, whilst leaving the rest of the bundle upgradable via `composer upgrade`. 
-
-DatingLibre uses Amazon SES and S3 (or a compatible service) and can be installed and updated automatically using Ansible.
+overridden to build a custom website: overriding functionality as required, whilst leaving the rest of the bundle upgradable via `composer upgrade`.
+  
+All PRs should be opened against this reference repository and/or the [datinglibre-app-bundle](https://github.com/datinglibre/datinglibre-app-bundle).
 
 ## Features
 
