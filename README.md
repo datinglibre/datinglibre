@@ -7,7 +7,7 @@ DatingLibre ([demo](https://github.com/datinglibre/DatingLibreDemo)) is a white-
 people based on geographical location, requirements and attributes. The requirements and attributes can be setup
 not only for relationships, but also for hobbies, such as finding a tandem language partner.
 
-DatingLibre uses Amazon SES and S3 (or a compatible service) and can be installed and updated automatically using Ansible. The demo runs on two $5 virtual servers.
+DatingLibre uses Amazon SES and S3 (or a compatible service) and can be installed and updated automatically using Ansible.
 
 ## Features
 
