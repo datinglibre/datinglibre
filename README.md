@@ -13,7 +13,7 @@ DatingLibre is made up of the following repositories:
 - the reference implementation (this repository) which uses the dummy categories `color` and `shape`, and contains the database schema, and Behat features.
 - the [datinglibre-app-bundle](https://github.com/datinglibre/datinglibre-app-bundle) which contains overridable Behat test contexts, controllers, repositories, services, entities.
 - the [DatingLibreDemo](https://github.com/datinglibre/DatingLibreDemo) site, which shows how the `datinglibre-app-bundle` can be 
-overridden to build a custom website: overriding functionality as required, whilst leaving the rest of the bundle upgradable via `composer upgrade`.
+overridden to build a custom website: overriding functionality as required, whilst leaving the rest of the bundle upgradable via `composer upgrade`. The demo code is deployed to [datinglibre.com](http://datinglibre.com).
   
 All PRs should be opened against this reference repository and/or the [datinglibre-app-bundle](https://github.com/datinglibre/datinglibre-app-bundle).
 
