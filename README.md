@@ -99,14 +99,12 @@ The default password for all test accounts is `password`.
 
 ### Download and edit the `datinglibre-app-bundle`
 
-This project is used as a skeleton to run the [datinglibre-app-bundle](https://github.com/datinglibre-app-bundle). The
-project is separated in this way, so that developers can [override parts of the project](https://symfony.com/doc/current/bundles/override.html)
-they want, whilst keeping the ability to keep updated with new DatingLibre features using `composer update`.
+This project is used as a skeleton to run the [datinglibre-app-bundle](https://github.com/datinglibre/datinglibre-app-bundle). The
+project is separated in this way, so that [parts of the bundle can be overridden](https://symfony.com/doc/current/bundles/override.html),
+whilst keeping the ability to keep updated with new DatingLibre features using `composer update`. This has been done in the 
+[DatingLibreDemo](https://github.com/datinglibre/DatingLibreDemo) project.
 
-For example, a developer will want to save their own categories (the reference matching categories are "color" and "shape"),
-whilst keeping the ability to update the admin section of the site, which is expected to be largely the same across installations.
-
-In order to contribute to the DatingLibre project, you will need to setup your own version of the `datinglibre-app-bundle`
+In order to contribute to the DatingLibre project, you will need to setup your own version of the [datinglibre-app-bundle](https://github.com/datinglibre/datinglibre-app-bundle)
 as a local repository.
 
 
