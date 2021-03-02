@@ -1,7 +1,7 @@
 
 # DatingLibre
 
-[![Build Status](https://travis-ci.com/datinglibre/datinglibre.svg?branch=master "Travis CI status")](https://travis-ci.com/github/datinglibre/datinglibre)
+[![Build Status](https://travis-ci.com/datinglibre/DatingLibre.svg?branch=master "Travis CI status")](https://travis-ci.com/github/datinglibre/datinglibre)
 
 DatingLibre ([demo](https://github.com/datinglibre/DatingLibreDemo)) is a white-label open source Symfony 5.2 `PHP` 7.4 dating site backed by PostgreSQL,
 Amazon `SES` and `S3` (or a compatible service). It can be installed and updated using Ansible.
