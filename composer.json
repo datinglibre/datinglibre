@@ -1,6 +1,8 @@
 {
     "type": "project",
     "license": "MIT",
+    "name": "datinglibre/datinglibre",
+    "description": "The reference implementation of DatingLibre",
     "require": {
         "php": "^7.4",
         "ext-ctype": "*",

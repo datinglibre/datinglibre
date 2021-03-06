@@ -34,9 +34,9 @@ All PRs should be opened against this reference repository and/or the [datinglib
 
 ## Development
 
-Ubuntu 20.04 is recommended. Minimum requirements: 
+Ubuntu 20.04 is supported. Minimum requirements: 
 
-  - `PHP` 7.4 (`sudo apt install php7.4 php7.4-json php7.4-curl php7.4-simplexml php7.4-pgsql php7.4-intl`)
+  - `PHP` 7.4 (`sudo apt install php7.4 php7.4-json php7.4-curl php7.4-simplexml php7.4-pgsql php7.4-intl php7.4-mbstring`)
   - Composer (`sudo apt install composer`)
   - Docker and docker compose (`sudo apt install docker docker-compose` `sudo usermod -aG docker your_username` `sudo systemctl enable docker`, log out then in again to refresh groups).
   - The [Symfony command line tool](https://symfony.com/download).
@@ -113,8 +113,25 @@ whilst keeping the ability to keep updated with new DatingLibre features using `
 [DatingLibreDemo](https://github.com/datinglibre/DatingLibreDemo) project.
 
 In order to contribute to the DatingLibre project, you will need to setup your own version of the [datinglibre-app-bundle](https://github.com/datinglibre/datinglibre-app-bundle)
-as a local repository.
+as a local repository, add the following to your DatingLibre `composer.json` file, substituting `/home/datinglibre/git/datinglibre-app-bundle` with 
+the path to the bundle in your filesystem:
 
+        "repositories": [
+        {
+            "type": "path",
+            "url": "/home/datinglibre/git/datinglibre-app-bundle",
+            "options": {
+                "symlink": true
+            }
+        }
+    ]
+
+Update your `composer.json` to use 
+
+           "datinglibre/datinglibre-app-bundle": "@dev"
+
+Then run `composer update`. Make source code changes in `datinglibre-app-bundle` and add Behat tests in the main DatingLibre 
+project, commit, and open PRs against the respective projects.
 
 ## Deployment
 
