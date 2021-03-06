@@ -117,14 +117,14 @@ as a local repository, add the following to your DatingLibre `composer.json` fil
 the path to the bundle in your filesystem:
 
         "repositories": [
-        {
-            "type": "path",
-            "url": "/home/datinglibre/git/datinglibre-app-bundle",
-            "options": {
-                "symlink": true
+            {
+                "type": "path",
+                "url": "/home/datinglibre/git/datinglibre-app-bundle",
+                "options": {
+                    "symlink": true
+                }
             }
-        }
-    ]
+        ]
 
 Update your `composer.json` to use 
 
