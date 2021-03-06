@@ -133,6 +133,10 @@ Update your `composer.json` to use
 Then run `composer update`. Make source code changes in `datinglibre-app-bundle` and add Behat tests in the main DatingLibre 
 project, commit, and open PRs against the respective projects.
 
+## Architectural Design Record
+
+See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/)
+
 ## Deployment
 
 See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/).
