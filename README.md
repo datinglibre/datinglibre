@@ -145,6 +145,10 @@ See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/).
     
 See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/).
 
+## User management
+
+See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/).
+
 ## Credits
 
 The `countries.sql` `regions.sql` and `cities.sql` files were created by processing geographical data from [GeoNames](https://www.geonames.org/)
