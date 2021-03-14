@@ -9,7 +9,7 @@
         "ext-iconv": "*",
         "ext-json": "*",
         "aws/aws-sdk-php": "^3.140",
-        "datinglibre/datinglibre-app-bundle": "^0.10.2",
+        "datinglibre/datinglibre-app-bundle": "^0.11.0",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.1",
         "doctrine/doctrine-migrations-bundle": "^3.0",
