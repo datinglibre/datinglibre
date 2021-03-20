@@ -33,12 +33,13 @@ final class Version20200101000000 extends AbstractMigration
         $this->addSql('CREATE TABLE datinglibre.images (
     id UUID NOT NULL PRIMARY KEY,
     type TEXT NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
     secure_url TEXT,
     secure_url_expiry TIMESTAMP WITH TIME ZONE,
     is_profile BOOLEAN NOT NULL,
     user_id UUID REFERENCES datinglibre.users ON DELETE SET NULL,
-    state TEXT NOT NULL
+    state TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL
 );');
         // enforce one default profile image per user
         $this->addSql('CREATE UNIQUE INDEX profile_image ON datinglibre.images (user_id)
@@ -111,9 +112,9 @@ final class Version20200101000000 extends AbstractMigration
         $this->addSql('CREATE TABLE datinglibre.filters (
     user_id UUID NOT NULL REFERENCES datinglibre.users ON DELETE CASCADE,
     region_id UUID REFERENCES datinglibre.regions ON DELETE CASCADE,
-    distance integer CHECK (distance > 0),
-    min_age integer CHECK (min_age >= 18 AND min_age <= max_age),
-    max_age integer CHECK (max_age >= 18 AND max_age >= min_age)
+    distance INTEGER CHECK (distance > 0),
+    min_age INTEGER CHECK (min_age >= 18 AND min_age <= max_age),
+    max_age INTEGER CHECK (max_age >= 18 AND max_age >= min_age)
 )');
         $this->addSql('CREATE TABLE datinglibre.messages (
     id UUID NOT NULL PRIMARY KEY,
@@ -140,6 +141,31 @@ final class Version20200101000000 extends AbstractMigration
     type TEXT NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL
 );');
+
+        $this->addSql('CREATE TABLE datinglibre.events (
+    id UUID NOT NULL PRIMARY KEY,
+    user_id UUID REFERENCES datinglibre.users ON DELETE SET NULL,
+    name TEXT,
+    data JSONB,
+    sort_id BIGSERIAL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL 
+)');
+        $this->addSql('CREATE INDEX event_sort_order ON datinglibre.events(sort_id);');
+
+        // the provider_id is the payment provider's subscription ID
+        $this->addSql('CREATE TABLE datinglibre.subscriptions (
+    id UUID NOT NULL PRIMARY KEY,
+    user_id UUID REFERENCES datinglibre.users ON DELETE SET NULL,
+    provider TEXT NOT NULL,
+    provider_id TEXT NOT NULL,
+    state TEXT NOT NULL,
+    renewal_date DATE NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    UNIQUE (provider, provider_id)
+)');
+
+        $this->addSql('CREATE INDEX subscriptions_provider_id ON datinglibre.subscriptions(provider, provider_id);');
     }
 
     public function down(Schema $schema) : void
@@ -158,5 +184,7 @@ final class Version20200101000000 extends AbstractMigration
         $this->addSql('DROP TABLE datinglibre.tokens');
         $this->addSql('DROP TABLE datinglibre.emails');
         $this->addSql('DROP TABLE datinglibre.filters');
+        $this->addSql('DROP TABLE datinglibre.events');
+        $this->addSql('DROP TABLE datinglibre.subscriptions');
     }
 }

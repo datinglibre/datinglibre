@@ -8,7 +8,7 @@ Feature:
             | newuser@example.com | blue, square | yellow, circle | London | 30  |
         And the user "newuser@example.com" has uploaded a profile image
         And I am logged in with "newuser@example.com"
-        When I go to "/user/delete"
+        When I go to "/account/delete"
         Then I should see "Confirm your password below to permanently delete your account"
         And I fill in "delete_account_form_password_first" with "password"
         And I fill in "delete_account_form_password_second" with "password"

@@ -11,6 +11,8 @@ default:
                 - DatingLibre\AppBundle\Behat\MessageContext
                 - DatingLibre\AppBundle\Behat\ModerateContext
                 - DatingLibre\AppBundle\Behat\ImageContext
+                - DatingLibre\AppBundle\Behat\SubscriptionContext
+                - DatingLibre\AppBundle\Behat\CcBillContext
                 - Behat\MinkExtension\Context\MinkContext
 
     extensions:

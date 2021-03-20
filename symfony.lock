@@ -1,4 +1,10 @@
 {
+    "async-aws/core": {
+        "version": "1.9.1"
+    },
+    "async-aws/ses": {
+        "version": "1.4.0"
+    },
     "aws/aws-sdk-php": {
         "version": "3.140.4"
     },
@@ -47,6 +53,9 @@
     "composer/xdebug-handler": {
         "version": "1.4.3"
     },
+    "datinglibre/datinglibre-ccbill-bundle": {
+        "version": "v0.1.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -73,6 +82,9 @@
     },
     "doctrine/dbal": {
         "version": "v2.9.2"
+    },
+    "doctrine/deprecations": {
+        "version": "v0.5.3"
     },
     "doctrine/doctrine-bundle": {
         "version": "1.6",
@@ -655,6 +667,9 @@
     },
     "twig/extra-bundle": {
         "version": "v3.1.1"
+    },
+    "twig/intl-extra": {
+        "version": "v3.3.0"
     },
     "twig/string-extra": {
         "version": "v3.1.1"
