@@ -22,7 +22,7 @@ services:
       MH_STORAGE: memory
   s3ninja:
     restart: always
-    image: scireum/s3-ninja:6.4
+    image: scireum/s3-ninja:7.0
     ports:
     - "9444:9000"
   redis:
