@@ -47,11 +47,17 @@
     "behat/transliterator": {
         "version": "v1.2.0"
     },
+    "composer/package-versions-deprecated": {
+        "version": "1.11.99.1"
+    },
     "composer/semver": {
         "version": "1.7.1"
     },
     "composer/xdebug-handler": {
         "version": "1.4.3"
+    },
+    "datinglibre/datinglibre-app-bundle": {
+        "version": "v0.13.0"
     },
     "datinglibre/datinglibre-ccbill-bundle": {
         "version": "v0.1.0"
