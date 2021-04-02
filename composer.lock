@@ -295,16 +295,16 @@
         },
         {
             "name": "datinglibre/datinglibre-app-bundle",
-            "version": "v0.11.2",
+            "version": "v0.11.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/datinglibre/datinglibre-app-bundle.git",
-                "reference": "7896039a0038c5c779c452836e48d4e3bef01fa1"
+                "reference": "402eccfb7f080920a89f5fa4712c7ac12cdf32a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/datinglibre/datinglibre-app-bundle/zipball/7896039a0038c5c779c452836e48d4e3bef01fa1",
-                "reference": "7896039a0038c5c779c452836e48d4e3bef01fa1",
+                "url": "https://api.github.com/repos/datinglibre/datinglibre-app-bundle/zipball/402eccfb7f080920a89f5fa4712c7ac12cdf32a8",
+                "reference": "402eccfb7f080920a89f5fa4712c7ac12cdf32a8",
                 "shasum": ""
             },
             "require": {
@@ -366,9 +366,9 @@
             "description": "The core overridable code of DatingLibre",
             "support": {
                 "issues": "https://github.com/datinglibre/datinglibre-app-bundle/issues",
-                "source": "https://github.com/datinglibre/datinglibre-app-bundle/tree/v0.11.2"
+                "source": "https://github.com/datinglibre/datinglibre-app-bundle/tree/v0.11.3"
             },
-            "time": "2021-04-02T10:48:13+00:00"
+            "time": "2021-04-02T13:03:36+00:00"
         },
         {
             "name": "datinglibre/datinglibre-ccbill-bundle",
