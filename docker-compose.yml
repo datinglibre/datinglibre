@@ -25,9 +25,3 @@ services:
     image: scireum/s3-ninja:7.0
     ports:
     - "9444:9000"
-  redis:
-    restart: always
-    image: redis:4-alpine
-    ports:
-    - "6379:6379"
-
