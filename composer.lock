@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e67c17ddbfc00ab911b254d4550298aa",
+    "content-hash": "8ee80871f0998deac205999fb9998065",
     "packages": [
         {
             "name": "async-aws/core",
@@ -295,21 +295,21 @@
         },
         {
             "name": "datinglibre/datinglibre-app-bundle",
-            "version": "v0.13.0",
+            "version": "v0.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/datinglibre/datinglibre-app-bundle.git",
-                "reference": "3f8f6edf636292defe48bf7d003abe7cfc78515b"
+                "reference": "615b221b195a5d3e1f0908cd709af79f69c82268"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/datinglibre/datinglibre-app-bundle/zipball/3f8f6edf636292defe48bf7d003abe7cfc78515b",
-                "reference": "3f8f6edf636292defe48bf7d003abe7cfc78515b",
+                "url": "https://api.github.com/repos/datinglibre/datinglibre-app-bundle/zipball/615b221b195a5d3e1f0908cd709af79f69c82268",
+                "reference": "615b221b195a5d3e1f0908cd709af79f69c82268",
                 "shasum": ""
             },
             "require": {
                 "aws/aws-sdk-php": "3.174.*",
-                "datinglibre/datinglibre-ccbill-bundle": "0.2.*",
+                "datinglibre/datinglibre-ccbill-bundle": "0.3.*",
                 "doctrine/annotations": "^1.0",
                 "doctrine/doctrine-bundle": "^2.1",
                 "doctrine/doctrine-migrations-bundle": "^3.0",
@@ -368,40 +368,35 @@
             "description": "The core overridable code of DatingLibre",
             "support": {
                 "issues": "https://github.com/datinglibre/datinglibre-app-bundle/issues",
-                "source": "https://github.com/datinglibre/datinglibre-app-bundle/tree/v0.13.0"
+                "source": "https://github.com/datinglibre/datinglibre-app-bundle/tree/v0.14.0"
             },
-            "time": "2021-04-02T19:02:12+00:00"
+            "time": "2021-04-05T18:20:00+00:00"
         },
         {
             "name": "datinglibre/datinglibre-ccbill-bundle",
-            "version": "v0.2.0",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/datinglibre/datinglibre-ccbill-bundle.git",
-                "reference": "e55ab164567174378cc501ce8f3c471ee46bc622"
+                "reference": "f6d7749d51fa3679745f9081efcd1da985fadc4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/datinglibre/datinglibre-ccbill-bundle/zipball/e55ab164567174378cc501ce8f3c471ee46bc622",
-                "reference": "e55ab164567174378cc501ce8f3c471ee46bc622",
+                "url": "https://api.github.com/repos/datinglibre/datinglibre-ccbill-bundle/zipball/f6d7749d51fa3679745f9081efcd1da985fadc4a",
+                "reference": "f6d7749d51fa3679745f9081efcd1da985fadc4a",
                 "shasum": ""
             },
             "require": {
-                "ext-json": "*",
-                "psr/container": "^1.0",
-                "symfony/console": "5.2.*",
-                "symfony/dotenv": "5.2.*",
-                "symfony/flex": "^1.11",
-                "symfony/framework-bundle": "5.2.*"
+                "ext-json": "*"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.16",
-                "symfony/phpunit-bridge": "^5.2"
+                "phpunit/phpunit": "^9.5"
             },
-            "type": "symfony-bundle",
+            "type": "library",
             "autoload": {
                 "psr-4": {
-                    "DatingLibre\\CcBillBundle\\": "src/"
+                    "DatingLibre\\CcBillEventParser\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -414,12 +409,12 @@
                     "email": "admin@datinglibre.com"
                 }
             ],
-            "description": "CCBill Webhook bundle",
+            "description": "CCBill Webhook event parser",
             "support": {
                 "issues": "https://github.com/datinglibre/datinglibre-ccbill-bundle/issues",
-                "source": "https://github.com/datinglibre/datinglibre-ccbill-bundle/tree/v0.2.0"
+                "source": "https://github.com/datinglibre/datinglibre-ccbill-bundle/tree/v0.3.0"
             },
-            "time": "2021-04-02T08:10:51+00:00"
+            "time": "2021-04-05T16:27:01+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -901,16 +896,16 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "8b922578bdee2243a26202b13df795e170efaef8"
+                "reference": "a08bc3b4d8567cdff05e89b272ba1e06e9d71c21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/8b922578bdee2243a26202b13df795e170efaef8",
-                "reference": "8b922578bdee2243a26202b13df795e170efaef8",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/a08bc3b4d8567cdff05e89b272ba1e06e9d71c21",
+                "reference": "a08bc3b4d8567cdff05e89b272ba1e06e9d71c21",
                 "shasum": ""
             },
             "require": {
@@ -922,7 +917,7 @@
                 "symfony/config": "^4.3.3|^5.0",
                 "symfony/console": "^3.4.30|^4.3.3|^5.0",
                 "symfony/dependency-injection": "^4.3.3|^5.0",
-                "symfony/doctrine-bridge": "^4.3.7|^5.0",
+                "symfony/doctrine-bridge": "^4.4.7|^5.0",
                 "symfony/framework-bundle": "^3.4.30|^4.3.3|^5.0",
                 "symfony/service-contracts": "^1.1.1|^2.0"
             },
@@ -935,25 +930,25 @@
                 "doctrine/orm": "^2.6",
                 "friendsofphp/proxy-manager-lts": "^1.0",
                 "phpunit/phpunit": "^7.5 || ^8.0 || ^9.3",
-                "symfony/phpunit-bridge": "^4.2",
+                "psalm/plugin-phpunit": "^0.15.1",
+                "psalm/plugin-symfony": "^2.2.4",
+                "symfony/phpunit-bridge": "^5.2",
                 "symfony/property-info": "^4.3.3|^5.0",
                 "symfony/proxy-manager-bridge": "^3.4|^4.3.3|^5.0",
+                "symfony/security-bundle": "^4.4|5.0",
                 "symfony/twig-bridge": "^3.4.30|^4.3.3|^5.0",
                 "symfony/validator": "^3.4.30|^4.3.3|^5.0",
                 "symfony/web-profiler-bundle": "^3.4.30|^4.3.3|^5.0",
                 "symfony/yaml": "^3.4.30|^4.3.3|^5.0",
-                "twig/twig": "^1.34|^2.12|^3.0"
+                "twig/twig": "^1.34|^2.12|^3.0",
+                "vimeo/psalm": "^4.7"
             },
             "suggest": {
                 "doctrine/orm": "The Doctrine ORM integration is optional in the bundle.",
+                "ext-pdo": "*",
                 "symfony/web-profiler-bundle": "To use the data collector."
             },
             "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.3.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Doctrine\\Bundle\\DoctrineBundle\\": ""
@@ -991,7 +986,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/DoctrineBundle/issues",
-                "source": "https://github.com/doctrine/DoctrineBundle/tree/2.3.0"
+                "source": "https://github.com/doctrine/DoctrineBundle/tree/2.3.1"
             },
             "funding": [
                 {
@@ -1007,7 +1002,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-03-16T16:24:04+00:00"
+            "time": "2021-04-05T14:21:02+00:00"
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",

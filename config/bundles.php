@@ -14,6 +14,5 @@ return [
     FriendsOfBehat\SymfonyExtension\Bundle\FriendsOfBehatSymfonyExtensionBundle::class => ['test' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
-    DatingLibre\AppBundle\DatingLibreAppBundle::class => ['all' => true],
-    DatingLibre\CcBillBundle\DatingLibreCcBillBundle::class => ['all' => true],
+    DatingLibre\AppBundle\DatingLibreAppBundle::class => ['all' => true]
 ];

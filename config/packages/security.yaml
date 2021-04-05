@@ -34,6 +34,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/ccbill, roles: IS_AUTHENTICATED_ANONYMOUSLY, ips: [ 64.38.212.1/24, 64.38.215.1/24, 64.38.240.1/24, 64.38.241.1/24 ] }
         - { path: ^/moderator, roles: [ROLE_ADMIN, ROLE_MODERATOR]}
         - { path: ^/admin, roles: [ROLE_ADMIN]}
         - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
