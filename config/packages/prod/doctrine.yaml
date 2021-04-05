@@ -3,9 +3,8 @@ doctrine:
         connections:
             default:
                 driver: 'pdo_pgsql'
-                sslmode: 'require'
-                sslcert: '/etc/datinglibre/database.crt'
-                sslkey: '/etc/datinglibre/database.key'
+                sslmode: 'verify-ca'
+                sslrootcert: '/home/datinglibre/.postgresql/root.crt'
     orm:
         auto_generate_proxy_classes: false
         metadata_cache_driver:

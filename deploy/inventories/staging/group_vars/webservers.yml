@@ -1,10 +1,15 @@
 domain_name: datinglibre.local
 mailer_dsn: smtp://192.168.0.101:1025
-database_certificate_path: /etc/datinglibre/database.crt
-database_key_path: /etc/datinglibre/database.key
-purge_users_params: NOT_ENABLED 24
-# used when we cannot go via pgbouncer as we require a session
-psql_direct_connection: PGSSLCERT={{ database_certificate_path }} PGSSLKEY={{ database_key_path }} PGPASSWORD={{ database_password }} psql -U datinglibre -p5432 -h {{ database_host }} datinglibre
+database_root_certificate_path: /home/datinglibre/.postgresql/root.crt
+purge_users_parameters: NOT_ENABLED 24
+app_secret: replacethissecret
+postgres_port: 5432
+pgbouncer_port: 6543
+# used when we cannot go via pgbouncer as we require a session (pgbouncer is configured for transactions, not sessions)
+psql_direct_connection: psql "sslmode=verify-ca sslrootcert={{ database_root_certificate_path }} password={{ database_password }} dbname=datinglibre host={{ database_host }} port={{ postgres_port }}"
+pgbouncer_connection_url: postgresql://datinglibre:{{ database_password }}@{{ database_host }}:{{ pgbouncer_port }}/datinglibre
+datinglibre_certificate_path: /etc/ssl/certs/datinglibre.crt
+datinglibre_key_path: /etc/ssl/private/datinglibre.key
 datinglibre_certificate: |
   -----BEGIN CERTIFICATE-----
   MIIFozCCA4ugAwIBAgIUNckvQiWxkztBFy6PcNw5AzZ0n0owDQYJKoZIhvcNAQEL

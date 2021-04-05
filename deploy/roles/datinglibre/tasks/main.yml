@@ -50,7 +50,7 @@
     owner: datinglibre
     group: www-data
 
-- name: Create datinglibre config direction
+- name: Create datinglibre config directory
   become: true
   file:
     path: /etc/datinglibre
@@ -59,23 +59,23 @@
     group: www-data
     mode: 0750
 
-- name: Copy datinglibre database certificate
+- name: Create datinglibre .postgresql directory
   become: true
-  copy:
-    content: "{{ database_certificate }}"
-    dest: "{{ database_certificate_path }}"
+  file:
+    path: /home/datinglibre/.postgresql
+    state: directory
     owner: datinglibre
     group: www-data
     mode: 0750
 
-- name: Copy datinglibre database key
+- name: Copy datinglibre root database certificate
   become: true
   copy:
-    content: "{{ database_key }}"
-    dest: "{{ database_key_path }}"
+    content: "{{ database_root_certificate }}"
+    dest: "{{ database_root_certificate_path }}"
     owner: datinglibre
     group: www-data
-    mode: 0600
+    mode: 0750
 
 - name: Copy datinglibre SSL certificates
   become: true
@@ -84,8 +84,8 @@
     dest: "{{ item.dest }}"
     mode: "{{ item.mode }}"
   with_items:
-    - { content: "{{ datinglibre_certificate }}", dest: "/etc/ssl/certs/datinglibre.crt", mode: 644 }
-    - { content: "{{ datinglibre_key }}", dest: "/etc/ssl/private/datinglibre.key", mode: 700 }
+    - { content: "{{ datinglibre_certificate }}", dest: "{{ datinglibre_certificate_path }}", mode: 644 }
+    - { content: "{{ datinglibre_key }}", dest: "{{ datinglibre_key_path }}", mode: 700 }
   tags: ssl
 
 - name: Deploy datinglibre src
@@ -301,7 +301,7 @@
   cron:
     name: "Purge users"
     minute: "*/5"
-    job: "/var/www/datinglibre/bin/console app:users:purge {{ purge_users_params }}"
+    job: "/var/www/datinglibre/bin/console app:users:purge {{ purge_users_parameters }}"
     user: datinglibre
 
 - name: Install refresh expired secure image urls cron
