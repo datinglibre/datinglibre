@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ee80871f0998deac205999fb9998065",
+    "content-hash": "2f3711fb9c74ce33671cb7dd62015301",
     "packages": [
         {
             "name": "async-aws/core",
@@ -295,16 +295,16 @@
         },
         {
             "name": "datinglibre/datinglibre-app-bundle",
-            "version": "v0.14.0",
+            "version": "v0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/datinglibre/datinglibre-app-bundle.git",
-                "reference": "615b221b195a5d3e1f0908cd709af79f69c82268"
+                "reference": "38bc48f2bd518055e2be417aada8fbba72c9649c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/datinglibre/datinglibre-app-bundle/zipball/615b221b195a5d3e1f0908cd709af79f69c82268",
-                "reference": "615b221b195a5d3e1f0908cd709af79f69c82268",
+                "url": "https://api.github.com/repos/datinglibre/datinglibre-app-bundle/zipball/38bc48f2bd518055e2be417aada8fbba72c9649c",
+                "reference": "38bc48f2bd518055e2be417aada8fbba72c9649c",
                 "shasum": ""
             },
             "require": {
@@ -318,7 +318,6 @@
                 "ext-json": "*",
                 "gumlet/php-image-resize": "^2.0",
                 "martin-georgiev/postgresql-for-doctrine": "^1.5",
-                "mlocati/ip-lib": "^1.13",
                 "psr/container": "^1.0",
                 "symfony/amazon-mailer": "5.2.*",
                 "symfony/console": "5.2.*",
@@ -368,9 +367,9 @@
             "description": "The core overridable code of DatingLibre",
             "support": {
                 "issues": "https://github.com/datinglibre/datinglibre-app-bundle/issues",
-                "source": "https://github.com/datinglibre/datinglibre-app-bundle/tree/v0.14.0"
+                "source": "https://github.com/datinglibre/datinglibre-app-bundle/tree/v0.15.0"
             },
-            "time": "2021-04-05T18:20:00+00:00"
+            "time": "2021-04-06T17:14:30+00:00"
         },
         {
             "name": "datinglibre/datinglibre-ccbill-bundle",
@@ -1006,27 +1005,28 @@
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
-            "version": "3.0.2",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineMigrationsBundle.git",
-                "reference": "b8de89fe811e62f1dea8cf9aafda0ea45ca6f1f3"
+                "reference": "d1248471734c62b94baac36cb18e9c635775eeb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/b8de89fe811e62f1dea8cf9aafda0ea45ca6f1f3",
-                "reference": "b8de89fe811e62f1dea8cf9aafda0ea45ca6f1f3",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/d1248471734c62b94baac36cb18e9c635775eeb0",
+                "reference": "d1248471734c62b94baac36cb18e9c635775eeb0",
                 "shasum": ""
             },
             "require": {
                 "doctrine/doctrine-bundle": "~1.0|~2.0",
-                "doctrine/migrations": "~3.0",
+                "doctrine/migrations": "^3.1",
                 "php": "^7.2|^8.0",
                 "symfony/framework-bundle": "~3.4|~4.0|~5.0"
             },
             "require-dev": {
                 "doctrine/coding-standard": "^8.0",
                 "doctrine/orm": "^2.6",
+                "doctrine/persistence": "^1.3||^2.0",
                 "phpstan/phpstan": "^0.12",
                 "phpstan/phpstan-deprecation-rules": "^0.12",
                 "phpstan/phpstan-phpunit": "^0.12",
@@ -1034,11 +1034,6 @@
                 "phpunit/phpunit": "^7.0|^8.0|^9.0"
             },
             "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Doctrine\\Bundle\\MigrationsBundle\\": ""
@@ -1074,7 +1069,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/DoctrineMigrationsBundle/issues",
-                "source": "https://github.com/doctrine/DoctrineMigrationsBundle/tree/3.0.2"
+                "source": "https://github.com/doctrine/DoctrineMigrationsBundle/tree/3.1.0"
             },
             "funding": [
                 {
@@ -1090,7 +1085,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-23T15:13:22+00:00"
+            "time": "2021-04-05T20:45:07+00:00"
         },
         {
             "name": "doctrine/event-manager",
@@ -1539,16 +1534,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "2.8.3",
+            "version": "2.8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "657a30f8ceef2a78c2ff36a9fe6c6a6717c1c448"
+                "reference": "a588555ecd837b8d7e89355d9a13902e54d529c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/657a30f8ceef2a78c2ff36a9fe6c6a6717c1c448",
-                "reference": "657a30f8ceef2a78c2ff36a9fe6c6a6717c1c448",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/a588555ecd837b8d7e89355d9a13902e54d529c7",
+                "reference": "a588555ecd837b8d7e89355d9a13902e54d529c7",
                 "shasum": ""
             },
             "require": {
@@ -1620,9 +1615,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/2.8.3"
+                "source": "https://github.com/doctrine/orm/tree/2.8.4"
             },
-            "time": "2021-04-01T21:16:53+00:00"
+            "time": "2021-04-05T18:38:36+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -2448,78 +2443,6 @@
                 }
             ],
             "time": "2021-01-24T13:21:48+00:00"
-        },
-        {
-            "name": "mlocati/ip-lib",
-            "version": "1.14.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mlocati/ip-lib.git",
-                "reference": "882bc0e115970a536b13bcfa59f312783fce08c8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mlocati/ip-lib/zipball/882bc0e115970a536b13bcfa59f312783fce08c8",
-                "reference": "882bc0e115970a536b13bcfa59f312783fce08c8",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "ext-pdo_sqlite": "*",
-                "phpunit/dbunit": "^1.4 || ^2 || ^3 || ^4",
-                "phpunit/phpunit": "^4.8 || ^5.7 || ^6.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "IPLib\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michele Locati",
-                    "email": "mlocati@gmail.com",
-                    "homepage": "https://github.com/mlocati",
-                    "role": "Author"
-                }
-            ],
-            "description": "Handle IPv4, IPv6 addresses and ranges",
-            "homepage": "https://github.com/mlocati/ip-lib",
-            "keywords": [
-                "IP",
-                "address",
-                "addresses",
-                "ipv4",
-                "ipv6",
-                "manage",
-                "managing",
-                "matching",
-                "network",
-                "networking",
-                "range",
-                "subnet"
-            ],
-            "support": {
-                "issues": "https://github.com/mlocati/ip-lib/issues",
-                "source": "https://github.com/mlocati/ip-lib/tree/1.14.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sponsors/mlocati",
-                    "type": "github"
-                },
-                {
-                    "url": "https://paypal.me/mlocati",
-                    "type": "other"
-                }
-            ],
-            "time": "2020-12-31T11:30:02+00:00"
         },
         {
             "name": "monolog/monolog",
