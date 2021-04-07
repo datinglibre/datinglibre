@@ -56,11 +56,11 @@
     "composer/xdebug-handler": {
         "version": "1.4.3"
     },
+    "datinglibre/ccbill": {
+        "version": "v0.5.0"
+    },
     "datinglibre/datinglibre-app-bundle": {
         "version": "v0.13.0"
-    },
-    "datinglibre/datinglibre-ccbill-bundle": {
-        "version": "v0.1.0"
     },
     "doctrine/annotations": {
         "version": "1.0",

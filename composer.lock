@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2f3711fb9c74ce33671cb7dd62015301",
+    "content-hash": "f4ff7819e2f75e2d25ce4e7c4cb80ee1",
     "packages": [
         {
             "name": "async-aws/core",
@@ -294,22 +294,66 @@
             "time": "2020-11-11T10:22:58+00:00"
         },
         {
-            "name": "datinglibre/datinglibre-app-bundle",
-            "version": "v0.15.1",
+            "name": "datinglibre/ccbill",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/datinglibre/datinglibre-app-bundle.git",
-                "reference": "1f51fff76af267f774726a829bb51f1d95c134fd"
+                "url": "https://github.com/datinglibre/ccbill.git",
+                "reference": "def7604f02396f1f4fcac1bd5156bf1217651bbb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/datinglibre/datinglibre-app-bundle/zipball/1f51fff76af267f774726a829bb51f1d95c134fd",
-                "reference": "1f51fff76af267f774726a829bb51f1d95c134fd",
+                "url": "https://api.github.com/repos/datinglibre/ccbill/zipball/def7604f02396f1f4fcac1bd5156bf1217651bbb",
+                "reference": "def7604f02396f1f4fcac1bd5156bf1217651bbb",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DatingLibre\\CcBill\\": "src/CcBill"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dating Libre",
+                    "email": "admin@datinglibre.com"
+                }
+            ],
+            "description": "DatingLibre CCBill library (unoffical)",
+            "support": {
+                "issues": "https://github.com/datinglibre/ccbill/issues",
+                "source": "https://github.com/datinglibre/ccbill/tree/v0.5.0"
+            },
+            "time": "2021-04-07T11:54:04+00:00"
+        },
+        {
+            "name": "datinglibre/datinglibre-app-bundle",
+            "version": "v0.15.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/datinglibre/datinglibre-app-bundle.git",
+                "reference": "403e8c1e207e3689b1b8889cac2b8494cdffa26d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/datinglibre/datinglibre-app-bundle/zipball/403e8c1e207e3689b1b8889cac2b8494cdffa26d",
+                "reference": "403e8c1e207e3689b1b8889cac2b8494cdffa26d",
                 "shasum": ""
             },
             "require": {
                 "aws/aws-sdk-php": "3.174.*",
-                "datinglibre/datinglibre-ccbill-bundle": "0.3.*",
+                "datinglibre/ccbill": "0.5.*",
                 "doctrine/annotations": "^1.0",
                 "doctrine/doctrine-bundle": "^2.1",
                 "doctrine/doctrine-migrations-bundle": "^3.0",
@@ -366,53 +410,9 @@
             "description": "The core overridable code of DatingLibre",
             "support": {
                 "issues": "https://github.com/datinglibre/datinglibre-app-bundle/issues",
-                "source": "https://github.com/datinglibre/datinglibre-app-bundle/tree/v0.15.1"
+                "source": "https://github.com/datinglibre/datinglibre-app-bundle/tree/v0.15.2"
             },
-            "time": "2021-04-06T18:02:58+00:00"
-        },
-        {
-            "name": "datinglibre/datinglibre-ccbill-bundle",
-            "version": "v0.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/datinglibre/datinglibre-ccbill-bundle.git",
-                "reference": "f6d7749d51fa3679745f9081efcd1da985fadc4a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/datinglibre/datinglibre-ccbill-bundle/zipball/f6d7749d51fa3679745f9081efcd1da985fadc4a",
-                "reference": "f6d7749d51fa3679745f9081efcd1da985fadc4a",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16",
-                "phpunit/phpunit": "^9.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "DatingLibre\\CcBillEventParser\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Dating Libre",
-                    "email": "admin@datinglibre.com"
-                }
-            ],
-            "description": "CCBill Webhook event parser",
-            "support": {
-                "issues": "https://github.com/datinglibre/datinglibre-ccbill-bundle/issues",
-                "source": "https://github.com/datinglibre/datinglibre-ccbill-bundle/tree/v0.3.0"
-            },
-            "time": "2021-04-05T16:27:01+00:00"
+            "time": "2021-04-07T12:07:10+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -9126,16 +9126,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v2.18.4",
+            "version": "v2.18.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "06f764e3cb6d60822d8f5135205f9d32b5508a31"
+                "reference": "e0f6d05c8b157f50029ca6c65c19ed2694f475bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/06f764e3cb6d60822d8f5135205f9d32b5508a31",
-                "reference": "06f764e3cb6d60822d8f5135205f9d32b5508a31",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/e0f6d05c8b157f50029ca6c65c19ed2694f475bf",
+                "reference": "e0f6d05c8b157f50029ca6c65c19ed2694f475bf",
                 "shasum": ""
             },
             "require": {
@@ -9218,7 +9218,7 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/issues",
-                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v2.18.4"
+                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v2.18.5"
             },
             "funding": [
                 {
@@ -9226,7 +9226,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-20T14:52:33+00:00"
+            "time": "2021-04-06T18:37:33+00:00"
         },
         {
             "name": "instaclick/php-webdriver",
