@@ -17,6 +17,14 @@ overridden to build a custom website: overriding functionality as required, whil
   
 All PRs should be opened against this reference repository and/or the [datinglibre-app-bundle](https://github.com/datinglibre/datinglibre-app-bundle).
 
+## Development environment setup
+
+See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/Development).
+
+## Deployment
+
+See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/Deploy-production).
+
 ## Documentation
 
 See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/).
@@ -36,26 +44,6 @@ See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/).
 - Delete account.
 
 ![Image showing profile edit page](https://raw.githubusercontent.com/datinglibre/datinglibre.github.io/main/profile.png "Profile edit page")
-
-## Development
-
-See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/Development).
-
-## Architecture Decision Record
-
-See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/).
-
-## Deployment
-
-See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/).
-
-## Customization
-    
-See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/).
-
-## User management
-
-See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/).
 
 ## Credits
 

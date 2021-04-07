@@ -8,10 +8,12 @@ default:
                 - DatingLibre\AppBundle\Behat\ProfileImageContext
                 - DatingLibre\AppBundle\Behat\SearchContext
                 - DatingLibre\AppBundle\Behat\BlockContext
+                - DatingLibre\AppBundle\Behat\ReportContext
                 - DatingLibre\AppBundle\Behat\MessageContext
                 - DatingLibre\AppBundle\Behat\ModerateContext
                 - DatingLibre\AppBundle\Behat\ImageContext
                 - DatingLibre\AppBundle\Behat\SubscriptionContext
+                - DatingLibre\AppBundle\Behat\SuspensionContext
                 - DatingLibre\AppBundle\Behat\CcBillContext
                 - Behat\MinkExtension\Context\MinkContext
 

@@ -43,10 +43,9 @@ Feature:
         Then I should see "westminster_yellow"
         And I follow "westminster_yellow"
         And I follow "Block"
-        And I select "No reason" from "block_form_reason"
         And I press "Block"
         Then I should be on "/search"
-        And I should see "Successfully blocked user"
+        And I should see "Blocked user"
         And I should not see "westminster_yellow"
 
     @ui @block

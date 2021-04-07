@@ -217,7 +217,7 @@
     mode: 0770
   with_items:
     - { src: "../templates/categories_and_attributes.sql.j2", dest: "/tmp/categories_and_attributes.sql" }
-    - { src: "../templates/block_reasons.sql.j2", dest: "/tmp/block_reasons.sql" }
+    - { src: "../templates/report_reasons.sql.j2", dest: "/tmp/report_reasons.sql" }
 
 
 - name: Insert categories and attributes into database
@@ -227,21 +227,21 @@
   args:
     executable: /bin/bash
 
-- name: Insert block reasons into database
+- name: Insert report reasons into database
   become: true
   become_user: datinglibre
-  shell: /var/www/datinglibre/bin/console doctrine:query:sql "$(< /tmp/block_reasons.sql)"
+  shell: /var/www/datinglibre/bin/console doctrine:query:sql "$(< /tmp/report_reasons.sql)"
   args:
     executable: /bin/bash
 
-- name: Cleanup categories, attributes, block reasons
+- name: Cleanup categories, attributes, report reasons
   become: true
   file:
     path: "{{ item }}"
     state: absent
   with_items:
     - "/tmp/categories_and_attributes.sql"
-    - "/tmp/block_reasons.sql"
+    - "/tmp/report_reasons.sql"
 
 - name: Copy locations
   become: true
