@@ -19,6 +19,7 @@ All PRs should be opened against this reference repository and/or the [datinglib
 
 ## Features
 
+- [Automated deployment using Ansible](https://github.com/datinglibre/DatingLibre/wiki/Deploy-production)
 - Register account, with a private reminder if an email address already exists. 
 - Confirm account through email.
 - Reset password.
@@ -135,7 +136,7 @@ project, commit, and open PRs against the respective projects.
 
 ## Architectural Design Record
 
-See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/)
+See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/).
 
 ## Deployment
 
