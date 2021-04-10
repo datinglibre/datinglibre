@@ -41,7 +41,7 @@ See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/).
 
 See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/Development).
 
-## Architectural Design Record
+## Architecture Decision Record
 
 See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/).
 
