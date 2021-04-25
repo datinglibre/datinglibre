@@ -40,6 +40,9 @@ See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/).
 - Search by radius and/or region, through a provided [dataset](https://github.com/datinglibre/datinglibre#credits) of the latitudes and longitudes of the world's significant towns and cities.
 - Browse through profiles, using keyset pagination.
 - Block users.
+- Report users.
+- Moderate user reports.
+- Suspend users.  
 - Moderate profile images.
 - Delete account.
 
