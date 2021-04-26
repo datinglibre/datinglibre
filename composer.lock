@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7590b0dac8493ab2bb97b4da589eab3e",
+    "content-hash": "4d00dcdf0013527f67c6b1594175ed3f",
     "packages": [
         {
             "name": "async-aws/core",
@@ -339,16 +339,16 @@
         },
         {
             "name": "datinglibre/datinglibre-app-bundle",
-            "version": "v0.18.0",
+            "version": "v0.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/datinglibre/datinglibre-app-bundle.git",
-                "reference": "25ec8bf3f63f78c2922a342ef07871e2f15f7193"
+                "reference": "e093a9d81abe3144cd9e71b5bf53a64caf2ca006"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/datinglibre/datinglibre-app-bundle/zipball/25ec8bf3f63f78c2922a342ef07871e2f15f7193",
-                "reference": "25ec8bf3f63f78c2922a342ef07871e2f15f7193",
+                "url": "https://api.github.com/repos/datinglibre/datinglibre-app-bundle/zipball/e093a9d81abe3144cd9e71b5bf53a64caf2ca006",
+                "reference": "e093a9d81abe3144cd9e71b5bf53a64caf2ca006",
                 "shasum": ""
             },
             "require": {
@@ -410,9 +410,9 @@
             "description": "The core overridable code of DatingLibre",
             "support": {
                 "issues": "https://github.com/datinglibre/datinglibre-app-bundle/issues",
-                "source": "https://github.com/datinglibre/datinglibre-app-bundle/tree/v0.18.0"
+                "source": "https://github.com/datinglibre/datinglibre-app-bundle/tree/v0.18.1"
             },
-            "time": "2021-04-25T15:42:14+00:00"
+            "time": "2021-04-26T19:22:31+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -2093,16 +2093,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.8.1",
+            "version": "1.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "35ea11d335fd638b5882ff1725228b3d35496ab1"
+                "reference": "dc960a912984efb74d0a90222870c72c87f10c91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/35ea11d335fd638b5882ff1725228b3d35496ab1",
-                "reference": "35ea11d335fd638b5882ff1725228b3d35496ab1",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/dc960a912984efb74d0a90222870c72c87f10c91",
+                "reference": "dc960a912984efb74d0a90222870c72c87f10c91",
                 "shasum": ""
             },
             "require": {
@@ -2162,9 +2162,9 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/1.8.1"
+                "source": "https://github.com/guzzle/psr7/tree/1.8.2"
             },
-            "time": "2021-03-21T16:25:00+00:00"
+            "time": "2021-04-26T09:17:50+00:00"
         },
         {
             "name": "laminas/laminas-code",
