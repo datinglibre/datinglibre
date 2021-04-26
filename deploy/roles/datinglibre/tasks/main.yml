@@ -217,8 +217,6 @@
     mode: 0770
   with_items:
     - { src: "../templates/categories_and_attributes.sql.j2", dest: "/tmp/categories_and_attributes.sql" }
-    - { src: "../templates/report_reasons.sql.j2", dest: "/tmp/report_reasons.sql" }
-
 
 - name: Insert categories and attributes into database
   become: true
@@ -227,21 +225,13 @@
   args:
     executable: /bin/bash
 
-- name: Insert report reasons into database
-  become: true
-  become_user: datinglibre
-  shell: /var/www/datinglibre/bin/console doctrine:query:sql "$(< /tmp/report_reasons.sql)"
-  args:
-    executable: /bin/bash
-
-- name: Cleanup categories, attributes, report reasons
+- name: Cleanup categories, attributes
   become: true
   file:
     path: "{{ item }}"
     state: absent
   with_items:
     - "/tmp/categories_and_attributes.sql"
-    - "/tmp/report_reasons.sql"
 
 - name: Copy locations
   become: true
