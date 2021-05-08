@@ -132,16 +132,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.174.3",
+            "version": "3.180.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "d58a350b23810a3930f432364af2d7589cf672b3"
+                "reference": "948a4defbe2a571cc4460725015b8e98b7060f2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d58a350b23810a3930f432364af2d7589cf672b3",
-                "reference": "d58a350b23810a3930f432364af2d7589cf672b3",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/948a4defbe2a571cc4460725015b8e98b7060f2d",
+                "reference": "948a4defbe2a571cc4460725015b8e98b7060f2d",
                 "shasum": ""
             },
             "require": {
@@ -216,9 +216,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.174.3"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.180.5"
             },
-            "time": "2021-03-18T18:16:53+00:00"
+            "time": "2021-05-07T18:12:43+00:00"
         },
         {
             "name": "composer/package-versions-deprecated",
@@ -339,20 +339,20 @@
         },
         {
             "name": "datinglibre/datinglibre-app-bundle",
-            "version": "v0.20.0",
+            "version": "v0.20.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/datinglibre/datinglibre-app-bundle.git",
-                "reference": "56c4d667cc4000dcd0f07f33d5c2d36f275283c4"
+                "reference": "d759248186f3823881fa72019adf902e58ae730c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/datinglibre/datinglibre-app-bundle/zipball/56c4d667cc4000dcd0f07f33d5c2d36f275283c4",
-                "reference": "56c4d667cc4000dcd0f07f33d5c2d36f275283c4",
+                "url": "https://api.github.com/repos/datinglibre/datinglibre-app-bundle/zipball/d759248186f3823881fa72019adf902e58ae730c",
+                "reference": "d759248186f3823881fa72019adf902e58ae730c",
                 "shasum": ""
             },
             "require": {
-                "aws/aws-sdk-php": "3.174.*",
+                "aws/aws-sdk-php": "^3.174.3",
                 "datinglibre/ccbill": "0.5.*",
                 "doctrine/annotations": "^1.0",
                 "doctrine/doctrine-bundle": "^2.1",
@@ -410,9 +410,9 @@
             "description": "The core overridable code of DatingLibre",
             "support": {
                 "issues": "https://github.com/datinglibre/datinglibre-app-bundle/issues",
-                "source": "https://github.com/datinglibre/datinglibre-app-bundle/tree/v0.20.0"
+                "source": "https://github.com/datinglibre/datinglibre-app-bundle/tree/v0.20.1"
             },
-            "time": "2021-05-08T06:37:04+00:00"
+            "time": "2021-05-08T07:00:56+00:00"
         },
         {
             "name": "doctrine/annotations",
