@@ -25,19 +25,31 @@
   become: true
   user:
     name: datinglibre
-    group: datinglibre
-    append: true
+    groups: datinglibre
+    append: yes
     skeleton: "/etc/skel"
     createhome: yes
     shell: /bin/bash
+
+- name: Add www-data to datinglibre group
+  become: true
+  user:
+    name: www-data
+    groups: datinglibre
+    append: yes
 
 - name: Update PHP FPM to use datinglibre user
   become: true
   lineinfile:
     dest: /etc/php/7.4/fpm/pool.d/www.conf
-    regexp: "^user = www-data"
-    line: "user = datinglibre"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
     state: present
+  with_items:
+    - { regexp: "^user = www-data", line: "user = datinglibre" }
+    - { regexp: "^group = www-data", line: "group = datinglibre" }
+    - { regexp: "^listen.group = www-data", line: "listen.group = datinglibre" }
+    - { regexp: "^listen.owner = www-data", line: "listen.owner = datinglibre" }
   notify: restart php-fpm
 
 - meta: flush_handlers
@@ -178,7 +190,13 @@
     dest: /var/www/datinglibre
   tags: sync
 
-- name: Composer install
+- name: Run composer self-update
+  become: true
+  command: >
+    /usr/local/bin/composer self-update
+  tags: sync
+
+- name: Composer install (can take several minutes)
   become: true
   become_user: datinglibre
   composer:
@@ -192,8 +210,9 @@
   file:
     dest: /var/www/datinglibre
     owner: datinglibre
-    group: www-data
+    group: datinglibre
     recurse: yes
+    mode: "u=rwx,g=rx,o="
   tags: sync
 
 - name: Run migrations
