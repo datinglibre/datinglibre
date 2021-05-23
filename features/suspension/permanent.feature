@@ -88,3 +88,13 @@ Feature:
        And I follow "Moderate"
        And I follow "Permanent suspensions"
        Then I should not see "newuser"
+
+   @suspension
+   Scenario: a permanent suspension results in a cancelled subscription
+       Given the following profiles exist:
+           | email               | city   | age |
+           | newuser@example.com | London | 30  |
+       And the user "newuser@example.com" has a "datinglibre" subscription with ID "985938"
+       And an administrator exists with email "admin@example.com"
+       And the administrator "admin@example.com" has permanently suspended "newuser@example.com"
+       Then the subscription for "newuser@example.com" is cancelled

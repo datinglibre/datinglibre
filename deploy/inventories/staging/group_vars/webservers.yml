@@ -10,6 +10,7 @@ psql_direct_connection: psql "sslmode=verify-ca sslrootcert={{ database_root_cer
 pgbouncer_connection_url: postgresql://datinglibre:{{ database_password }}@{{ database_host }}:{{ pgbouncer_port }}/datinglibre
 datinglibre_certificate_path: /etc/ssl/certs/datinglibre.crt
 datinglibre_key_path: /etc/ssl/private/datinglibre.key
+ccbill_password:
 datinglibre_certificate: |
   -----BEGIN CERTIFICATE-----
   MIIFozCCA4ugAwIBAgIUNckvQiWxkztBFy6PcNw5AzZ0n0owDQYJKoZIhvcNAQEL

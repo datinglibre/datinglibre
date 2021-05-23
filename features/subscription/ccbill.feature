@@ -12,9 +12,14 @@ Feature:
         And a new "ccbill" subscription is created for "newuser@example.com" with provider subscription ID "985938"
 
     @subscription
-    Scenario: A CcBill NewSaleSuccessEvent without a user ID is raised as an error
-        Given a new sale success event without a user ID
+    Scenario: A CcBill NewSaleSuccessEvent with an unknown user ID is raised as an error
+        Given a new sale success event with an unknown user ID
         Then a new "datinglibre.subscription.error" event with a data payload should be created
+
+    @subscription
+    Scenario: A CcBill NewSaleSuccessEvent with a missing user ID is raised as an error
+        Given a new sale success event with a missing user ID
+        # (an exception is thrown)
 
     @subscription
     Scenario: A CcBill NewSaleFailureEvent is persisted as an event
