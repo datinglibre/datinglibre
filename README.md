@@ -6,8 +6,7 @@
 DatingLibre ([demo](https://github.com/datinglibre/DatingLibreDemo)) is a white-label open source Symfony 5.2 `PHP` 7.4 dating site backed by PostgreSQL,
 Amazon `SES` and `S3` (or a compatible service). It can be installed and updated using Ansible.
 
-DatingLibre can introduce people based on geographical location, requirements and attributes. The requirements and attributes can be setup
-not only for relationships, but also for hobbies, such as finding a tandem language partner.
+DatingLibre can introduce people based on geographical location, requirements and attributes.
 
 DatingLibre is made up of the following repositories:
 - the reference implementation (this repository) which uses the test categories `color` and `shape`, contains the database schema, and Behat features.
@@ -32,7 +31,8 @@ See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/).
 ## Features
 
 - [Automated deployment using Ansible](https://github.com/datinglibre/DatingLibre/wiki/Deploy-production)
-- Register account, with a private reminder if an email address already exists. 
+- Register account, with a private reminder if an email address already exists.
+- Payment providers: [CCBill](https://github.com/datinglibre/DatingLibre/wiki/CCBill).  
 - Confirm account through email.
 - Reset password.
 - Create a profile.

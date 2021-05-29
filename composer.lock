@@ -295,16 +295,16 @@
         },
         {
             "name": "datinglibre/ccbill",
-            "version": "v0.6.0",
+            "version": "v0.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/datinglibre/ccbill.git",
-                "reference": "a746e3016c0bb151cd95f9ebbefb286e93804778"
+                "reference": "f1f6b73de89b99aa34c0471f136807ca6540da7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/datinglibre/ccbill/zipball/a746e3016c0bb151cd95f9ebbefb286e93804778",
-                "reference": "a746e3016c0bb151cd95f9ebbefb286e93804778",
+                "url": "https://api.github.com/repos/datinglibre/ccbill/zipball/f1f6b73de89b99aa34c0471f136807ca6540da7e",
+                "reference": "f1f6b73de89b99aa34c0471f136807ca6540da7e",
                 "shasum": ""
             },
             "require": {
@@ -334,27 +334,27 @@
             "description": "DatingLibre CCBill library (unoffical)",
             "support": {
                 "issues": "https://github.com/datinglibre/ccbill/issues",
-                "source": "https://github.com/datinglibre/ccbill/tree/v0.6.0"
+                "source": "https://github.com/datinglibre/ccbill/tree/v0.7.0"
             },
-            "time": "2021-05-29T07:21:39+00:00"
+            "time": "2021-05-29T10:24:16+00:00"
         },
         {
             "name": "datinglibre/datinglibre-app-bundle",
-            "version": "v0.23.0",
+            "version": "v0.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/datinglibre/datinglibre-app-bundle.git",
-                "reference": "5494c599af463461c2a5a28f6ba13e2925a6cc7f"
+                "reference": "2e7cf8786d75efc94bb806ba533871e05d1fdd4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/datinglibre/datinglibre-app-bundle/zipball/5494c599af463461c2a5a28f6ba13e2925a6cc7f",
-                "reference": "5494c599af463461c2a5a28f6ba13e2925a6cc7f",
+                "url": "https://api.github.com/repos/datinglibre/datinglibre-app-bundle/zipball/2e7cf8786d75efc94bb806ba533871e05d1fdd4c",
+                "reference": "2e7cf8786d75efc94bb806ba533871e05d1fdd4c",
                 "shasum": ""
             },
             "require": {
                 "aws/aws-sdk-php": "^3.174.3",
-                "datinglibre/ccbill": "0.6.*",
+                "datinglibre/ccbill": "0.7.*",
                 "doctrine/annotations": "^1.0",
                 "doctrine/doctrine-bundle": "^2.1",
                 "doctrine/doctrine-migrations-bundle": "^3.0",
@@ -411,9 +411,9 @@
             "description": "The core overridable code of DatingLibre",
             "support": {
                 "issues": "https://github.com/datinglibre/datinglibre-app-bundle/issues",
-                "source": "https://github.com/datinglibre/datinglibre-app-bundle/tree/v0.23.0"
+                "source": "https://github.com/datinglibre/datinglibre-app-bundle/tree/v0.23.1"
             },
-            "time": "2021-05-29T08:36:19+00:00"
+            "time": "2021-05-29T10:45:51+00:00"
         },
         {
             "name": "doctrine/annotations",
