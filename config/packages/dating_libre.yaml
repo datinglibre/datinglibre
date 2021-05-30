@@ -1,4 +1,6 @@
 dating_libre_app:
+    site_name: 'Dating Libre'
+    site_description: 'Description of the site'
     admin_email: '"Dating Libre Staging" <admin@example.com>'
     images_bucket: dlibreim
     image_upload: true
