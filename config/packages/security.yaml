@@ -1,12 +1,10 @@
 security:
+    enable_authenticator_manager: true
     hide_user_not_found: true
-    encoders:
+    password_hashers:
         DatingLibre\AppBundle\Entity\User:
             algorithm: auto
-
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
                 class: DatingLibre\AppBundle\Entity\User
@@ -16,29 +14,27 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
-            guard:
-                authenticators:
-                    - DatingLibre\AppBundle\Security\LoginFormAuthenticator
+            form_login:
+                login_path: /
+                check_path: /
+                username_parameter: 'email'
+                password_parameter: 'password'
+                enable_csrf: true
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                path: /
+                secure: true
+                samesite: strict
             logout:
                 path: logout
-                # where to redirect after logout
-                # target: app_any_route
-
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#firewalls-authentication
-
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/ccbill, roles: IS_AUTHENTICATED_ANONYMOUSLY, ips: [ 64.38.212.1/24, 64.38.215.1/24, 64.38.240.1/24, 64.38.241.1/24 ] }
+        - { path: ^/ccbill, roles: PUBLIC_ACCESS, ips: [ 64.38.212.1/24, 64.38.215.1/24, 64.38.240.1/24, 64.38.241.1/24 ] }
         - { path: ^/moderator, roles: [ROLE_ADMIN, ROLE_MODERATOR]}
         - { path: ^/admin, roles: [ROLE_ADMIN]}
-        - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/user/password$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/$, roles: PUBLIC_ACCESS }
+        - { path: ^/register, roles: PUBLIC_ACCESS }
+        - { path: ^/token, roles: PUBLIC_ACCESS }
+        - { path: ^/user/password/reset$, roles: PUBLIC_ACCESS }
+        - { path: ^/user/password/update$, roles: PUBLIC_ACCESS }
         - { path: ^/, roles: ROLE_USER }

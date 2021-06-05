@@ -2,7 +2,7 @@ Feature:
     As a user
     I want to be able to view another user's profile
 
-    @ui @profile
+    @search
     Scenario: I want to be able to view another user's profile
         Given the following profiles exist:
             | email                          | attributes     | requirements   | city   | age |

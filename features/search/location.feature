@@ -2,7 +2,7 @@ Feature:
     As a user
     I want to be able to find other users near me
 
-    @search @ui
+    @search
     Scenario:
         Given the following profiles exist:
             | email                    | attributes   | requirements   | city    | age |
@@ -101,7 +101,7 @@ Feature:
         When the user "bristol_blue@example.com" searches for matches
         Then the user "london_yellow@example.com" matches
 
-    @search @ui
+    @search
     Scenario: I can find users near me on the search page
         Given the following profiles exist:
             | email                    | attributes     | requirements   | city    | age |

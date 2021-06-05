@@ -32,7 +32,7 @@ Feature:
         When the user "westminster_yellow@example.com" searches for matches
         Then the user "chelsea_blue@example.com" does not match
 
-    @ui @block
+    @block
     Scenario: I can block another user
         Given the following profiles exist:
             | email                          | attributes     | requirements   | city   | age |
@@ -48,7 +48,7 @@ Feature:
         And I should see "Blocked user"
         And I should not see "westminster_yellow"
 
-    @ui @block
+    @block
     Scenario: I should not see an unmoderated profile image on the user's block page
         Given the following profiles exist:
             | email                          | attributes     | requirements   | city   | age |

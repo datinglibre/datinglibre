@@ -2,13 +2,12 @@ Feature:
     As a user
     I want to reset my password
 
-    @ui
-    @password
+    @security
     Scenario: I can reset my password
         Given the following profiles exist:
             | email               | city   | age |
             | newuser@example.com | London | 30  |
-        When I am on "/user/password"
+        When I am on "/user/password/reset"
         And I fill in "newuser@example.com" for "Email"
         And I press "Submit"
         And I should see "If an account for your email exists, a password reset link has been emailed to you"
@@ -21,47 +20,44 @@ Feature:
         And I log in using email "newuser@example.com" and password "foobar"
         Then I should see "Logout"
 
-    @ui
-    @password
+    @security
     Scenario: I can reset my password with mixture of upper and lowercase email
         Given the following profiles exist:
             | email               | city   | age |
             | newuser@example.com | London | 30  |
-        When I am on "/user/password"
+        When I am on "/user/password/reset"
         And I fill in "newuser@example.com" for "Email"
         And I press "Submit"
         And I should see "If an account for your email exists, a password reset link has been emailed to you"
         And I should receive a password reset email to "neWuseR@example.com"
 
-    @ui
-    @password
+
+    @security
     Scenario: I cannot reset my email with a blank address
         Given the following profiles exist:
             | email               | city   | age |
             | newuser@example.com | London | 30  |
-        When I am on "/user/password"
+        When I am on "/user/password/reset"
         And I fill in "" for "Email"
         And I press "Submit"
         Then I should see "Please enter an email address"
 
-    @ui
-    @password
+    @security
     Scenario: I cannot reset my email with a blank address
         Given the following profiles exist:
             | email               | city   | age |
             | newuser@example.com | London | 30  |
-        When I am on "/user/password"
+        When I am on "/user/password/reset"
         And I fill in "invalid" for "Email"
         And I press "Submit"
         Then I should see "Please enter a valid email address"
 
-    @ui
-    @password
+    @security
     Scenario: I can't reset my password with incorrect secret
         Given the following profiles exist:
             | email               | city   | age |
             | newuser@example.com | London | 30  |
-        When I am on "/user/password"
+        When I am on "/user/password/reset"
         And I fill in "newuser@example.com" for "Email"
         And I press "Submit"
         And I should see "If an account for your email exists, a password reset link has been emailed to you"

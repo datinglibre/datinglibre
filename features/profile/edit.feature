@@ -2,14 +2,14 @@ Feature:
     As a user
     I want to complete a profile
 
-    @ui @profile
+    @profile
     Scenario: I can login to my account
         Given a user with email "newuser@example.com" and password "password" exists
         When I log in using email "newuser@example.com" and password "password"
         Then I should be on "/profile/edit"
         And I should see "Please complete your profile"
 
-    @ui @profile
+    @profile
     Scenario: I can view my profile as a new user
         Given a user with email "newuser@example.com"
         When I log in using email "newuser@example.com"
@@ -17,7 +17,7 @@ Feature:
         And I should see "Please complete your profile"
         And I should see "United Kingdom"
 
-    @ui @profile
+    @profile
     Scenario: I have to enter a username
         Given a user with email "newuser@example.com"
         And I am logged in with "newuser@example.com"
@@ -26,7 +26,7 @@ Feature:
         And I press "Save"
         Then I should see "Please enter a username"
 
-    @ui @profile
+    @profile
     Scenario: My username has to be a valid length
         Given a user with email "newuser@example.com"
         And I am logged in with "newuser@example.com"
@@ -35,7 +35,7 @@ Feature:
         And I press "Save"
         Then I should see "Your username must be between 3 and 32 characters"
 
-    @ui @profile
+    @profile
     Scenario: My username has to be a valid length
         Given a user with email "newuser@example.com"
         And I am logged in with "newuser@example.com"
@@ -44,7 +44,7 @@ Feature:
         And I press "Save"
         Then I should see "Your username must be between 3 and 32 characters"
 
-    @ui @profile
+    @profile
     Scenario: My about section must not be too long
         Given a user with email "newuser@example.com"
         And I am logged in with "newuser@example.com"

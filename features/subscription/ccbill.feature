@@ -67,8 +67,8 @@ Feature:
         When the user "newuser@example.com" has bought a new CcBill subscription that has ID "985938"
         And there has been a failed rebill for subscription "985938" with next retry date "2020-08-23"
         Then a new "datinglibre.ccbill.renewal.failure" event should be created for "newuser@example.com"
-        And I am on "/account/subscription"
         And I am logged in with "newuser@example.com"
+        And I am on "/account/subscription"
         And I should see "Renewal failure"
         And I should see "August 23, 2020"
 

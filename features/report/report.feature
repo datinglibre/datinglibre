@@ -1,7 +1,7 @@
 Feature:
   I can report another user
 
-  @ui @report
+  @report
   Scenario: I can report another user
     Given the following profiles exist:
       | email                          | attributes     | requirements   | city   | age |
@@ -18,7 +18,7 @@ Feature:
     Then I should see "Reported user"
     And a report should exist for "westminster_yellow@example.com" from "chelsea_blue@example.com"
 
-  @ui @report
+  @report
   Scenario: I cannot report the same user twice
     Given the following profiles exist:
       | email                          | attributes     | requirements   | city   | age |

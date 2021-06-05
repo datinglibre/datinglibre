@@ -23,7 +23,7 @@ Feature:
         When the user "bath_1@example.com" sends the message "Hello" to "bristol_1@example.com"
         Then  "bristol_1@example.com" should have no messages
 
-    @message @ui
+    @message
     Scenario: I can see my matches
         Given the following profiles exist:
             | email                 | attributes     | requirements   | city    | age |
@@ -34,7 +34,7 @@ Feature:
         And I navigate to the matches page
         Then I should see "Hello"
 
-    @message @ui
+    @message
     Scenario: I can see the moderated profile image of my match
         Given the following profiles exist:
             | email                 | attributes     | requirements   | city    | age |
@@ -49,7 +49,7 @@ Feature:
         And I should see "bath_1"
         And the profile image is displayed
 
-    @message @ui
+    @message
     Scenario: I cannot see the unmoderated profile image of my match
         Given the following profiles exist:
             | email                 | attributes     | requirements   | city    | age |
@@ -63,7 +63,7 @@ Feature:
         And I should see "bath_1"
         And the anonymous profile image should be displayed
 
-    @message @ui
+    @message
     Scenario: The recipient can see their matches
         Given the following profiles exist:
             | email                 | attributes     | requirements   | city    | age |
@@ -75,7 +75,7 @@ Feature:
         Then I should see "Hello"
 
 
-    @message @ui
+    @message
     Scenario: I can send another user a message
         Given the following profiles exist:
             | email                 | attributes     | requirements   | city    | age |
@@ -88,7 +88,7 @@ Feature:
         And I should see "Hello this is a new message"
         And I should see "bristol_1"
 
-    @message @ui
+    @message
     Scenario: I can see my most recent messages
         Given the following profiles exist:
             | email                 | attributes     | requirements   | city    | age |
@@ -102,7 +102,7 @@ Feature:
         Then I should see "Another message"
         And I should see "bath_1"
 
-    @message @ui
+    @message
     Scenario: I can send messages to multiple users
         Given the following profiles exist:
             | email                 | attributes     | requirements   | city    | age |

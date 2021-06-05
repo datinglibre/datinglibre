@@ -8,17 +8,17 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
-        "datinglibre/datinglibre-app-bundle": "^0.25.0",
+        "datinglibre/datinglibre-app-bundle": "^0.26.0",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "sensio/framework-extra-bundle": "^5.4",
-        "symfony/asset": "5.2.*",
-        "symfony/console": "5.2.*",
-        "symfony/dotenv": "5.2.*",
-        "symfony/expression-language": "5.2.*",
+        "symfony/asset": "5.3.*",
+        "symfony/console": "5.3.*",
+        "symfony/dotenv": "5.3.*",
+        "symfony/expression-language": "5.3.*",
         "symfony/flex": "^1.3.1",
-        "symfony/framework-bundle": "5.2.*",
+        "symfony/framework-bundle": "5.3.*",
         "symfony/monolog-bundle": "^3.7",
-        "symfony/yaml": "5.2.*"
+        "symfony/yaml": "5.3.*"
     },
     "require-dev": {
         "behat/behat": "^3.7.0",
@@ -31,15 +31,15 @@
         "friends-of-behat/page-object-extension": "^0.3.1",
         "friends-of-behat/symfony-extension": "^2.1",
         "friendsofphp/php-cs-fixer": "^2.16",
-        "symfony/browser-kit": "^5.2",
-        "symfony/debug-bundle": "5.2.*",
+        "symfony/browser-kit": "^5.3",
+        "symfony/debug-bundle": "5.3.*",
         "symfony/debug-pack": "*",
-        "symfony/dom-crawler": "5.2.*",
-        "symfony/http-client": "5.2.*",
+        "symfony/dom-crawler": "5.3.*",
+        "symfony/http-client": "5.3.*",
         "symfony/maker-bundle": "^1.14",
         "symfony/profiler-pack": "*",
         "symfony/test-pack": "*",
-        "symfony/var-dumper": "5.2.*",
+        "symfony/var-dumper": "5.3.*",
         "webmozart/assert": "^1.10"
     },
     "config": {
@@ -80,7 +80,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "5.2.*"
+            "require": "5.3.*"
         }
     }
 }
