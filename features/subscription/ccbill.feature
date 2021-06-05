@@ -83,7 +83,7 @@ Feature:
         And I am logged in with "newuser@example.com"
         And I am on "/account/subscription"
         Then I should see "Cancelled"
-        And I should see "Ended"
+        And I should see "N/a"
 
     @subscription
     Scenario: A CcBill ChargebackEvent marks the subscription as a chargeback
@@ -96,7 +96,7 @@ Feature:
         And I am logged in with "newuser@example.com"
         And I am on "/account/subscription"
         Then I should see "Chargeback"
-        And I should see "Ended"
+        And I should see "N/a"
 
     @subscription
     Scenario: a CcBill RefundEvent marks the subscription as refunded
@@ -109,7 +109,7 @@ Feature:
         And I am logged in with "newuser@example.com"
         And I am on "/account/subscription"
         Then I should see "Refund"
-        And I should see "Ended"
+        And I should see "N/a"
 
     @subscription
     Scenario: a CcBill BillingDateChange event changes the next renewal date
