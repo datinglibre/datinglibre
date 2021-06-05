@@ -3,30 +3,25 @@
 
 [![Build Status](https://travis-ci.com/datinglibre/DatingLibre.svg?branch=master "Travis CI status")](https://travis-ci.com/github/datinglibre/datinglibre)
 
-DatingLibre ([demo](https://github.com/datinglibre/DatingLibreDemo)) is a white-label open source Symfony 5.2 `PHP` 7.4 dating site backed by PostgreSQL,
-Amazon `SES` and `S3` (or a compatible service). It can be installed and updated using Ansible.
-
-DatingLibre can introduce people based on geographical location, requirements and attributes.
+DatingLibre is an open source white-label dating site platform (implemented as a Symfony bundle). It uses: 
+- `PHP`
+- Symfony
+- PostgreSQL
+- Amazon `SES`
+- Amazon `S3` (or a compatible service) 
+- Ansible.
 
 DatingLibre is made up of the following repositories:
-- the reference implementation (this repository) which uses the test categories `color` and `shape`, contains the database schema, and Behat features.
-- the [datinglibre-app-bundle](https://github.com/datinglibre/datinglibre-app-bundle) which contains overridable Behat test contexts, controllers, repositories, services, entities.
-- the [DatingLibreDemo](https://github.com/datinglibre/DatingLibreDemo) site, which shows how the `datinglibre-app-bundle` can be 
-overridden to build a custom website: overriding functionality as required, whilst leaving the rest of the bundle upgradable via `composer upgrade`. The demo code is deployed to [datinglibre.com](http://datinglibre.com).
+- the reference implementation (this repository) which uses the test categories `color` and `shape`, contains the database schema, and Behat test scenarios.
+- the [datinglibre-app-bundle](https://github.com/datinglibre/datinglibre-app-bundle) which contains overridable, controllers, repositories, services, entities and Behat test contexts.
+- the [DatingLibreDemo](https://github.com/datinglibre/DatingLibreDemo) repository, which shows how the `datinglibre-app-bundle` can be 
+overridden to build a custom website: overriding functionality as required, whilst leaving the rest of the bundle upgradable via `composer upgrade`. The code in this repository is deployed to the live test site, which can be seen at [datinglibre.com](https://datinglibre.com).
   
 All PRs should be opened against this reference repository and/or the [datinglibre-app-bundle](https://github.com/datinglibre/datinglibre-app-bundle).
 
-## Development environment setup
-
-See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/Development).
-
-## Deployment
-
-See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/Deploy-production).
-
 ## Documentation
 
-See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/).
+See the [Wiki](https://github.com/datinglibre/DatingLibre/wiki/). Start with the [Development](https://github.com/datinglibre/DatingLibre/wiki/Development) section to set up the project on a local machine.
 
 ## Features
 
