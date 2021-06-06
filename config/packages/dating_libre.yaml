@@ -5,6 +5,10 @@ dating_libre_app:
     images_bucket: dlibreim
     image_upload: true
     is_demo: false
+    payment_providers:
+        datinglibre:
+            url: https://datinglibre.com
+            active: true
     categories:
     - color
     - shape
