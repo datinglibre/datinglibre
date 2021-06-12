@@ -12,8 +12,8 @@ DatingLibre is an open source white-label dating site platform (implemented as a
 - Ansible.
 
 DatingLibre is made up of the following repositories:
-- the reference implementation (this repository) which uses the test categories `color` and `shape`, contains the database schema, and Behat test scenarios.
-- the [datinglibre-app-bundle](https://github.com/datinglibre/datinglibre-app-bundle) which contains overridable, controllers, repositories, services, entities and Behat test contexts.
+- the reference implementation (this repository) which uses the test categories `color` and `shape`, and contains the Behat test scenarios.
+- the [datinglibre-app-bundle](https://github.com/datinglibre/datinglibre-app-bundle) which contains controllers, repositories, services, entities, database migrations and Behat test contexts.
 - the [DatingLibreDemo](https://github.com/datinglibre/DatingLibreDemo) repository, which shows how the `datinglibre-app-bundle` can be 
 overridden to build a custom website: overriding functionality as required, whilst leaving the rest of the bundle upgradable via `composer upgrade`. The code in this repository is deployed to the live test site, which can be seen at [datinglibre.com](https://datinglibre.com).
   
