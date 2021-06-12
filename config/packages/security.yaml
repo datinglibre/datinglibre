@@ -8,7 +8,6 @@ security:
         app_user_provider:
             entity:
                 class: DatingLibre\AppBundle\Entity\User
-                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

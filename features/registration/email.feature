@@ -9,7 +9,7 @@ Feature: I can register using my email address
         And I press "Register"
         And I should receive a confirmation email to "user@example.com"
         And I click the confirmation link and see "Your account is now enabled. You can now login"
-        And I fill in "user@example.com" for "email"
+        And I fill in "uSeR@example.com" for "email"
         And I fill in "password" for "password"
         And I press "Log in"
         Then I should see "Search"
