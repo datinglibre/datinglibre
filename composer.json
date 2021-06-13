@@ -8,7 +8,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
-        "datinglibre/datinglibre-app-bundle": "^0.29.0",
+        "datinglibre/datinglibre-app-bundle": "^0.30.0",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "sensio/framework-extra-bundle": "^5.4",
         "symfony/asset": "5.3.*",
