@@ -13,7 +13,7 @@ Feature:
         And I am logged in with "moderator@example.com"
         And I am on "/moderator/reports"
         And I follow "suspended"
-        And I follow "Suspensions"
+        And I follow "profile-menu-suspensions"
         Then I should see "Abusive messages"
         Then I should see "No suspensions"
         And I check "Spam"
