@@ -23,6 +23,49 @@ Feature:
         And I should see "bath_5"
 
     @search
+    Scenario: I should not be able to view an unmoderated profile image in profiles
+        Given the following profiles exist:
+            | email                 | attributes     | requirements   | city    | age |
+            | bristol_1@example.com | blue, square   | yellow, circle | Bristol | 30  |
+            | bath_1@example.com    | yellow, circle | blue, square   | Bath    | 30  |
+        And the following filters exist:
+            | email                 | distance | min_age | max_age |
+            | bristol_1@example.com | 100000   | 25      | 35      |
+        And the user "bath_1@example.com" has uploaded a profile image
+        And I am logged in with "bristol_1@example.com"
+        Then the response should contain "profile.jpg"
+        And the response should not contain "Signature"
+
+    @search
+    Scenario: I should be able to view a successfully moderated profile image in profiles
+        Given the following profiles exist:
+            | email                 | attributes     | requirements   | city    | age |
+            | bristol_1@example.com | blue, square   | yellow, circle | Bristol | 30  |
+            | bath_1@example.com    | yellow, circle | blue, square   | Bath    | 30  |
+        And the following filters exist:
+            | email                 | distance | min_age | max_age |
+            | bristol_1@example.com | 100000   | 25      | 35      |
+        And the user "bath_1@example.com" has uploaded a profile image
+        And the profile image for "bath_1@example.com" has passed moderation
+        And I am logged in with "bristol_1@example.com"
+        Then the response should contain "Signature"
+
+    @search
+    Scenario: I should not be able to view a failed moderated profile image in profiles
+        Given the following profiles exist:
+            | email                 | attributes     | requirements   | city    | age |
+            | bristol_1@example.com | blue, square   | yellow, circle | Bristol | 30  |
+            | bath_1@example.com    | yellow, circle | blue, square   | Bath    | 30  |
+        And the following filters exist:
+            | email                 | distance | min_age | max_age |
+            | bristol_1@example.com | 100000   | 25      | 35      |
+        And the user "bath_1@example.com" has uploaded a profile image
+        And the profile image for "bath_1@example.com" has failed moderation
+        And I am logged in with "bristol_1@example.com"
+        Then the response should not contain "Signature"
+        And the response should contain "profile.jpg"
+
+    @search
     Scenario: I can select the next and previous page
         Given the following profiles exist:
             | email                 | attributes     | requirements   | city    | age |

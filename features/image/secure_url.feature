@@ -3,7 +3,10 @@ Feature:
 
     @image
     Scenario:
-        Given I upload "cat.jpg" as the profile image for "image@example.com"
-        And the profile image for "image@example.com" has expired
+        Given the following profiles exist:
+            | email                          | attributes       | requirements | city   | age |
+            | chelsea_blue@example.com       | circle, green    | square, blue | London | 30  |
+        When I upload "cat.jpg" as the profile image for "chelsea_blue@example.com"
+        And the profile image for "chelsea_blue@example.com" has expired
         When the secure image refresh task has run
-        Then generate a new expiry date for the profile image of "image@example.com"
+        Then generate a new expiry date for the profile image of "chelsea_blue@example.com"
