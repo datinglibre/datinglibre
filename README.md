@@ -1,7 +1,7 @@
 
 # DatingLibre
 
-[![Build Status](https://travis-ci.com/datinglibre/DatingLibre.svg?branch=master "Travis CI status")](https://travis-ci.com/github/datinglibre/datinglibre)
+![Build Status](https://github.com/datinglibre/datinglibre/actions/workflows/datinglibre.yml/badge.svg)
 
 DatingLibre is an open source white-label dating site platform (implemented as a Symfony bundle). It uses: 
 - `PHP`
