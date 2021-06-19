@@ -1,0 +1,89 @@
+name: DatingLibre GitHub CI
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    name: Symfony (PHP ${{ matrix.php-versions }})
+    runs-on: ubuntu-20.04
+    services:
+      postgres:
+        image: postgis/postgis:13-3.0-alpine
+        env:
+          POSTGRES_USER: datinglibre
+          POSTGRES_PASSWORD: secret
+          POSTGRES_DB: datinglibre
+        ports:
+          - 5432:5432
+      mailhog:
+        image: mailhog/mailhog
+        ports:
+          - 1025:1025
+          - 8025:8025
+        env:
+          MH_STORAGE: memory
+      s3ninja:
+        image: scireum/s3-ninja:7.0.1
+        ports:
+          - 9444:9000
+    strategy:
+      fail-fast: true
+      matrix:
+        php-versions: ['7.4']
+    steps:
+      - name: Install postgresql-client
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends postgresql-client
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@2.11.0
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_pgsql, dom, filter, gd, iconv, json, mbstring, pdo, snmp
+          tools: symfony
+        env:
+          update: true
+
+      - name: Check PHP Version
+        run: php -v
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Composer dependencies
+        run: composer install
+
+      - name: Setup fixtures
+        run: |
+          echo 'drop schema if exists datinglibre cascade; create schema datinglibre; ' | PGPASSWORD=secret psql -h localhost --user datinglibre datinglibre
+          php bin/console doctrine:migrations:migrate --no-interaction
+          php bin/console doctrine:fixtures:load --append --no-interaction
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
+          DATABASE_URL: postgresql://datinglibre:secret@localhost:5432/datinglibre
+
+      - name: Start symfony server
+        run: symfony serve --port 8000 --no-tls --daemon
+
+      - name: Run behat tests
+        run: ./vendor/bin/behat --tags ~javascript
+
+      - name: Stop symfony server
+        run: symfony server:stop
