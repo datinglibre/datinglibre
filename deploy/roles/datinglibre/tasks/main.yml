@@ -201,7 +201,7 @@
   become_user: datinglibre
   composer:
     command: install
-    arguments: --no-dev
+    arguments: --no-dev --classmap-authoritative
     working_dir: /var/www/datinglibre
   tags: sync
 
