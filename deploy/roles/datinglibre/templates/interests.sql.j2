@@ -1,0 +1,3 @@
+{% for interest in dating_libre_app.interests %}
+INSERT INTO datinglibre.interests (id, name) VALUES (uuid_generate_v4(), '{{ interest }}') ON CONFLICT DO NOTHING;
+{% endfor %}

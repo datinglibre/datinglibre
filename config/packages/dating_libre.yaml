@@ -9,6 +9,10 @@ dating_libre_app:
         datinglibre:
             url: https://datinglibre.com
             active: true
+    # the values below are limited to alphanumeric characters
+    # separated by an underscore. They are used in behat tests
+    # and as translation keys. Ansible will generate and run
+    # SQL to automatically add them to the database.
     categories:
     - color
     - shape
@@ -21,6 +25,11 @@ dating_libre_app:
         - square
         - circle
         - triangle
+    interests:
+    - north
+    - south
+    - east
+    - west
     rules:
     - spam
     - abusive_messages

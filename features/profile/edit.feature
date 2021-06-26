@@ -68,6 +68,7 @@ Feature:
         And I select "1990" from "profile_form_dob_year"
         And I select "1" from "profile_form_dob_month"
         And I select "1" from "profile_form_dob_day"
+        And I check "North"
         And I close the toolbar
         And I press "Save"
         Then I should see "New user"

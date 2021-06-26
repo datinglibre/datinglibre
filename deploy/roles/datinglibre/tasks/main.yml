@@ -236,6 +236,8 @@
     mode: 0770
   with_items:
     - { src: "../templates/categories_and_attributes.sql.j2", dest: "/tmp/categories_and_attributes.sql" }
+    - { src: "../templates/interests.sql.j2", dest: "/tmp/interests.sql" }
+
 
 - name: Insert categories and attributes into database
   become: true
@@ -244,13 +246,12 @@
   args:
     executable: /bin/bash
 
-- name: Cleanup categories, attributes
+- name: Insert interests into database
   become: true
-  file:
-    path: "{{ item }}"
-    state: absent
-  with_items:
-    - "/tmp/categories_and_attributes.sql"
+  become_user: datinglibre
+  shell: /var/www/datinglibre/bin/console doctrine:query:sql "$(< /tmp/interests.sql)"
+  args:
+    executable: /bin/bash
 
 - name: Copy locations
   become: true
@@ -285,6 +286,18 @@
   shell: "{{ psql_direct_connection }} < /tmp/cities.sql"
   args:
     executable: /bin/bash
+
+- name: Cleanup categories, attributes
+  become: true
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "/tmp/categories_and_attributes.sql"
+    - "/tmp/interests.sql"
+    - "/tmp/cities.sql"
+    - "/tmp/regions.sql"
+    - "/tmp/countries.sql"
 
 - name: Copy datinglibre nginx conf
   become: true
