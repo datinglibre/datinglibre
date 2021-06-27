@@ -35,7 +35,7 @@ Feature:
         And the user "chelsea_blue@example.com" does not match
 
     @search
-    Scenario: I can filter a user when their interests don't match both of my filters
+    Scenario: I can view users where their interests match at least one of my filters
         Given the following profiles exist:
             | email                    | attributes     | requirements   | city    | age | interests |
             | bristol_blue@example.com | blue, square   | yellow, circle | Bristol | 30  | east      |
@@ -48,11 +48,11 @@ Feature:
             | email                    | interests   |
             | bristol_blue@example.com | east, north |
         When the user "bristol_blue@example.com" searches for matches
-        Then the user "bath_yellow@example.com" does not match
-        And the user "chelsea_blue@example.com" does not match
+        Then the user "bath_yellow@example.com" matches
+        And the user "chelsea_blue@example.com" matches
 
     @search
-    Scenario: I can filter a user when their interests match both of my filters
+    Scenario: I can match a user when their interests match both of my filters
         Given the following profiles exist:
             | email                    | attributes     | requirements   | city    | age | interests   |
             | bristol_blue@example.com | blue, square   | yellow, circle | Bristol | 30  | east        |
@@ -65,5 +65,5 @@ Feature:
             | email                    | interests   |
             | bristol_blue@example.com | east, north |
         When the user "bristol_blue@example.com" searches for matches
-        Then the user "bath_yellow@example.com" does not match
+        Then the user "bath_yellow@example.com" matches
         And the user "chelsea_blue@example.com" matches
