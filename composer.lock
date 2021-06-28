@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c42311835461af1277286dcf9413491d",
+    "content-hash": "a084ce6cd9bcd45eccaac6bbd16466d3",
     "packages": [
         {
             "name": "async-aws/core",
@@ -340,16 +340,16 @@
         },
         {
             "name": "datinglibre/datinglibre-app-bundle",
-            "version": "v0.35.0",
+            "version": "v0.36.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/datinglibre/datinglibre-app-bundle.git",
-                "reference": "36cd8bc1a87944db32d00bf651a579c83ce918d4"
+                "reference": "59fcedc4fdb72dfae935679342033041c886ea19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/datinglibre/datinglibre-app-bundle/zipball/36cd8bc1a87944db32d00bf651a579c83ce918d4",
-                "reference": "36cd8bc1a87944db32d00bf651a579c83ce918d4",
+                "url": "https://api.github.com/repos/datinglibre/datinglibre-app-bundle/zipball/59fcedc4fdb72dfae935679342033041c886ea19",
+                "reference": "59fcedc4fdb72dfae935679342033041c886ea19",
                 "shasum": ""
             },
             "require": {
@@ -412,9 +412,9 @@
             "description": "The core overridable code of DatingLibre",
             "support": {
                 "issues": "https://github.com/datinglibre/datinglibre-app-bundle/issues",
-                "source": "https://github.com/datinglibre/datinglibre-app-bundle/tree/v0.35.0"
+                "source": "https://github.com/datinglibre/datinglibre-app-bundle/tree/v0.36.0"
             },
-            "time": "2021-06-27T18:41:53+00:00"
+            "time": "2021-06-28T17:49:49+00:00"
         },
         {
             "name": "doctrine/annotations",
