@@ -3,6 +3,7 @@ default:
         default:
             contexts:
                 - DatingLibre\AppBundle\Behat\UserContext
+                - DatingLibre\AppBundle\Behat\AccountContext
                 - DatingLibre\AppBundle\Behat\RegistrationContext
                 - DatingLibre\AppBundle\Behat\ProfileEditContext
                 - DatingLibre\AppBundle\Behat\ProfileImageContext

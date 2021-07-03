@@ -2,6 +2,7 @@ domain_name: datinglibre.local
 mailer_dsn: smtp://192.168.0.101:1025
 database_root_certificate_path: /home/datinglibre/.postgresql/root.crt
 purge_users_parameters: NOT_ENABLED 24
+purge_user_archives_parameters: 30
 app_secret: replacethissecret
 postgres_port: 5432
 pgbouncer_port: 6543

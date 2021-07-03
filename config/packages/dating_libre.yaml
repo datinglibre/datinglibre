@@ -33,4 +33,7 @@ dating_libre_app:
     rules:
     - spam
     - abusive_messages
+    - offsite_linking
+    testing_user_email_addresses:
+    - admin@datinglibre.com
 

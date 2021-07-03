@@ -14,3 +14,4 @@ Feature:
         And I fill in "delete_account_form_password_second" with "password"
         And I press "Permanently delete my account"
         Then I should be on "/"
+        And there should be a user archive for "newuser@example.com"

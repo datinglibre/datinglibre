@@ -317,6 +317,14 @@
     job: "/var/www/datinglibre/bin/console app:users:purge {{ purge_users_parameters }}"
     user: datinglibre
 
+- name: Install purge user archives cron
+  become: true
+  cron:
+    name: "Purge user archives"
+    hour: "12"
+    job: "/var/www/datinglibre/bin/console app:user_archives:purge {{ purge_user_archives_parameters }}"
+    user: datinglibre
+
 - name: Install refresh expired secure image urls cron
   become: true
   cron:

@@ -17,3 +17,9 @@ if [[ $1 == "sync:prod" ]]
 then
     ansible-playbook -i ./deploy/inventories/production ./deploy/webservers.yml --vault-password-file=~/vault_password --tags sync
 fi;
+
+if [[ $1 == "upgrade:prod" ]]
+then
+    ansible all -i deploy/inventories/production -m apt -a "upgrade=yes update_cache=yes cache_valid_time=86400" --become
+    ansible all -i deploy/inventories/production -m stat -a "path=/var/run/reboot-required" --become
+fi;
