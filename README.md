@@ -4,7 +4,7 @@
 ![Build Status](https://github.com/datinglibre/datinglibre/actions/workflows/datinglibre.yml/badge.svg)
 
 DatingLibre is an open source white-label dating site platform (implemented as a Symfony bundle). It uses: 
-- `PHP`
+- `PHP` 7.4 or 8.0
 - Symfony
 - PostgreSQL
 - Amazon `SES`
