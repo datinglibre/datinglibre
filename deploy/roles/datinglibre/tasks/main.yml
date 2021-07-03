@@ -322,6 +322,7 @@
   cron:
     name: "Purge user archives"
     hour: "12"
+    minute: "30"
     job: "/var/www/datinglibre/bin/console app:user_archives:purge {{ purge_user_archives_parameters }}"
     user: datinglibre
 
