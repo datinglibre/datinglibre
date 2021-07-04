@@ -46,6 +46,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@2.11.0
         with:
+          ini-values: opcache.enable=1, opcache.enable_cli=1, opcache.memory_consumption=256, opcache.max_accelerated_files=32531, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
           php-version: ${{ matrix.php-versions }}
           extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_pgsql, dom, filter, gd, iconv, json, mbstring, pdo, snmp
           tools: symfony

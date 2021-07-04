@@ -45,6 +45,7 @@ Feature:
         Then I should see "985938"
         And I should see "Active"
         And I should see "August 20, 2012"
+        And I should not see "Buy a subscription"
 
     @subscription
     Scenario: A CcBill RenewalSuccessEvent renews a subscription
@@ -58,6 +59,7 @@ Feature:
         And I am on "/account/subscription"
         And I should see "Active"
         And I should see "September 20, 2020"
+        And I should not see "Buy a subscription"
 
     @subscription
     Scenario: A CcBill RenewalFailureEvent moves subscription into renewal failed state
@@ -83,6 +85,7 @@ Feature:
         And I am logged in with "newuser@example.com"
         And I am on "/account/subscription"
         Then I should see "Cancelled"
+        And I should see "Buy a subscription"
         And I should see "N/a"
 
     @subscription
