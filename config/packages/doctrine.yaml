@@ -12,6 +12,11 @@ doctrine:
                 mapping_types:
                     text[]: text[]
                     _text: text[]
+                options:
+                    # Always use PDO::ATTR_EMULATE_PREPARES as production uses
+                    # pgbouncer transaction pool mode, which does not work with
+                    # prepared statements
+                    20: true
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
