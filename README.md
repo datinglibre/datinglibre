@@ -35,6 +35,7 @@ Start with the [Development](https://github.com/datinglibre/DatingLibre/wiki/Dev
 - Create a profile.
 - Upload a profile image.
 - Search by radius and/or region, through a provided [dataset](https://github.com/datinglibre/locations) of the latitudes and longitudes of the world's significant towns and cities.
+- Search by interest.  
 - Browse through profiles, using keyset pagination.
 - Block users.
 - Report users.
