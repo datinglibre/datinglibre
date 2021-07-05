@@ -13,10 +13,17 @@ doctrine:
                     text[]: text[]
                     _text: text[]
                 options:
-                    # Always use PDO::ATTR_EMULATE_PREPARES as production uses
-                    # pgbouncer transaction pool mode, which does not work with
-                    # prepared statements
-                    20: true
+                    # Never use PDO::ATTR_EMULATE_PREPARES
+                    # pgbouncer is setup to pool sessions,
+                    # not transactions, so supports prepared
+                    # statements.
+                    # If pgbouncer is reconfigured to pool
+                    # transactions, an alternative to turning
+                    # off prepared statements should be
+                    # explored, such as binary_parameters mode,
+                    # as prepared statements are preferable
+                    # to emulation.
+                    20: false
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
