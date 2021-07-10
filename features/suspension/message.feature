@@ -13,7 +13,21 @@ Feature:
         And I am logged in with "user@example.com"
         And I follow "Matches"
         When I follow "suspended"
-        Then I should see "This user has been suspended for at least 72 hours. They will be unable to reply."
+        Then I should see "this user has been suspended for at least 72 hours. They will be unable to reply."
+
+    @suspension
+    Scenario: A user who has exchanged messages with another user can see when they are permanently suspended
+        Given the following profiles exist:
+            | email                 | city   | age |
+            | user@example.com      | London | 30  |
+            | suspended@example.com | London | 30  |
+        And the user "user@example.com" sends the message "Hello" to "suspended@example.com"
+        And an administrator exists with email "admin@example.com"
+        And the administrator "admin@example.com" has permanently suspended "suspended@example.com"
+        And I am logged in with "user@example.com"
+        And I follow "Matches"
+        When I follow "suspended"
+        Then I should see "This user has been permanently suspended. They will be unable to reply."
 
     @suspension
     Scenario: A user who has exchanged messages with a suspended user does not see this when suspension is closed
@@ -28,4 +42,4 @@ Feature:
         And I am logged in with "user@example.com"
         And I follow "Matches"
         When I follow "suspended"
-        Then I should not see "This user has been suspended"
+        Then I should not see "this user has been suspended"

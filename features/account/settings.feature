@@ -10,6 +10,6 @@ Feature:
         And I go to "/account/settings"
         Then I should see "Send an email I receive a new match"
         And I uncheck "user_setting_form_newMatchNotifications"
-        And I press "Submit"
+        And I press "Update"
         Then I should see "Settings updated"
         And the account setting "newMatchNotifications" for "user@example.com" should be "false"

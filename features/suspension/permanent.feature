@@ -98,3 +98,12 @@ Feature:
        And an administrator exists with email "admin@example.com"
        And the administrator "admin@example.com" has permanently suspended "newuser@example.com"
        Then the subscription for "newuser@example.com" is cancelled
+       And I log in using email "newuser@example.com"
+       And I am on "/profile"
+       Then I should see "your profile has been permanently suspended for the reasons below"
+       And I should see "Your subscription, if it exists, has been cancelled."
+       And I should see "Spam"
+       And I am on "/account/subscription"
+       And I should see "Cancelled"
+       And I should see "Your profile has been suspended."
+       Then I should not see "Buy a subscription"

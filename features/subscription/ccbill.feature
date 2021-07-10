@@ -27,7 +27,7 @@ Feature:
             | email               | city   | age |
             | newuser@example.com | London | 30  |
         When the user "newuser@example.com" has failed to buy a new CcBill subscription
-        Then a new "datinglibre.ccbill.newsalefailure" event should be created for "newuser@example.com"
+        Then a new "datinglibre.ccbill.new_sale_failure" event should be created for "newuser@example.com"
 
     @subscription
     Scenario: An error event raised as part of processing CcBill events is persisted as an event
@@ -68,7 +68,7 @@ Feature:
             | newuser@example.com | London | 30  |
         When the user "newuser@example.com" has bought a new CcBill subscription that has ID "985938"
         And there has been a failed rebill for subscription "985938" with next retry date "2020-08-23"
-        Then a new "datinglibre.ccbill.renewal.failure" event should be created for "newuser@example.com"
+        Then a new "datinglibre.ccbill.renewal_failure" event should be created for "newuser@example.com"
         And I am logged in with "newuser@example.com"
         And I am on "/account/subscription"
         And I should see "Renewal failure"
@@ -121,8 +121,20 @@ Feature:
             | newuser@example.com | London | 30  |
         When the user "newuser@example.com" has bought a new CcBill subscription that has ID "985938"
         And there has been a billing date change for "985938" to "2021-02-01"
-        Then a new "datinglibre.ccbill.billing.date.change" event should be created for "newuser@example.com"
+        Then a new "datinglibre.ccbill.billing_date_change" event should be created for "newuser@example.com"
         And I am logged in with "newuser@example.com"
         And I am on "/account/subscription"
         Then I should see "Active"
         And I should see "February 1, 2021"
+
+    @subscription
+    Scenario: a CcBill Expiration event expires the subscription
+        Given the following profiles exist:
+            | email               | city   | age |
+            | newuser@example.com | London | 30  |
+        When the user "newuser@example.com" has bought a new CcBill subscription that has ID "985938"
+        And there has been an expiration event for "985938"
+        Then a new "datinglibre.ccbill.expiration" event should be created for "newuser@example.com"
+        And I am logged in with "newuser@example.com"
+        And I am on "/account/subscription"
+        Then I should see "Expired"
