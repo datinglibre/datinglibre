@@ -17,7 +17,7 @@ Feature:
         Then I should see "Abusive messages"
         Then I should see "No suspensions"
         And I check "Spam"
-        And I press "Suspend user"
+        And I press "Suspend"
         Then the user "suspended@example.com" should receive a suspension email for "Spam" for "24" hours
         Then I should see "User suspended"
         And I should not see "Abusive messages"
@@ -40,13 +40,14 @@ Feature:
         Then I should see "your profile has been suspended for the reasons below. It will be reviewed after 72 hours."
 
     @suspension
-    Scenario: A moderator cannot suspend the same user twice
+    Scenario: When a moderator creates another suspension, the previous suspension will be closed
         Given the following profiles exist:
             | email               | city   | age |
             | newuser@example.com | London | 30  |
         And a moderator exists with email "moderator@example.com"
         And the moderator "moderator@example.com" has suspended "newuser@example.com" for "spam" for "72" hours
-        When the moderator "moderator@example.com" suspends "newuser@example.com" again an error should be thrown
+        And the moderator "moderator@example.com" has suspended "newuser@example.com" for "spam" for "72" hours
+        Then only one open suspension should exist for "newuser@example.com"
 
     @suspension
     Scenario: A moderator can view expired suspensions
