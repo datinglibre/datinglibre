@@ -3,7 +3,7 @@ Feature:
     I can queue a user for permanent suspension
 
     @suspension
-    Scenario: A moderator can permanently suspend a user
+    Scenario: A moderator can enter a user into the permanent suspension queue
         Given the following profiles exist:
             | email                 | city   | age |
             | reporter@example.com  | London | 30  |
@@ -25,7 +25,7 @@ Feature:
         And I should see "Abusive messages"
 
     @suspension
-    Scenario: An administrator permanently suspend a profile
+    Scenario: An administrator can permanently suspend a profile
         Given the following profiles exist:
             | email                 | city   | age |
             | reporter@example.com  | London | 30  |
@@ -43,6 +43,17 @@ Feature:
         And the user "suspended@example.com" should receive a permanent suspension email with "Abusive messages"
         And I follow "profile-menu-suspensions"
         Then I should see "Open"
+
+    @suspension
+    Scenario: A permanent suspension by an administrator overrides a previous suspension
+        Given the following profiles exist:
+            | email               | city   | age |
+            | newuser@example.com | London | 30  |
+        And a moderator exists with email "moderator@example.com"
+        And the moderator "moderator@example.com" has suspended "newuser@example.com" for "spam" for "72" hours
+        And an administrator exists with email "admin@example.com"
+        And the administrator "admin@example.com" has permanently suspended "newuser@example.com"
+        Then the user "newuser@example.com" should receive a permanent suspension email with "Spam"
 
     @suspension
     Scenario: An administrator can confirm a permanent suspension
