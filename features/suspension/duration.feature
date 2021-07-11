@@ -20,8 +20,6 @@ Feature:
         And I press "Suspend"
         Then the user "suspended@example.com" should receive a suspension email for "Spam" for "24" hours
         Then I should see "User suspended"
-        And I should not see "Abusive messages"
-        And I should see "Spam"
 
     @suspension
     Scenario: A user loses access to the site when they are suspended

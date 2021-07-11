@@ -3,7 +3,7 @@ Feature:
     I can queue a user for permanent suspension
 
     @suspension
-    Scenario: A moderator can enter a user into the permanent suspension queue
+    Scenario: A moderator can enter a user into the permanent suspension queue. The user is not allowed to edit profile.
         Given the following profiles exist:
             | email                 | city   | age |
             | reporter@example.com  | London | 30  |
@@ -23,6 +23,11 @@ Feature:
         Then I should see "Permanent"
         Then I should see "Open"
         And I should see "Abusive messages"
+        And I follow "Logout"
+        And I am logged in with "suspended@example.com"
+        Then I should see "The suspension will be reviewed."
+        And I follow "Edit"
+        Then I should see "The suspension will be reviewed."
 
     @suspension
     Scenario: An administrator can permanently suspend a profile
