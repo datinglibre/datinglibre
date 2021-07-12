@@ -84,6 +84,9 @@ Feature:
         Then I should see "Abusive messages"
         And I follow "Permanently suspend"
         Then I should see "Profile has been permanently suspended"
+        And I follow "Logout"
+        And I am logged in with "newuser@example.com"
+        Then I should see "Suspended"
 
    @suspension
    Scenario: An administrator can close a permanent suspension
